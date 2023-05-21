@@ -1,0 +1,15 @@
+version: '3.2'
+
+services:
+  api-application:
+    build:
+      context: api-application
+    container_name: api-application
+    ports:
+      - 8080:8080
+      - 9990:9990
+
+networks:
+  default:
+    external:
+      name: smsjavademo_net
