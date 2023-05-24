@@ -4,18 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.sinan.javademo</groupId>
-    <artifactId>sms-java-demo</artifactId>
+    <parent>
+        <groupId>com.sinan.javademo</groupId>
+        <artifactId>sms-java-demo</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>sms-core</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>sms-core-application</name>
-    <description>Provides internal store functionalities via Restful APIs. </description>
+    <name>sms-core</name>
+    <description>Handles the backend logic and models for all store operations.</description>
 
-    <packaging>pom</packaging>
 
-    <modules>
-        <module>api-gateway</module>
-        <module>sms-core</module>
-    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

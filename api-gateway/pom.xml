@@ -10,10 +10,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.sinan.javademo</groupId>
-    <artifactId>api-application</artifactId>
+    <artifactId>api-gateway</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>api-application</name>
+    <name>api-gateway</name>
+    <description>An entry point for all API calls, it validates incoming requests and redirects them to corresponding controllers.</description>
+
     <packaging>war</packaging>
 
     <properties>
@@ -21,6 +22,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.source>11</maven.compiler.source>
         <junit.version>5.9.2</junit.version>
+        <sms.core.version>1.0-SNAPSHOT</sms.core.version>
     </properties>
 
     <dependencies>
@@ -54,10 +56,16 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.sinan.javademo</groupId>
+            <artifactId>sms-core</artifactId>
+            <version>${sms.core.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
-        <finalName>api-application</finalName>
+        <finalName>sms</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

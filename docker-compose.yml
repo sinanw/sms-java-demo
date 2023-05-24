@@ -3,8 +3,8 @@ version: '3.2'
 services:
   api-application:
     build:
-      context: api-application
-    container_name: api-application
+      context: api-gateway
+    container_name: api-gateway
     ports:
       - 8080:8080
       - 9990:9990
