@@ -5,10 +5,10 @@ import java.util.List;
 
 
 public class Cart{
-    private List<Item> items;
+    private final List<Item> items;
 
     public Cart() {
-        this.items = new ArrayList<Item>();
+        this.items = new ArrayList<>();
     }
 
     public void addItem(Item item) {

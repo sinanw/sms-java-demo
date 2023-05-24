@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StaticStoreRepository implements StoreRepository{
-    private Map<String,Item> storeItems;
+    private final Map<String,Item> storeItems;
 
     public StaticStoreRepository(){
         this.storeItems = new HashMap<>();

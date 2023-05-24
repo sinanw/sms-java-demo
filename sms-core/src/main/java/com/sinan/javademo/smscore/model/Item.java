@@ -1,9 +1,9 @@
 package com.sinan.javademo.smscore.model;
 
 public class Item {
-    private String name;
-    private UnitType unit;
-    private double price;
+    private final String name;
+    private final UnitType unit;
+    private final double price;
 
     public Item(String name, UnitType unit, double price) {
         this.name = name;
@@ -25,7 +25,7 @@ public class Item {
 
     @Override
     public String toString() {
-        String formattedPrice = this.price < 1.0 ? String.format("%dp", (int) (this.price * 100)) : String.format("\u00A3%.2f", this.price);
+        String formattedPrice = this.price < 1.0 ? String.format("%dp", (int) (this.price * 100)) : String.format("£%.2f", this.price);
         return String.format("%s - %s per %s", this.name, formattedPrice, this.unit.toString());
     }
 }
