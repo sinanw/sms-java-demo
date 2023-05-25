@@ -7,7 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 
 @Path("/engineering")
 @Produces(MediaType.TEXT_PLAIN)
-public class EngineeringResource {
+public class EngineeringResource extends SMSResource{
 
     public EngineeringResource(){}
 

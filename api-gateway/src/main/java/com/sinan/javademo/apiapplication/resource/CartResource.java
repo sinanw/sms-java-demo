@@ -1,11 +1,7 @@
 package com.sinan.javademo.apiapplication.resource;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.sinan.javademo.apiapplication.model.APIError;
 import com.sinan.javademo.apiapplication.model.CartCheckoutResponse;
-import com.sinan.javademo.apiapplication.model.serializer.APIErrorSerializer;
-import com.sinan.javademo.apiapplication.model.serializer.CartCheckoutResponseSerializer;
 import com.sinan.javademo.smscore.exception.ItemNotFoundException;
 import com.sinan.javademo.smscore.model.Cart;
 import com.sinan.javademo.smscore.service.CartService;
@@ -16,17 +12,11 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/cart")
-public class CartResource {
+public class CartResource extends SMSResource{
 
     private final CartService cartService = new CartService();
-    private final Gson gson;
 
-    public CartResource() {
-        this.gson = new GsonBuilder()
-                .registerTypeAdapter(APIError.class, new APIErrorSerializer())
-                .registerTypeAdapter(CartCheckoutResponse.class, new CartCheckoutResponseSerializer())
-                .create();
-    }
+    public CartResource() {}
 
     @GET
     @Path("/ping")
@@ -43,10 +33,11 @@ public class CartResource {
         try{
             Cart cart = this.cartService.createCart(items);
             CartCheckoutResponse cartCheckoutResponse = new CartCheckoutResponse(cart.getTotalPrice());
-            return Response.status(Response.Status.CREATED).entity(this.gson.toJson(cartCheckoutResponse)).build();
+//            return Response.status(Response.Status.CREATED).entity(gson.toJson(cartCheckoutResponse)).build();
+            return Response.status(Response.Status.CREATED).entity(gson.toJson(cartCheckoutResponse)).build();
         }catch (ItemNotFoundException ex){
             APIError apiError = new APIError(ex.getMessage(),"This error happened when we couldn't find the required item in our system, please check the items list and make sure you are selecting valid item names");
-            return Response.status(Response.Status.NOT_FOUND).entity(this.gson.toJson(apiError)).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(gson.toJson(apiError)).build();
         }
     }
 
