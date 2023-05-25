@@ -19,4 +19,8 @@ public class Cart{
     public List<Item> getItems() {
         return new ArrayList<>(this.items);
     }
+
+    public double getTotalPrice(){
+        return this.items.stream().map(Item::getPrice).reduce(0d, Double::sum);
+    }
 }
