@@ -5,7 +5,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
-import javax.naming.OperationNotSupportedException;
 import java.io.IOException;
 
 @JsonAdapter(APIErrorJsonAdapter.class)
@@ -39,7 +38,6 @@ class APIErrorJsonAdapter extends TypeAdapter<APIError>{
 
     @Override
     public APIError read(JsonReader jsonReader) throws IOException {
-        //No need to deserialize json to APIError object because APIError is a response contract
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Deserializing json to APIError object is not supported, APIError is a response contract!");
     }
 }

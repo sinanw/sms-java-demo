@@ -33,7 +33,6 @@ public class CartResource extends SMSResource{
         try{
             Cart cart = this.cartService.createCart(items);
             CartCheckoutResponse cartCheckoutResponse = new CartCheckoutResponse(cart.getTotalPrice());
-//            return Response.status(Response.Status.CREATED).entity(gson.toJson(cartCheckoutResponse)).build();
             return Response.status(Response.Status.CREATED).entity(gson.toJson(cartCheckoutResponse)).build();
         }catch (ItemNotFoundException ex){
             APIError apiError = new APIError(ex.getMessage(),"This error happened when we couldn't find the required item in our system, please check the items list and make sure you are selecting valid item names");

@@ -31,7 +31,6 @@ class CartCheckoutResponseJsonAdapter extends TypeAdapter<CartCheckoutResponse>{
 
     @Override
     public CartCheckoutResponse read(JsonReader jsonReader) throws IOException {
-        //No need to deserialize json to CartCheckoutResponse object because CartCheckoutResponse is a response contract
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Deserializing json to CartCheckoutResponse object is not supported, CartCheckoutResponse is a response contract!");
     }
 }
