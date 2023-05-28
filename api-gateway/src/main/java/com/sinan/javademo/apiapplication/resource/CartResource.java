@@ -9,6 +9,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/cart")
@@ -18,21 +19,17 @@ public class CartResource extends SMSResource{
 
     public CartResource() {}
 
-    @GET
-    @Path("/ping")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String ping() {
-        return "pong";
-    }
-
     @POST
     @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createCart(List<String> items){
         try{
-            Cart cart = this.cartService.createCart(items);
-            CartCheckoutResponse cartCheckoutResponse = new CartCheckoutResponse(cart.getTotalPrice());
+            Cart cart = cartService.createCart(items);
+            double subTotalPrice = cart.getTotalPrice();
+            List<String> offers = new ArrayList<>();
+            double totalPrice = cartService.checkoutCart(cart, offers);
+            CartCheckoutResponse cartCheckoutResponse = new CartCheckoutResponse(subTotalPrice,totalPrice,offers);
             return Response.status(Response.Status.CREATED).entity(gson.toJson(cartCheckoutResponse)).build();
         }catch (ItemNotFoundException ex){
             APIError apiError = new APIError(ex.getMessage(),"This error happened when we couldn't find the required item in our system, please check the items list and make sure you are selecting valid item names");

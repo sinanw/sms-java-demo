@@ -25,7 +25,7 @@ public class Item {
 
     @Override
     public String toString() {
-        String formattedPrice = this.price < 1.0 ? String.format("%dp", (int) (this.price * 100)) : String.format("£%.2f", this.price);
-        return String.format("%s - %s per %s", this.name, formattedPrice, this.unit.toString());
+        String formattedPrice = price < 1.0 ? String.format("%dp", (int) (price * 100)) : String.format("£%.2f", price);
+        return String.format("%s - %s per %s", name, formattedPrice, unit.toString());
     }
 }

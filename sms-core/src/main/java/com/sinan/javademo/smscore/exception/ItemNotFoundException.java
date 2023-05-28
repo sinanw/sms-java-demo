@@ -9,10 +9,6 @@ public class ItemNotFoundException extends SMSException{
         this.itemIdentifier = itemIdentifier;
     }
 
-    public String getItemIdentifier(){
-        return this.itemIdentifier;
-    }
-
 
 
 }
