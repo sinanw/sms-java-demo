@@ -27,11 +27,6 @@ public class Item {
         return price;
     }
 
-    @Override
-    public String toString() {
-        String formattedPrice = price < 1.0 ? String.format("%dp", (int) (price * 100)) : String.format("£%.2f", price);
-        return String.format("%s - %s per %s", name, formattedPrice, unit.toString());
-    }
 
     @Override
     public boolean equals(Object o) {
