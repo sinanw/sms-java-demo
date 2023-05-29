@@ -1,6 +1,8 @@
 package com.sinan.javademo.smscore.model;
 
+import com.sinan.javademo.smscore.exception.DupplicateCartOfferException;
 import com.sinan.javademo.smscore.exception.ItemNotFoundException;
+import com.sinan.javademo.smscore.model.offer.BaseOffer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,10 +34,13 @@ class CartItem {
 public class Cart {
     private final String id;
     private final Map<String, CartItem> items;
+    private final Map<BaseOffer, Double> appliedOffers;
+
 
     public Cart() {
         id = UUID.randomUUID().toString();
         items = new HashMap<>();
+        appliedOffers = new HashMap<>();
     }
 
     public String getId() {
@@ -50,13 +55,31 @@ public class Cart {
         }
     }
 
+    public void addOffer(BaseOffer offer, double discount) throws DupplicateCartOfferException {
+        if (appliedOffers.containsKey(offer)) {
+            throw new DupplicateCartOfferException(offer, this);
+        }
+        appliedOffers.put(offer, discount);
+    }
+
 
     public Map<String, CartItem> getItems() {
         return new HashMap<>(items);
     }
 
-    public double getTotalPrice() {
+    public Map<BaseOffer, Double> getAppliedOffers() {
+        return new HashMap<>(appliedOffers);
+    }
+
+    public double getSubTotalPrice() {
         return items.values().stream().map(CartItem::getTotalPrice).reduce(0d, Double::sum);
+    }
+    public double getTotalDiscount(){
+        return appliedOffers.values().stream().reduce(0d,Double::sum);
+    }
+
+    public double getTotalPrice(){
+        return getSubTotalPrice()-getTotalDiscount();
     }
 
 
@@ -72,7 +95,7 @@ public class Cart {
     }
 
     public double getItemTotalPrice(Item item) throws ItemNotFoundException {
-        if (!hasItem(item)){
+        if (!hasItem(item)) {
             throw new ItemNotFoundException(item.getName());
         }
         return items.get(item.getName()).getTotalPrice();

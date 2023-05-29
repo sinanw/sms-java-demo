@@ -9,7 +9,6 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Path("/cart")
@@ -26,10 +25,10 @@ public class CartResource extends SMSResource{
     public Response createCart(List<String> items){
         try{
             Cart cart = cartService.createCart(items);
-            double subTotalPrice = cart.getTotalPrice();
-            List<String> offers = new ArrayList<>();
-            double totalPrice = cartService.checkoutCart(cart, offers);
-            CartCheckoutResponse cartCheckoutResponse = new CartCheckoutResponse(subTotalPrice,totalPrice,offers);
+            cartService.checkoutCart(cart);
+            double subTotalPrice = cart.getSubTotalPrice();
+            double totalPrice = cart.getTotalPrice();
+            CartCheckoutResponse cartCheckoutResponse = new CartCheckoutResponse(subTotalPrice,totalPrice,cart.getAppliedOffers());
             return Response.status(Response.Status.CREATED).entity(gson.toJson(cartCheckoutResponse)).build();
         }catch (ItemNotFoundException ex){
             APIError apiError = new APIError(ex.getMessage(),"This error happened when we couldn't find the required item in our system, please check the items list and make sure you are selecting valid item names");
