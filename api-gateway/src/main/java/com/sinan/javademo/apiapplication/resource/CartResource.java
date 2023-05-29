@@ -1,5 +1,6 @@
 package com.sinan.javademo.apiapplication.resource;
 
+import com.sinan.javademo.apiapplication.exception.InvalidEmptyCartException;
 import com.sinan.javademo.apiapplication.model.APIError;
 import com.sinan.javademo.apiapplication.model.CartCheckoutResponse;
 import com.sinan.javademo.smscore.exception.ItemNotFoundException;
@@ -24,6 +25,9 @@ public class CartResource extends SMSResource{
     @Produces(MediaType.APPLICATION_JSON)
     public Response createCart(List<String> items){
         try{
+            if (items.size()==0){
+                throw new InvalidEmptyCartException();
+            }
             Cart cart = cartService.createCart(items);
             cartService.checkoutCart(cart);
             double subTotalPrice = cart.getSubTotalPrice();
@@ -33,6 +37,9 @@ public class CartResource extends SMSResource{
         }catch (ItemNotFoundException ex){
             APIError apiError = new APIError(ex.getMessage(),"This error happened when we couldn't find the required item in our system, please check the items list and make sure you are selecting valid item names");
             return Response.status(Response.Status.NOT_FOUND).entity(gson.toJson(apiError)).build();
+        }catch (InvalidEmptyCartException ex){
+            APIError apiError = new APIError(ex.getMessage(),"This error happened because cart can't be initialized with no items, please make sure to add at least one item!");
+            return Response.status(Response.Status.BAD_REQUEST).entity(gson.toJson(apiError)).build();
         }
     }
 

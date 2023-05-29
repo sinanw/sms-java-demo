@@ -3,8 +3,9 @@ package com.sinan.javademo.smscore.model.offer;
 import com.sinan.javademo.smscore.model.Item;
 import com.sinan.javademo.smscore.model.offer.strategy.discount.condition.ItemExistConditionStrategy;
 import com.sinan.javademo.smscore.model.offer.strategy.discount.execution.ItemPercentageExecutionStrategy;
+import com.sinan.javademo.smscore.util.InputValidator;
 
-public class SingleItemOffer extends ProductBaseOffer{
+public class SingleItemOffer extends ProductBaseOffer {
     private final Item item;
     private final double percentage;
 
@@ -19,14 +20,14 @@ public class SingleItemOffer extends ProductBaseOffer{
     public SingleItemOffer(String description, Item item, double percentage) {
         super(description);
         this.item = item;
-        this.percentage = percentage;
+        this.percentage = InputValidator.validatePercentage(percentage,1,100);
         this.conditionStrategy = new ItemExistConditionStrategy(item);
         this.executionStrategy = new ItemPercentageExecutionStrategy(item, percentage);
     }
 
     @Override
     public String toString() {
-        return String.format("%s %.0f%% off",item.getName(),percentage);
+        return String.format("%s %.0f%% off", item.getName(), percentage);
     }
 
 }

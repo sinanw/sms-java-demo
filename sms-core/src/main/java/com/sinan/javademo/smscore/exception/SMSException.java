@@ -1,6 +1,6 @@
 package com.sinan.javademo.smscore.exception;
 
-public class SMSException extends Exception{
+public class SMSException extends RuntimeException{
 
     private static final String messagePrefix = "SMS Exception";
     private static final String messagePrefixDelimiter = " -> ";

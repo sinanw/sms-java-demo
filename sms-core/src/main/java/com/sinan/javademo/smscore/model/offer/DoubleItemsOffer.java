@@ -1,8 +1,10 @@
 package com.sinan.javademo.smscore.model.offer;
 
+import com.sinan.javademo.smscore.exception.InvalidPercentageException;
 import com.sinan.javademo.smscore.model.Item;
 import com.sinan.javademo.smscore.model.offer.strategy.discount.condition.MinItemCountConditionStrategy;
 import com.sinan.javademo.smscore.model.offer.strategy.discount.execution.ItemPercentageExecutionStrategy;
+import com.sinan.javademo.smscore.util.InputValidator;
 
 public class DoubleItemsOffer extends ProductBaseOffer{
     private final Item sourceItem;
@@ -31,7 +33,7 @@ public class DoubleItemsOffer extends ProductBaseOffer{
         this.sourceItem = sourceItem;
         this.targetItem = targetItem;
         this.minSourceQuantity = minSourceQuantity;
-        this.percentage = percentage;
+        this.percentage = InputValidator.validatePercentage(percentage,1,100);
         this.conditionStrategy = new MinItemCountConditionStrategy(sourceItem,minSourceQuantity);
         this.executionStrategy = new ItemPercentageExecutionStrategy(targetItem,percentage);
     }

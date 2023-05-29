@@ -1,7 +1,7 @@
 package com.sinan.javademo.smscore.repository;
 
 import com.sinan.javademo.smscore.exception.ItemNotFoundException;
-import com.sinan.javademo.smscore.exception.OfferTimeRangeConflictException;
+import com.sinan.javademo.smscore.exception.TimeRangeConflictException;
 import com.sinan.javademo.smscore.model.*;
 import com.sinan.javademo.smscore.model.offer.BaseOffer;
 import com.sinan.javademo.smscore.model.offer.CartPercentageOffer;
@@ -42,7 +42,7 @@ public class StaticStoreRepository implements StoreRepository {
             try {
                 offer1.setStartTime(LocalDateTime.of(2023, 5, 24, 0, 0, 0));
                 offer1.setEndTime(LocalDateTime.of(2023, 5, 31, 0, 0, 0));
-            } catch (OfferTimeRangeConflictException ignored) {
+            } catch (TimeRangeConflictException ignored) {
 
             }
             BaseOffer offer2 = new DoubleItemsOffer("Buy 2 tins of soup and get a loaf of bread for half price", getItem("Soup"), getItem("Bread"), 2, 50);
