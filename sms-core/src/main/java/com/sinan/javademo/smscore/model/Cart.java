@@ -33,7 +33,7 @@ public class Cart {
         }
     }
 
-    public void addOffer(BaseOffer offer, double discount) throws DupplicateCartOfferException {
+    public void addOffer(BaseOffer offer, double discount) {
         if (appliedOffers.containsKey(offer)) {
             throw new DupplicateCartOfferException(offer, this);
         }
@@ -73,7 +73,7 @@ public class Cart {
         return items.containsKey(item);
     }
 
-    public double getItemTotalPrice(Item item) throws ItemNotFoundException {
+    public double getItemTotalPrice(Item item) {
         if (!hasItem(item)) {
             throw new ItemNotFoundException(item.getName());
         }

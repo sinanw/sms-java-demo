@@ -1,6 +1,5 @@
 package com.sinan.javademo.smscore.model.offer.strategy.discount.execution;
 
-import com.sinan.javademo.smscore.exception.ItemNotFoundException;
 import com.sinan.javademo.smscore.model.Cart;
 import com.sinan.javademo.smscore.model.Item;
 import com.sinan.javademo.smscore.util.InputValidator;
@@ -11,16 +10,12 @@ public class ItemPercentageExecutionStrategy implements DiscountExecutionStrateg
 
     public ItemPercentageExecutionStrategy(Item item, double percentage) {
         this.item = item;
-        this.percentage = InputValidator.validatePercentage(percentage,1,100);;
+        this.percentage = InputValidator.validatePercentage(percentage, 1, 100);
     }
 
     @Override
     public double apply(Cart cart) {
-        try{
-            double itemTotalPrice = cart.getItemTotalPrice(item);
-            return (percentage / 100) * itemTotalPrice;
-        }catch(ItemNotFoundException ignored){
-            return 0;
-        }
+        double itemTotalPrice = cart.getItemTotalPrice(item);
+        return (percentage / 100) * itemTotalPrice;
     }
 }

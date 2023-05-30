@@ -1,6 +1,5 @@
 package com.sinan.javademo.smscore.model.offer;
 
-import com.sinan.javademo.smscore.exception.TimeRangeConflictException;
 import com.sinan.javademo.smscore.model.offer.strategy.discount.condition.DiscountConditionStrategy;
 import com.sinan.javademo.smscore.model.offer.strategy.discount.execution.DiscountExecutionStrategy;
 import com.sinan.javademo.smscore.util.InputValidator;
@@ -43,12 +42,12 @@ public abstract class BaseOffer {
         return executionStrategy;
     }
 
-    public void setStartTime(LocalDateTime startTime) throws TimeRangeConflictException {
+    public void setStartTime(LocalDateTime startTime) {
         InputValidator.validateDateTimeRange(startTime, endTime);
         this.startTime = startTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) throws TimeRangeConflictException {
+    public void setEndTime(LocalDateTime endTime) {
         InputValidator.validateDateTimeRange(startTime, endTime);
         this.endTime = endTime;
     }

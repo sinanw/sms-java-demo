@@ -26,7 +26,7 @@ public class APIError {
     }
 }
 
-class APIErrorJsonAdapter extends TypeAdapter<APIError>{
+class APIErrorJsonAdapter extends TypeAdapter<APIError> {
 
     @Override
     public void write(JsonWriter jsonWriter, APIError apiError) throws IOException {
@@ -37,7 +37,7 @@ class APIErrorJsonAdapter extends TypeAdapter<APIError>{
     }
 
     @Override
-    public APIError read(JsonReader jsonReader) throws IOException {
+    public APIError read(JsonReader jsonReader) {
         throw new UnsupportedOperationException("Deserializing json to APIError object is not supported, APIError is a response contract!");
     }
 }
