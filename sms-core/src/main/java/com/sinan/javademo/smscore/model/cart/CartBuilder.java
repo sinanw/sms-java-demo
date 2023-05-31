@@ -16,7 +16,8 @@ public class CartBuilder implements BaseCartBuilder {
 
     @Override
     public void populateItems(List<String> itemsList) {
-        ItemsRepository itemsRepository = new ItemsRepositoryFactory().createRepository(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
+        ItemsRepositoryFactory factory = new ItemsRepositoryFactory();
+        ItemsRepository itemsRepository = factory.create(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
         for (var item : itemsList) {
             Item newItem = itemsRepository.getItem(item);
             cart.addItem(newItem);

@@ -1,7 +1,7 @@
 package com.sinan.javademo.smscore.repository;
 
 public class ItemsRepositoryFactory {
-    public ItemsRepository createRepository(String repositoryType) {
+    public ItemsRepository create(String repositoryType) {
         return switch (repositoryType) {
             case "STATIC" -> new StaticItemsRepository();
             case "DB" -> new DBItemsRepository();

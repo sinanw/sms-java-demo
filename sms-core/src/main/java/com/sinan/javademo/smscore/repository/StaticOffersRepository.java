@@ -16,7 +16,8 @@ public class StaticOffersRepository implements OffersRepository {
     private final ItemsRepository itemsRepository;
 
     public StaticOffersRepository() {
-        itemsRepository = new ItemsRepositoryFactory().createRepository(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
+        ItemsRepositoryFactory factory = new ItemsRepositoryFactory();
+        itemsRepository = factory.create(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
 
         offers = new ArrayList<>();
         BaseOffer offer1 = new SingleItemOffer("Apples have 10% off their normal price this week",

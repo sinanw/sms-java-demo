@@ -11,7 +11,8 @@ public class OfferService {
     private final OffersRepository offersRepository;
 
     public OfferService() {
-        offersRepository = new OffersRepositoryFactory().createOfferRepository(StoreConfiguration.OFFERS_REPOSITORY_TYPE);
+        OffersRepositoryFactory factory = new OffersRepositoryFactory();
+        offersRepository = factory.create(StoreConfiguration.OFFERS_REPOSITORY_TYPE);
     }
 
     public List<BaseOffer> getActiveOffers(){
