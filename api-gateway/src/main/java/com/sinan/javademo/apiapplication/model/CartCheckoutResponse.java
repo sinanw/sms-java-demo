@@ -2,7 +2,7 @@ package com.sinan.javademo.apiapplication.model;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.sinan.javademo.apiapplication.model.adapter.CartCheckoutResponseJsonAdapter;
-import com.sinan.javademo.smscore.model.Cart;
+import com.sinan.javademo.smscore.model.cart.Cart;
 
 import java.util.ArrayList;
 import java.util.List;

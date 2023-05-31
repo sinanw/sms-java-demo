@@ -1,8 +1,8 @@
 package com.sinan.javademo.smscore.repository;
 
 import com.sinan.javademo.smscore.exception.ItemNotFoundException;
-import com.sinan.javademo.smscore.model.Item;
-import com.sinan.javademo.smscore.model.UnitType;
+import com.sinan.javademo.smscore.model.item.Item;
+import com.sinan.javademo.smscore.model.item.UnitType;
 
 import java.util.HashMap;
 import java.util.Map;

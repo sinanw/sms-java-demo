@@ -1,6 +1,6 @@
 package com.sinan.javademo.smscore.exception;
 
-import com.sinan.javademo.smscore.model.Cart;
+import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.model.offer.BaseOffer;
 
 public class DupplicateCartOfferException extends SMSException {

@@ -1,6 +1,6 @@
 package com.sinan.javademo.smscore.model.offer;
 
-import com.sinan.javademo.smscore.model.Item;
+import com.sinan.javademo.smscore.model.item.Item;
 import com.sinan.javademo.smscore.model.offer.strategy.discount.condition.ItemExistConditionStrategy;
 import com.sinan.javademo.smscore.model.offer.strategy.discount.execution.ItemPercentageExecutionStrategy;
 import com.sinan.javademo.smscore.util.InputValidator;

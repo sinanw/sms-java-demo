@@ -1,6 +1,6 @@
 package com.sinan.javademo.smscore.model.offer.strategy.discount.execution;
 
-import com.sinan.javademo.smscore.model.Cart;
+import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.util.InputValidator;
 
 public class CartPercentageExecutionStrategy implements DiscountExecutionStrategy {

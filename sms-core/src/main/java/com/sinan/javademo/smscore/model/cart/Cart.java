@@ -1,7 +1,8 @@
-package com.sinan.javademo.smscore.model;
+package com.sinan.javademo.smscore.model.cart;
 
 import com.sinan.javademo.smscore.exception.DupplicateCartOfferException;
 import com.sinan.javademo.smscore.exception.ItemNotFoundException;
+import com.sinan.javademo.smscore.model.item.Item;
 import com.sinan.javademo.smscore.model.offer.BaseOffer;
 
 import java.util.HashMap;

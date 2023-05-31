@@ -2,7 +2,7 @@ package com.sinan.javademo.apiapplication.resource;
 
 import com.sinan.javademo.apiapplication.exception.InvalidEmptyCartException;
 import com.sinan.javademo.apiapplication.model.CartCheckoutResponse;
-import com.sinan.javademo.smscore.model.Cart;
+import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.service.CartService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

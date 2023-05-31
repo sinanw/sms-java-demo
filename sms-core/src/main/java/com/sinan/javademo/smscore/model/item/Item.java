@@ -1,4 +1,4 @@
-package com.sinan.javademo.smscore.model;
+package com.sinan.javademo.smscore.model.item;
 
 import java.util.UUID;
 
