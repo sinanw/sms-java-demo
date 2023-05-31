@@ -1,4 +1,4 @@
-package com.sinan.javademo.smscore.repository;
+package com.sinan.javademo.smscore.repository.items;
 
 import com.sinan.javademo.smscore.model.item.Item;
 

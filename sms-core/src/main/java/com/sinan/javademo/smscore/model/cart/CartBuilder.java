@@ -1,8 +1,8 @@
 package com.sinan.javademo.smscore.model.cart;
 
 import com.sinan.javademo.smscore.model.item.Item;
-import com.sinan.javademo.smscore.repository.ItemsRepository;
-import com.sinan.javademo.smscore.repository.ItemsRepositoryFactory;
+import com.sinan.javademo.smscore.repository.items.ItemsRepository;
+import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
 import com.sinan.javademo.smscore.util.StoreConfiguration;
 
 import java.util.List;

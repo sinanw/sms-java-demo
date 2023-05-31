@@ -1,9 +1,11 @@
-package com.sinan.javademo.smscore.repository;
+package com.sinan.javademo.smscore.repository.offers;
 
 import com.sinan.javademo.smscore.model.offer.BaseOffer;
 import com.sinan.javademo.smscore.model.offer.CartPercentageOffer;
 import com.sinan.javademo.smscore.model.offer.DoubleItemsOffer;
 import com.sinan.javademo.smscore.model.offer.SingleItemOffer;
+import com.sinan.javademo.smscore.repository.items.ItemsRepository;
+import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
 import com.sinan.javademo.smscore.util.StoreConfiguration;
 
 import java.time.LocalDateTime;

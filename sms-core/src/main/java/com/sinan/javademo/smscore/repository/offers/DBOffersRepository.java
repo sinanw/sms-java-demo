@@ -1,4 +1,4 @@
-package com.sinan.javademo.smscore.repository;
+package com.sinan.javademo.smscore.repository.offers;
 
 import com.sinan.javademo.smscore.model.offer.BaseOffer;
 

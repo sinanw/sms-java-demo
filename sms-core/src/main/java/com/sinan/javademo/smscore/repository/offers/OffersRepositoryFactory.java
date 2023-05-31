@@ -1,4 +1,4 @@
-package com.sinan.javademo.smscore.repository;
+package com.sinan.javademo.smscore.repository.offers;
 
 public class OffersRepositoryFactory {
     public OffersRepository create(String repositoryType) {

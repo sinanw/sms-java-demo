@@ -1,8 +1,8 @@
 package com.sinan.javademo.smscore.service;
 
 import com.sinan.javademo.smscore.model.offer.BaseOffer;
-import com.sinan.javademo.smscore.repository.OffersRepository;
-import com.sinan.javademo.smscore.repository.OffersRepositoryFactory;
+import com.sinan.javademo.smscore.repository.offers.OffersRepository;
+import com.sinan.javademo.smscore.repository.offers.OffersRepositoryFactory;
 import com.sinan.javademo.smscore.util.StoreConfiguration;
 
 import java.util.List;
