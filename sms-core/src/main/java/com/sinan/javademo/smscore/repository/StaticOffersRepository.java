@@ -24,7 +24,7 @@ public class StaticOffersRepository implements OffersRepository {
                 LocalDateTime.of(2023, 5, 24, 0, 0, 0)
         );
         offer1.setEndTime(
-                LocalDateTime.of(2023, 5, 31, 0, 0, 0)
+                LocalDateTime.of(2023, 6, 30, 0, 0, 0)
         );
 
         BaseOffer offer2 = new DoubleItemsOffer("Buy 2 tins of soup and get a loaf of bread for half price",

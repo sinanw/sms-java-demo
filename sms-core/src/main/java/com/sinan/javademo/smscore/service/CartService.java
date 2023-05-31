@@ -1,25 +1,21 @@
 package com.sinan.javademo.smscore.service;
 
 import com.sinan.javademo.smscore.model.cart.Cart;
-import com.sinan.javademo.smscore.model.item.Item;
-import com.sinan.javademo.smscore.repository.ItemsRepository;
-import com.sinan.javademo.smscore.repository.StaticItemsRepository;
+import com.sinan.javademo.smscore.model.cart.CartBuilder;
+import com.sinan.javademo.smscore.model.cart.CartDirector;
 
 import java.util.List;
 
 public class CartService {
 
-    private final ItemsRepository itemsRepository = new StaticItemsRepository();
     private final OfferService offerService = new OfferService();
 
 
     public Cart createCart(List<String> itemsList) {
-        Cart cart = new Cart();
-        for (var item : itemsList) {
-            Item newItem = itemsRepository.getItem(item);
-            cart.addItem(newItem);
-        }
-        return cart;
+        CartBuilder cartBuilder = new CartBuilder();
+        CartDirector cartDirector = new CartDirector(cartBuilder);
+        cartDirector.createCartWithItems(itemsList);
+        return cartBuilder.build();
     }
 
     public void checkoutCart(Cart cart) {
