@@ -4,6 +4,7 @@ import com.sinan.javademo.smscore.model.offer.BaseOffer;
 import com.sinan.javademo.smscore.model.offer.CartPercentageOffer;
 import com.sinan.javademo.smscore.model.offer.DoubleItemsOffer;
 import com.sinan.javademo.smscore.model.offer.SingleItemOffer;
+import com.sinan.javademo.smscore.util.StoreConfiguration;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,9 +13,10 @@ import java.util.List;
 public class StaticOffersRepository implements OffersRepository {
 
     private final List<BaseOffer> offers;
-    private final ItemsRepository itemsRepository = new StaticItemsRepository();
+    private final ItemsRepository itemsRepository;
 
     public StaticOffersRepository() {
+        itemsRepository = new ItemsRepositoryFactory().createRepository(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
 
         offers = new ArrayList<>();
         BaseOffer offer1 = new SingleItemOffer("Apples have 10% off their normal price this week",

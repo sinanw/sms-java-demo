@@ -8,8 +8,11 @@ import java.util.List;
 
 public class CartService {
 
-    private final OfferService offerService = new OfferService();
+    private final OfferService offerService;
 
+    public CartService() {
+        offerService = new OfferService();
+    }
 
     public Cart createCart(List<String> itemsList) {
         CartBuilder cartBuilder = new CartBuilder();
