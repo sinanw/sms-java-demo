@@ -5,7 +5,7 @@ import com.sinan.javademo.smscore.exception.TimeRangeConflictException;
 
 import java.time.LocalDateTime;
 
-public class InputValidator {
+public final class InputValidator {
     public static double validatePercentage(double value, double minBound, double maxBound) {
         if (value < minBound || value > maxBound) {
             throw new InvalidPercentageException(value, minBound, maxBound);
