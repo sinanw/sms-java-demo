@@ -12,6 +12,7 @@ public class CartDetailsResponseAdapter extends TypeAdapter<CartDetailsResponse>
     public void write(JsonWriter jsonWriter, CartDetailsResponse cartDetailsResponse) throws IOException {
         jsonWriter.beginObject();
         jsonWriter.name("cartId").value(cartDetailsResponse.getCartId());
+        jsonWriter.name("currency").value(cartDetailsResponse.getCurrency());
         jsonWriter.name("items");
         jsonWriter.beginArray();
         for (var item : cartDetailsResponse.getCartItems()) {

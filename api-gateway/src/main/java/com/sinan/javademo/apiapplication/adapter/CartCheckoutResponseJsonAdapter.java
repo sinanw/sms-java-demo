@@ -23,6 +23,7 @@ public class CartCheckoutResponseJsonAdapter extends TypeAdapter<CartCheckoutRes
         }
         jsonWriter.endArray();
         jsonWriter.name("totalPrice").value(APIHelper.formatDouble(cartCheckoutResponse.getTotalPrice()));
+        jsonWriter.name("currency").value(cartCheckoutResponse.getCurrency());
         jsonWriter.endObject();
     }
 

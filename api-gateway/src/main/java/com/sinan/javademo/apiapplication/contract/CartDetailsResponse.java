@@ -12,6 +12,7 @@ import java.util.List;
 public class CartDetailsResponse {
     private final String cartId;
     private final List<CartItem> cartItems;
+    private final String currency;
 
     public String getCartId() {
         return cartId;
@@ -21,8 +22,13 @@ public class CartDetailsResponse {
         return cartItems;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
     public CartDetailsResponse(Cart cart) {
         this.cartId = cart.getId();
+        this.currency = cart.getCurrency().toString();
         cartItems = new ArrayList<>();
         var items = cart.getItems();
         for (var item : items.keySet()) {

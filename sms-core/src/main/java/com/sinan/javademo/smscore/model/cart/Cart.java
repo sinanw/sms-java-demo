@@ -4,6 +4,8 @@ import com.sinan.javademo.smscore.exception.CartItemNotFoundException;
 import com.sinan.javademo.smscore.model.item.Item;
 import com.sinan.javademo.smscore.model.offer.BaseOffer;
 
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -13,16 +15,22 @@ public class Cart {
     private final String id;
     private final Map<Item, Integer> items;
     private final Map<BaseOffer, Double> appliedOffers;
+    private final CurrencyUnit currency;
 
 
     public Cart() {
         id = UUID.randomUUID().toString();
         items = new HashMap<>();
         appliedOffers = new HashMap<>();
+        this.currency = Monetary.getCurrency("USD");
     }
 
     public String getId() {
         return id;
+    }
+
+    public CurrencyUnit getCurrency() {
+        return currency;
     }
 
     public void addItem(Item item) {
@@ -45,6 +53,18 @@ public class Cart {
         }
     }
 
+    public Map<Item, Integer> getItems() {
+        return new HashMap<>(items);
+    }
+
+
+    public boolean hasItem(Item item) {
+        return items.containsKey(item);
+    }
+
+    public int getItemQuantity(Item item) {
+        return hasItem(item) ? items.get(item) : 0;
+    }
 
     public void addOffer(BaseOffer offer, double discount) {
         appliedOffers.put(offer, discount);
@@ -56,21 +76,12 @@ public class Cart {
         }
     }
 
-
-    public Map<Item, Integer> getItems() {
-        return new HashMap<>(items);
-    }
-
     public Map<BaseOffer, Double> getAppliedOffers() {
         return new HashMap<>(appliedOffers);
     }
 
-    public double getSubTotalPrice() {
-        double subTotal = 0;
-        for (var entry : items.entrySet()) {
-            subTotal += entry.getKey().getPrice() * entry.getValue();
-        }
-        return subTotal;
+    public boolean hasOffer(BaseOffer offer) {
+        return appliedOffers.containsKey(offer);
     }
 
     public double getTotalDiscount() {
@@ -81,18 +92,13 @@ public class Cart {
         return getSubTotalPrice() - getTotalDiscount();
     }
 
-    public int getItemQuantity(Item item) {
-        return hasItem(item) ? items.get(item) : 0;
+    public double getSubTotalPrice() {
+        double subTotal = 0;
+        for (var entry : items.entrySet()) {
+            subTotal += entry.getKey().getPrice() * entry.getValue();
+        }
+        return subTotal;
     }
-
-    public boolean hasItem(Item item) {
-        return items.containsKey(item);
-    }
-
-    public boolean hasOffer(BaseOffer offer) {
-        return appliedOffers.containsKey(offer);
-    }
-
 
     public double getItemTotalPrice(Item item) {
         if (!hasItem(item)) {
