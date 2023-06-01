@@ -1,9 +1,9 @@
-package com.sinan.javademo.apiapplication.model.adapter;
+package com.sinan.javademo.apiapplication.adapter;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.sinan.javademo.apiapplication.model.CartDetailsResponse;
+import com.sinan.javademo.apiapplication.contract.CartDetailsResponse;
 
 import java.io.IOException;
 
@@ -28,6 +28,6 @@ public class CartDetailsResponseAdapter extends TypeAdapter<CartDetailsResponse>
 
     @Override
     public CartDetailsResponse read(JsonReader jsonReader) throws IOException {
-        throw new UnsupportedOperationException("Deserializing json to CartDetailsResponse object is not supported, CartDetailsResponse is a response contract!");
+        throw new UnsupportedOperationException("Deserializing from json is not supported, this object is a response contract!");
     }
 }

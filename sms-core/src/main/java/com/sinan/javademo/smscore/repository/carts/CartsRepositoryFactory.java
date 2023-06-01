@@ -1,10 +1,10 @@
 package com.sinan.javademo.smscore.repository.carts;
 
-public class CartRepositoryFactory {
-    public CartRepository creat(String repositoryType) {
+public class CartsRepositoryFactory {
+    public CartsRepository creat(String repositoryType) {
         return switch (repositoryType) {
-            case "STATIC" -> StaticCartRepository.getInstance();
-            case "DB" -> new DBCartRepository();
+            case "STATIC" -> StaticCartsRepository.getInstance();
+            case "DB" -> new DBCartsRepository();
             default -> throw new IllegalArgumentException(
                     String.format("%s carts repository type is not supported!", repositoryType));
         };

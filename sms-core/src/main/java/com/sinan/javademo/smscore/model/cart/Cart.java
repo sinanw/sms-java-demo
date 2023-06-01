@@ -1,7 +1,6 @@
 package com.sinan.javademo.smscore.model.cart;
 
-import com.sinan.javademo.smscore.exception.DupplicateCartOfferException;
-import com.sinan.javademo.smscore.exception.ItemNotFoundException;
+import com.sinan.javademo.smscore.exception.CartItemNotFoundException;
 import com.sinan.javademo.smscore.model.item.Item;
 import com.sinan.javademo.smscore.model.offer.BaseOffer;
 
@@ -34,11 +33,27 @@ public class Cart {
         }
     }
 
-    public void addOffer(BaseOffer offer, double discount) {
-        if (appliedOffers.containsKey(offer)) {
-            throw new DupplicateCartOfferException(offer, this);
+    public void removeItem(Item item) {
+        if (!hasItem(item)) {
+            throw new CartItemNotFoundException(this.getId(), item.getName());
         }
+        int count = items.get(item);
+        if (count == 1) {
+            items.remove(item);
+        } else {
+            items.put(item, count - 1);
+        }
+    }
+
+
+    public void addOffer(BaseOffer offer, double discount) {
         appliedOffers.put(offer, discount);
+    }
+
+    public void removeOfferIfExist(BaseOffer offer) {
+        if (hasOffer(offer)) {
+            appliedOffers.remove(offer);
+        }
     }
 
 
@@ -78,9 +93,10 @@ public class Cart {
         return appliedOffers.containsKey(offer);
     }
 
+
     public double getItemTotalPrice(Item item) {
         if (!hasItem(item)) {
-            throw new ItemNotFoundException(item.getName());
+            throw new CartItemNotFoundException(this.getId(), item.getName());
         }
         return item.getPrice() * items.get(item);
     }

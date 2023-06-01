@@ -1,4 +1,4 @@
-package com.sinan.javademo.apiapplication.model.adapter;
+package com.sinan.javademo.apiapplication.adapter;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -19,6 +19,6 @@ public class APIErrorJsonAdapter extends TypeAdapter<APIError> {
 
     @Override
     public APIError read(JsonReader jsonReader) {
-        throw new UnsupportedOperationException("Deserializing json to APIError object is not supported, APIError is a response contract!");
+        throw new UnsupportedOperationException("Deserializing from json is not supported, this object is a response contract!");
     }
 }

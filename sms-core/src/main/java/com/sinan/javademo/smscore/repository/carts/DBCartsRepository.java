@@ -2,7 +2,7 @@ package com.sinan.javademo.smscore.repository.carts;
 
 import com.sinan.javademo.smscore.model.cart.Cart;
 
-public class DBCartRepository implements CartRepository{
+public class DBCartsRepository implements CartsRepository {
     @Override
     public Cart getCart(String id) {
         //This is just an example, no database implementation is provided.

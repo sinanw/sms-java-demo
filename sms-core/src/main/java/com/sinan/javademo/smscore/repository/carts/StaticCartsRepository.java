@@ -6,17 +6,17 @@ import com.sinan.javademo.smscore.model.cart.Cart;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StaticCartRepository implements CartRepository {
+public class StaticCartsRepository implements CartsRepository {
     private final Map<String, Cart> carts;
-    private static StaticCartRepository instance;
+    private static StaticCartsRepository instance;
 
-    private StaticCartRepository() {
+    private StaticCartsRepository() {
         carts = new HashMap<>();
     }
 
-    public static StaticCartRepository getInstance() {
+    public static StaticCartsRepository getInstance() {
         if (instance == null) {
-            instance = new StaticCartRepository();
+            instance = new StaticCartsRepository();
         }
         return instance;
     }

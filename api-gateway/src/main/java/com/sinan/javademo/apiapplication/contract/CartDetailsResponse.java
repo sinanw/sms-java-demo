@@ -1,7 +1,8 @@
-package com.sinan.javademo.apiapplication.model;
+package com.sinan.javademo.apiapplication.contract;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.sinan.javademo.apiapplication.model.adapter.CartDetailsResponseAdapter;
+import com.sinan.javademo.apiapplication.model.CartItem;
+import com.sinan.javademo.apiapplication.adapter.CartDetailsResponseAdapter;
 import com.sinan.javademo.smscore.model.cart.Cart;
 
 import java.util.ArrayList;
