@@ -8,10 +8,19 @@ import java.util.Map;
 
 public class StaticCartRepository implements CartRepository {
     private final Map<String, Cart> carts;
+    private static StaticCartRepository instance;
 
-    public StaticCartRepository() {
-        this.carts = new HashMap<>();
+    private StaticCartRepository() {
+        carts = new HashMap<>();
     }
+
+    public static StaticCartRepository getInstance() {
+        if (instance == null) {
+            instance = new StaticCartRepository();
+        }
+        return instance;
+    }
+
 
     @Override
     public Cart getCart(String id) {
@@ -21,4 +30,10 @@ public class StaticCartRepository implements CartRepository {
         return carts.get(id);
 
     }
+
+    @Override
+    public void saveCart(Cart cart) {
+        carts.put(cart.getId(), cart);
+    }
+
 }

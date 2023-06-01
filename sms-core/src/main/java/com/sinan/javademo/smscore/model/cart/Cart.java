@@ -74,6 +74,10 @@ public class Cart {
         return items.containsKey(item);
     }
 
+    public boolean hasOffer(BaseOffer offer) {
+        return appliedOffers.containsKey(offer);
+    }
+
     public double getItemTotalPrice(Item item) {
         if (!hasItem(item)) {
             throw new ItemNotFoundException(item.getName());

@@ -13,7 +13,7 @@ public class CartDirector {
         cartBuilder.populateItems(itemsList);
     }
 
-    public void createEmptyCart(BaseCartBuilder cartBuilder){
+    public void createEmptyCart(){
         //Nothing to do
     }
 }

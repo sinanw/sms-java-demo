@@ -8,4 +8,10 @@ public class DBCartRepository implements CartRepository{
         //This is just an example, no database implementation is provided.
         throw new UnsupportedOperationException("This functionality is not supported in this demo project!");
     }
+
+    @Override
+    public void saveCart(Cart cart) {
+        //This is just an example, no database implementation is provided.
+        throw new UnsupportedOperationException("This functionality is not supported in this demo project!");
+    }
 }

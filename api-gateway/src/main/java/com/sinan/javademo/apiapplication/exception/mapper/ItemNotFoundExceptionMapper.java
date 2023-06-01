@@ -12,7 +12,9 @@ public class ItemNotFoundExceptionMapper implements ExceptionMapper<ItemNotFound
 
     @Override
     public Response toResponse(ItemNotFoundException ex) {
-        APIError apiError = new APIError(ex.getMessage(), "This error happened because cart can't be initialized with no items, please make sure to add at least one item!");
+        APIError apiError = new APIError(ex.getMessage(),
+                "This error happened because an item can't be found in our system, " +
+                        "please make sure to select valid item names!");
         return Response.status(Response.Status.BAD_REQUEST).entity(new Gson().toJson(apiError)).build();
     }
 }

@@ -16,8 +16,9 @@ public class StaticOffersRepository implements OffersRepository {
 
     private final List<BaseOffer> offers;
     private final ItemsRepository itemsRepository;
+    private static StaticOffersRepository instance;
 
-    public StaticOffersRepository() {
+    private StaticOffersRepository() {
         ItemsRepositoryFactory factory = new ItemsRepositoryFactory();
         itemsRepository = factory.create(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
 
@@ -40,6 +41,13 @@ public class StaticOffersRepository implements OffersRepository {
                 10);
 
         offers.addAll(List.of(offer1, offer2, offer3));
+    }
+
+    public static StaticOffersRepository getInstance() {
+        if (instance == null) {
+            instance = new StaticOffersRepository();
+        }
+        return instance;
     }
 
     @Override

@@ -9,14 +9,22 @@ import java.util.Map;
 
 public class StaticItemsRepository implements ItemsRepository {
     private final Map<String, Item> storeItems;
+    private static StaticItemsRepository instance;
 
 
-    public StaticItemsRepository() {
+    private StaticItemsRepository() {
         storeItems = new HashMap<>();
         storeItems.put("Soup", new Item("Soup", UnitType.TIN, 0.65d));
         storeItems.put("Bread", new Item("Bread", UnitType.LOAF, 0.80d));
         storeItems.put("Milk", new Item("Milk", UnitType.BOTTLE, 1.30d));
         storeItems.put("Apples", new Item("Apples", UnitType.BAG, 1.00d));
+    }
+
+    public static StaticItemsRepository getInstance() {
+        if (instance == null) {
+            instance = new StaticItemsRepository();
+        }
+        return instance;
     }
 
     public Map<String, Item> getItems() {
