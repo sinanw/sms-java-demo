@@ -23,11 +23,10 @@ public class StaticItemsRepository implements ItemsRepository {
         return storeItems;
     }
 
-    public Item getItem(String itemName){
-        if (storeItems.containsKey(itemName)) {
-            return storeItems.get(itemName);
-        } else {
+    public Item getItem(String itemName) {
+        if (!storeItems.containsKey(itemName)) {
             throw new ItemNotFoundException(itemName);
         }
+        return storeItems.get(itemName);
     }
 }
