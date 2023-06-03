@@ -9,9 +9,6 @@ import jakarta.ws.rs.core.MediaType;
 @Produces(MediaType.TEXT_PLAIN)
 public class EngineeringResource extends SMSResource {
 
-    public EngineeringResource() {
-    }
-
     @GET
     @Path("/ping")
     public String ping() {

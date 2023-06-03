@@ -12,13 +12,14 @@ public class APIErrorJsonAdapter extends TypeAdapter<APIError> {
     @Override
     public void write(JsonWriter jsonWriter, APIError apiError) throws IOException {
         jsonWriter.beginObject();
-        jsonWriter.name("errorMessage").value(apiError.getMessage());
-        jsonWriter.name("errorDescription").value(apiError.getDescription());
+        jsonWriter.name("errorMessage").value(apiError.message());
+        jsonWriter.name("errorDescription").value(apiError.description());
         jsonWriter.endObject();
     }
 
     @Override
     public APIError read(JsonReader jsonReader) {
-        throw new UnsupportedOperationException("Deserializing from json is not supported, this object is a response contract!");
+        throw new UnsupportedOperationException(
+                "Deserializing from json is not supported, this object is a response contract!");
     }
 }

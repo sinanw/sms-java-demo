@@ -1,9 +1,11 @@
 package com.sinan.javademo.smscore.repository.items;
 
 import com.sinan.javademo.smscore.model.item.Item;
+import jakarta.inject.Singleton;
 
 import java.util.Map;
 
+@Singleton
 public class DBItemsRepository implements IItemsRepository {
     @Override
     public Map<String, Item> getItems() {

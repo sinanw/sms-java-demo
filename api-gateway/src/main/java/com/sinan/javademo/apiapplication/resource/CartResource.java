@@ -8,6 +8,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
 import java.util.List;
 
 @Path("/cart")
@@ -17,9 +18,6 @@ public class CartResource extends SMSResource {
 
     @Inject
     private CartService cartService;
-
-    public CartResource() {
-    }
 
     @POST
     public Response createCart(List<String> itemsIdentifiers) {

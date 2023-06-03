@@ -21,6 +21,8 @@ public class CartService {
     private OfferService offerService;
     private final ICartsRepository cartsRepository;
     private final IItemsRepository itemsRepository;
+    @Inject
+    private CartBuilder cartBuilder;
 
     @Inject
     public CartService(CartsRepositoryFactory cartsRepositoryFactory, ItemsRepositoryFactory itemsRepositoryFactory) {
@@ -34,7 +36,6 @@ public class CartService {
 
     public Cart createCart(List<String> itemsIdentifiers) {
         //Creating cart object
-        CartBuilder cartBuilder = new CartBuilder();
         CartDirector cartDirector = new CartDirector(cartBuilder);
         if (itemsIdentifiers != null) {
             cartDirector.createCartWithItems(itemsIdentifiers);

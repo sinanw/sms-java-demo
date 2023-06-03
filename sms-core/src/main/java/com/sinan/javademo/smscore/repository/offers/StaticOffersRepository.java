@@ -7,20 +7,23 @@ import com.sinan.javademo.smscore.model.offer.SingleItemOffer;
 import com.sinan.javademo.smscore.repository.items.IItemsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
 import com.sinan.javademo.smscore.util.StoreConfiguration;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Singleton
 public class StaticOffersRepository implements IOffersRepository {
 
     private final List<BaseOffer> offers;
     private final IItemsRepository itemsRepository;
-    private static StaticOffersRepository instance;
 
-    private StaticOffersRepository() {
-        ItemsRepositoryFactory factory = new ItemsRepositoryFactory();
-        itemsRepository = factory.create(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
+
+    @Inject
+    private StaticOffersRepository(ItemsRepositoryFactory itemsRepositoryFactory) {
+        itemsRepository = itemsRepositoryFactory.create(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
 
         offers = new ArrayList<>();
         BaseOffer offer1 = new SingleItemOffer("Apples have 10% off their normal price this week",
@@ -41,13 +44,6 @@ public class StaticOffersRepository implements IOffersRepository {
                 10);
 
         offers.addAll(List.of(offer1, offer2, offer3));
-    }
-
-    public static StaticOffersRepository getInstance() {
-        if (instance == null) {
-            instance = new StaticOffersRepository();
-        }
-        return instance;
     }
 
     @Override

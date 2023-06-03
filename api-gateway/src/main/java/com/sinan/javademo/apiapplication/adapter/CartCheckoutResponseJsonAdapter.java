@@ -29,6 +29,7 @@ public class CartCheckoutResponseJsonAdapter extends TypeAdapter<CartCheckoutRes
 
     @Override
     public CartCheckoutResponse read(JsonReader jsonReader) {
-        throw new UnsupportedOperationException("Deserializing from json is not supported, this object is a response contract!");
+        throw new UnsupportedOperationException(
+                "Deserializing from json is not supported, this object is a response contract!");
     }
 }

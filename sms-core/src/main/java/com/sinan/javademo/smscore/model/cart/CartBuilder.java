@@ -4,20 +4,25 @@ import com.sinan.javademo.smscore.model.item.Item;
 import com.sinan.javademo.smscore.repository.items.IItemsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
 import com.sinan.javademo.smscore.util.StoreConfiguration;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
+@RequestScoped
 public class CartBuilder implements IBaseCartBuilder {
     private Cart cart;
+    @Inject
+    private ItemsRepositoryFactory itemsRepositoryFactory;
 
+    @Inject
     public CartBuilder() {
         this.cart = new Cart();
     }
 
     @Override
     public void populateItems(List<String> itemsList) {
-        ItemsRepositoryFactory factory = new ItemsRepositoryFactory();
-        IItemsRepository itemsRepository = factory.create(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
+        IItemsRepository itemsRepository = itemsRepositoryFactory.create(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
         for (var item : itemsList) {
             Item newItem = itemsRepository.getItem(item);
             cart.addItem(newItem);

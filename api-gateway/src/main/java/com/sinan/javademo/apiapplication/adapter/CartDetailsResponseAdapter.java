@@ -29,6 +29,7 @@ public class CartDetailsResponseAdapter extends TypeAdapter<CartDetailsResponse>
 
     @Override
     public CartDetailsResponse read(JsonReader jsonReader) throws IOException {
-        throw new UnsupportedOperationException("Deserializing from json is not supported, this object is a response contract!");
+        throw new UnsupportedOperationException(
+                "Deserializing from json is not supported, this object is a response contract!");
     }
 }

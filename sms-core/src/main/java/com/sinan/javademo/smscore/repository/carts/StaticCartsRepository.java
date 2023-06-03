@@ -2,23 +2,17 @@ package com.sinan.javademo.smscore.repository.carts;
 
 import com.sinan.javademo.smscore.exception.CartNotFoundException;
 import com.sinan.javademo.smscore.model.cart.Cart;
+import jakarta.inject.Singleton;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Singleton
 public class StaticCartsRepository implements ICartsRepository {
     private final Map<String, Cart> carts;
-    private static StaticCartsRepository instance;
 
-    private StaticCartsRepository() {
+    public StaticCartsRepository() {
         carts = new HashMap<>();
-    }
-
-    public static StaticCartsRepository getInstance() {
-        if (instance == null) {
-            instance = new StaticCartsRepository();
-        }
-        return instance;
     }
 
 
