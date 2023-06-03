@@ -3,7 +3,7 @@ import com.sinan.javademo.smscore.model.offer.BaseOffer;
 
 import java.util.List;
 
-public interface OffersRepository {
+public interface IOffersRepository {
     List<BaseOffer> getOffers();
 
 }

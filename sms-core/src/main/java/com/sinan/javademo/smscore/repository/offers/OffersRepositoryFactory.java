@@ -4,7 +4,7 @@ import jakarta.inject.Singleton;
 
 @Singleton
 public class OffersRepositoryFactory {
-    public OffersRepository create(String repositoryType) {
+    public IOffersRepository create(String repositoryType) {
         return switch (repositoryType) {
             case "STATIC" -> StaticOffersRepository.getInstance();
             case "DB" -> new DBOffersRepository();

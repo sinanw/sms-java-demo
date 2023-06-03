@@ -4,7 +4,7 @@ import jakarta.inject.Singleton;
 
 @Singleton
 public class CartsRepositoryFactory {
-    public CartsRepository creat(String repositoryType) {
+    public ICartsRepository creat(String repositoryType) {
         return switch (repositoryType) {
             case "STATIC" -> StaticCartsRepository.getInstance();
             case "DB" -> new DBCartsRepository();

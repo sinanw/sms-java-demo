@@ -1,7 +1,7 @@
 package com.sinan.javademo.smscore.model.offer;
 
-import com.sinan.javademo.smscore.model.offer.strategy.discount.condition.DiscountConditionStrategy;
-import com.sinan.javademo.smscore.model.offer.strategy.discount.execution.DiscountExecutionStrategy;
+import com.sinan.javademo.smscore.model.offer.strategy.discount.condition.IDiscountConditionStrategy;
+import com.sinan.javademo.smscore.model.offer.strategy.discount.execution.IDiscountExecutionStrategy;
 import com.sinan.javademo.smscore.util.InputValidator;
 
 import java.time.LocalDateTime;
@@ -11,8 +11,8 @@ public abstract class BaseOffer {
     private final String id;
     private String description;
     private LocalDateTime startTime, endTime;
-    protected DiscountConditionStrategy conditionStrategy;
-    protected DiscountExecutionStrategy executionStrategy;
+    protected IDiscountConditionStrategy conditionStrategy;
+    protected IDiscountExecutionStrategy executionStrategy;
 
     public BaseOffer(String description) {
         this.id = UUID.randomUUID().toString();
@@ -34,11 +34,11 @@ public abstract class BaseOffer {
     }
 
 
-    public DiscountConditionStrategy getConditionStrategy() {
+    public IDiscountConditionStrategy getConditionStrategy() {
         return conditionStrategy;
     }
 
-    public DiscountExecutionStrategy getExecutionStrategy() {
+    public IDiscountExecutionStrategy getExecutionStrategy() {
         return executionStrategy;
     }
 

@@ -3,7 +3,7 @@ package com.sinan.javademo.smscore.model.offer.strategy.discount.condition;
 import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.model.item.Item;
 
-public class ItemExistConditionStrategy implements DiscountConditionStrategy {
+public class ItemExistConditionStrategy implements IDiscountConditionStrategy {
     private final Item item;
 
     public ItemExistConditionStrategy(Item item) {

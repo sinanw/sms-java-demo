@@ -6,7 +6,7 @@ import com.sinan.javademo.smscore.model.cart.Cart;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StaticCartsRepository implements CartsRepository {
+public class StaticCartsRepository implements ICartsRepository {
     private final Map<String, Cart> carts;
     private static StaticCartsRepository instance;
 

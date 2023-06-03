@@ -4,7 +4,7 @@ import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.model.item.Item;
 import com.sinan.javademo.smscore.util.InputValidator;
 
-public class ItemPercentageExecutionStrategy implements DiscountExecutionStrategy {
+public class ItemPercentageExecutionStrategy implements IDiscountExecutionStrategy {
     private final Item item;
     private final double percentage;
 

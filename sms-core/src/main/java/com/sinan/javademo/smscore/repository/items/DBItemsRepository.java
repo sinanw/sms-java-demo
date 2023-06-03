@@ -4,7 +4,7 @@ import com.sinan.javademo.smscore.model.item.Item;
 
 import java.util.Map;
 
-public class DBItemsRepository implements ItemsRepository{
+public class DBItemsRepository implements IItemsRepository {
     @Override
     public Map<String, Item> getItems() {
         //This is just an example, no database implementation is provided.

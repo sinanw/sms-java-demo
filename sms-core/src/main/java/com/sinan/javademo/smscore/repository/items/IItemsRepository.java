@@ -4,7 +4,7 @@ import com.sinan.javademo.smscore.model.item.Item;
 
 import java.util.Map;
 
-public interface ItemsRepository {
+public interface IItemsRepository {
     Map<String, Item> getItems();
     Item getItem(String item);
 }

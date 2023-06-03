@@ -7,7 +7,7 @@ import com.sinan.javademo.smscore.model.item.UnitType;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StaticItemsRepository implements ItemsRepository {
+public class StaticItemsRepository implements IItemsRepository {
     private final Map<String, Item> storeItems;
     private static StaticItemsRepository instance;
 

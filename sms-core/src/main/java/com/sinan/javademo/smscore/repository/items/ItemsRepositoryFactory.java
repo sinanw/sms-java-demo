@@ -6,7 +6,7 @@ import jakarta.inject.Singleton;
 public class ItemsRepositoryFactory {
 
 
-    public ItemsRepository create(String repositoryType) {
+    public IItemsRepository create(String repositoryType) {
         return switch (repositoryType) {
             case "STATIC" -> StaticItemsRepository.getInstance();
             case "DB" -> new DBItemsRepository();

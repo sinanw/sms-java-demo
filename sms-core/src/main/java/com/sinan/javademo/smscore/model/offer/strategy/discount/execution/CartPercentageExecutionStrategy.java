@@ -3,12 +3,12 @@ package com.sinan.javademo.smscore.model.offer.strategy.discount.execution;
 import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.util.InputValidator;
 
-public class CartPercentageExecutionStrategy implements DiscountExecutionStrategy {
+public class CartPercentageExecutionStrategy implements IDiscountExecutionStrategy {
 
     private final double percentage;
 
     public CartPercentageExecutionStrategy(double percentage) {
-        this.percentage = InputValidator.validatePercentage(percentage,1,100);;
+        this.percentage = InputValidator.validatePercentage(percentage,1,100);
     }
 
     @Override

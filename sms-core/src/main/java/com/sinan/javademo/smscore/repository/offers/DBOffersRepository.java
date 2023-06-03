@@ -4,7 +4,7 @@ import com.sinan.javademo.smscore.model.offer.BaseOffer;
 
 import java.util.List;
 
-public class DBOffersRepository implements OffersRepository{
+public class DBOffersRepository implements IOffersRepository {
     @Override
     public List<BaseOffer> getOffers() {
         //This is just an example, no database implementation is provided.

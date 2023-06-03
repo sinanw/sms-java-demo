@@ -4,9 +4,9 @@ import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.model.cart.CartBuilder;
 import com.sinan.javademo.smscore.model.cart.CartDirector;
 import com.sinan.javademo.smscore.model.item.Item;
-import com.sinan.javademo.smscore.repository.carts.CartsRepository;
+import com.sinan.javademo.smscore.repository.carts.ICartsRepository;
 import com.sinan.javademo.smscore.repository.carts.CartsRepositoryFactory;
-import com.sinan.javademo.smscore.repository.items.ItemsRepository;
+import com.sinan.javademo.smscore.repository.items.IItemsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
 import com.sinan.javademo.smscore.util.StoreConfiguration;
 import jakarta.inject.Inject;
@@ -19,8 +19,8 @@ public class CartService {
 
     @Inject
     private OfferService offerService;
-    private final CartsRepository cartsRepository;
-    private final ItemsRepository itemsRepository;
+    private final ICartsRepository cartsRepository;
+    private final IItemsRepository itemsRepository;
 
     @Inject
     public CartService(CartsRepositoryFactory cartsRepositoryFactory, ItemsRepositoryFactory itemsRepositoryFactory) {

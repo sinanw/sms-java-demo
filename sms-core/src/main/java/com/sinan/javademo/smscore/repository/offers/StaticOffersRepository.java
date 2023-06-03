@@ -4,7 +4,7 @@ import com.sinan.javademo.smscore.model.offer.BaseOffer;
 import com.sinan.javademo.smscore.model.offer.CartPercentageOffer;
 import com.sinan.javademo.smscore.model.offer.DoubleItemsOffer;
 import com.sinan.javademo.smscore.model.offer.SingleItemOffer;
-import com.sinan.javademo.smscore.repository.items.ItemsRepository;
+import com.sinan.javademo.smscore.repository.items.IItemsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
 import com.sinan.javademo.smscore.util.StoreConfiguration;
 
@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StaticOffersRepository implements OffersRepository {
+public class StaticOffersRepository implements IOffersRepository {
 
     private final List<BaseOffer> offers;
-    private final ItemsRepository itemsRepository;
+    private final IItemsRepository itemsRepository;
     private static StaticOffersRepository instance;
 
     private StaticOffersRepository() {
