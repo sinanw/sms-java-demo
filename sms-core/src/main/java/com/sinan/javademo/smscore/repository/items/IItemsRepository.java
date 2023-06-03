@@ -6,5 +6,6 @@ import java.util.Map;
 
 public interface IItemsRepository {
     Map<String, Item> getItems();
+
     Item getItem(String item);
 }

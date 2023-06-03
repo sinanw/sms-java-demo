@@ -11,7 +11,8 @@ public class OffersRepositoryFactory {
     private final Map<String, IOffersRepository> instances;
 
     @Inject
-    public OffersRepositoryFactory(StaticOffersRepository staticOffersRepository, DBOffersRepository dbOffersRepository) {
+    public OffersRepositoryFactory(StaticOffersRepository staticOffersRepository,
+                                   DBOffersRepository dbOffersRepository) {
         instances = new HashMap<>();
         instances.put("STATIC", staticOffersRepository);
         instances.put("DB", dbOffersRepository);

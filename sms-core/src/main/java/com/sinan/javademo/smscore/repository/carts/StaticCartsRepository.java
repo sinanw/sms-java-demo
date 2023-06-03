@@ -15,7 +15,6 @@ public class StaticCartsRepository implements ICartsRepository {
         carts = new HashMap<>();
     }
 
-
     @Override
     public Cart getCart(String id) {
         if (!carts.containsKey(id)) {

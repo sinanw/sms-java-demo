@@ -6,7 +6,19 @@ import com.sinan.javademo.smscore.util.InputValidator;
 
 public class ItemPercentageExecutionStrategy implements IDiscountExecutionStrategy {
     private final Item item;
-    private final double percentage;
+    private double percentage;
+
+    public Item getItem() {
+        return item;
+    }
+
+    public double getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
+    }
 
     public ItemPercentageExecutionStrategy(Item item, double percentage) {
         this.item = item;

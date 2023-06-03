@@ -12,7 +12,6 @@ import java.util.Map;
 public class StaticItemsRepository implements IItemsRepository {
     private final Map<String, Item> storeItems;
 
-
     public StaticItemsRepository() {
         storeItems = new HashMap<>();
         storeItems.put("Soup", new Item("Soup", UnitType.TIN, 0.65d));

@@ -5,10 +5,18 @@ import com.sinan.javademo.smscore.util.InputValidator;
 
 public class CartPercentageExecutionStrategy implements IDiscountExecutionStrategy {
 
-    private final double percentage;
+    private double percentage;
+
+    public double getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
+    }
 
     public CartPercentageExecutionStrategy(double percentage) {
-        this.percentage = InputValidator.validatePercentage(percentage,1,100);
+        this.percentage = InputValidator.validatePercentage(percentage, 1, 100);
     }
 
     @Override

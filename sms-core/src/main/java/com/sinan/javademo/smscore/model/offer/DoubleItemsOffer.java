@@ -5,11 +5,11 @@ import com.sinan.javademo.smscore.model.offer.strategy.discount.condition.MinIte
 import com.sinan.javademo.smscore.model.offer.strategy.discount.execution.ItemPercentageExecutionStrategy;
 import com.sinan.javademo.smscore.util.InputValidator;
 
-public class DoubleItemsOffer extends ProductBaseOffer{
+public class DoubleItemsOffer extends ProductBaseOffer {
     private final Item sourceItem;
     private final Item targetItem;
-    private final int minSourceQuantity;
-    private final double percentage;
+    private int minSourceQuantity;
+    private double percentage;
 
     public Item getSourceItem() {
         return sourceItem;
@@ -23,8 +23,16 @@ public class DoubleItemsOffer extends ProductBaseOffer{
         return minSourceQuantity;
     }
 
+    public void setMinSourceQuantity(int minSourceQuantity) {
+        this.minSourceQuantity = minSourceQuantity;
+    }
+
     public double getPercentage() {
         return percentage;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
     }
 
     public DoubleItemsOffer(String description, Item sourceItem, Item targetItem, int minSourceQuantity, double percentage) {
@@ -32,14 +40,14 @@ public class DoubleItemsOffer extends ProductBaseOffer{
         this.sourceItem = sourceItem;
         this.targetItem = targetItem;
         this.minSourceQuantity = minSourceQuantity;
-        this.percentage = InputValidator.validatePercentage(percentage,1,100);
-        this.conditionStrategy = new MinItemCountConditionStrategy(sourceItem,minSourceQuantity);
-        this.executionStrategy = new ItemPercentageExecutionStrategy(targetItem,percentage);
+        this.percentage = InputValidator.validatePercentage(percentage, 1, 100);
+        this.conditionStrategy = new MinItemCountConditionStrategy(sourceItem, minSourceQuantity);
+        this.executionStrategy = new ItemPercentageExecutionStrategy(targetItem, percentage);
     }
 
     @Override
     public String toString() {
-        return String.format("%s %.0f%% off",targetItem.getName(),percentage);
+        return String.format("%s %.0f%% off", targetItem.getName(), percentage);
     }
 
 }

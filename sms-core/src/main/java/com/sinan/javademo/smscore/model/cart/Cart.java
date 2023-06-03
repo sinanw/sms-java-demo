@@ -15,8 +15,7 @@ public class Cart {
     private final String id;
     private final Map<Item, Integer> items;
     private final Map<BaseOffer, Double> appliedOffers;
-    private final CurrencyUnit currency;
-
+    private CurrencyUnit currency;
 
     public Cart() {
         id = UUID.randomUUID().toString();
@@ -31,6 +30,10 @@ public class Cart {
 
     public CurrencyUnit getCurrency() {
         return currency;
+    }
+
+    public void setCurrency(CurrencyUnit currency) {
+        this.currency = currency;
     }
 
     public void addItem(Item item) {

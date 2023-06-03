@@ -7,7 +7,7 @@ public class CartItemNotFoundException extends SMSException {
     public final String itemIdentifier;
 
     public CartItemNotFoundException(String cartIdentifier, String itemIdentifier) {
-        super(String.format(messageTemplate,  itemIdentifier, cartIdentifier));
+        super(String.format(messageTemplate, itemIdentifier, cartIdentifier));
         this.cartIdentifier = cartIdentifier;
         this.itemIdentifier = itemIdentifier;
     }

@@ -5,10 +5,14 @@ import com.sinan.javademo.smscore.model.offer.strategy.discount.execution.CartPe
 import com.sinan.javademo.smscore.util.InputValidator;
 
 public class CartPercentageOffer extends CartBaseOffer {
-    private final double percentage;
+    private double percentage;
 
     public double getPercentage() {
         return percentage;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
     }
 
     public CartPercentageOffer(String description, double percentage) {

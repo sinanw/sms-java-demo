@@ -15,9 +15,12 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CartResource extends SMSResource {
+    private final CartService cartService;
 
     @Inject
-    private CartService cartService;
+    public CartResource(CartService cartService) {
+        this.cartService = cartService;
+    }
 
     @POST
     public Response createCart(List<String> itemsIdentifiers) {

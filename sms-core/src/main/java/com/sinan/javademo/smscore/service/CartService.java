@@ -17,15 +17,17 @@ import java.util.List;
 @Singleton
 public class CartService {
 
-    @Inject
-    private OfferService offerService;
+    private final OfferService offerService;
+    private final CartBuilder cartBuilder;
     private final ICartsRepository cartsRepository;
     private final IItemsRepository itemsRepository;
-    @Inject
-    private CartBuilder cartBuilder;
 
     @Inject
-    public CartService(CartsRepositoryFactory cartsRepositoryFactory, ItemsRepositoryFactory itemsRepositoryFactory) {
+    public CartService(OfferService offerService, CartBuilder cartBuilder,
+                       CartsRepositoryFactory cartsRepositoryFactory,
+                       ItemsRepositoryFactory itemsRepositoryFactory) {
+        this.offerService = offerService;
+        this.cartBuilder = cartBuilder;
         cartsRepository = cartsRepositoryFactory.creat(StoreConfiguration.CARTS_REPOSITORY_TYPE);
         itemsRepository = itemsRepositoryFactory.create(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
     }

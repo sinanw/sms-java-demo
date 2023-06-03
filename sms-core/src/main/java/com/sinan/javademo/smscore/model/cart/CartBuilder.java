@@ -12,13 +12,18 @@ import java.util.List;
 @RequestScoped
 public class CartBuilder implements IBaseCartBuilder {
     private Cart cart;
-    @Inject
+
     private ItemsRepositoryFactory itemsRepositoryFactory;
 
     @Inject
-    public CartBuilder() {
+    public CartBuilder(ItemsRepositoryFactory itemsRepositoryFactory) {
+        this.itemsRepositoryFactory = itemsRepositoryFactory;
         this.cart = new Cart();
     }
+
+    public CartBuilder() {
+    }
+
 
     @Override
     public void populateItems(List<String> itemsList) {

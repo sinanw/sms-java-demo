@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Singleton
 public class ItemsRepositoryFactory {
-    Map<String, IItemsRepository> instances;
+    private final Map<String, IItemsRepository> instances;
 
     @Inject
     public ItemsRepositoryFactory(StaticItemsRepository staticItemsRepository, DBItemsRepository dbItemsRepository) {

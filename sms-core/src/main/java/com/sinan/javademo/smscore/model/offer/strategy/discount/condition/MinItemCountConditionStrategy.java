@@ -5,7 +5,19 @@ import com.sinan.javademo.smscore.model.item.Item;
 
 public class MinItemCountConditionStrategy implements IDiscountConditionStrategy {
     private final Item item;
-    private final int minQuantity;
+    private int minQuantity;
+
+    public Item getItem() {
+        return item;
+    }
+
+    public int getMinQuantity() {
+        return minQuantity;
+    }
+
+    public void setMinQuantity(int minQuantity) {
+        this.minQuantity = minQuantity;
+    }
 
     public MinItemCountConditionStrategy(Item item, int minQuantity) {
         this.item = item;

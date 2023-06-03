@@ -27,21 +27,15 @@ public class StaticOffersRepository implements IOffersRepository {
 
         offers = new ArrayList<>();
         BaseOffer offer1 = new SingleItemOffer("Apples have 10% off their normal price this week",
-                itemsRepository.getItem("Apples"),
-                10);
-        offer1.setStartTime(
-                LocalDateTime.of(2023, 5, 24, 0, 0, 0)
-        );
-        offer1.setEndTime(
-                LocalDateTime.of(2023, 6, 30, 0, 0, 0)
-        );
+                itemsRepository.getItem("Apples"), 10);
+        offer1.setStartTime(LocalDateTime.of(2023, 5, 24, 0, 0, 0));
+        offer1.setEndTime(LocalDateTime.of(2023, 6, 30, 0, 0, 0));
 
         BaseOffer offer2 = new DoubleItemsOffer("Buy 2 tins of soup and get a loaf of bread for half price",
                 itemsRepository.getItem("Soup"),
                 itemsRepository.getItem("Bread"),
                 2, 50);
-        BaseOffer offer3 = new CartPercentageOffer("Get 10% discount off the base cart total price",
-                10);
+        BaseOffer offer3 = new CartPercentageOffer("Get 10% discount off the base cart total price", 10);
 
         offers.addAll(List.of(offer1, offer2, offer3));
     }

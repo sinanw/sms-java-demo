@@ -4,5 +4,6 @@ import java.util.List;
 
 public interface IBaseCartBuilder {
     void populateItems(List<String> items);
+
     void reset();
 }

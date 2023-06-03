@@ -7,10 +7,14 @@ import com.sinan.javademo.smscore.util.InputValidator;
 
 public class SingleItemOffer extends ProductBaseOffer {
     private final Item item;
-    private final double percentage;
+    private double percentage;
 
     public Item getItem() {
         return item;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
     }
 
     public double getPercentage() {
@@ -20,7 +24,7 @@ public class SingleItemOffer extends ProductBaseOffer {
     public SingleItemOffer(String description, Item item, double percentage) {
         super(description);
         this.item = item;
-        this.percentage = InputValidator.validatePercentage(percentage,1,100);
+        this.percentage = InputValidator.validatePercentage(percentage, 1, 100);
         this.conditionStrategy = new ItemExistConditionStrategy(item);
         this.executionStrategy = new ItemPercentageExecutionStrategy(item, percentage);
     }
