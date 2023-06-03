@@ -1,6 +1,11 @@
 package com.sinan.javademo.smscore.repository.items;
 
+import jakarta.inject.Singleton;
+
+@Singleton
 public class ItemsRepositoryFactory {
+
+
     public ItemsRepository create(String repositoryType) {
         return switch (repositoryType) {
             case "STATIC" -> StaticItemsRepository.getInstance();

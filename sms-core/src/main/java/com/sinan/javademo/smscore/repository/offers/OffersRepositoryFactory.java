@@ -1,5 +1,8 @@
 package com.sinan.javademo.smscore.repository.offers;
 
+import jakarta.inject.Singleton;
+
+@Singleton
 public class OffersRepositoryFactory {
     public OffersRepository create(String repositoryType) {
         return switch (repositoryType) {

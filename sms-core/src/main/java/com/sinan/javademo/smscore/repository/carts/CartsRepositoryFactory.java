@@ -1,5 +1,8 @@
 package com.sinan.javademo.smscore.repository.carts;
 
+import jakarta.inject.Singleton;
+
+@Singleton
 public class CartsRepositoryFactory {
     public CartsRepository creat(String repositoryType) {
         return switch (repositoryType) {

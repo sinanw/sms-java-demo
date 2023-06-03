@@ -9,21 +9,22 @@ import com.sinan.javademo.smscore.repository.carts.CartsRepositoryFactory;
 import com.sinan.javademo.smscore.repository.items.ItemsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
 import com.sinan.javademo.smscore.util.StoreConfiguration;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import java.util.List;
 
+@Singleton
 public class CartService {
 
-    private final OfferService offerService;
+    @Inject
+    private OfferService offerService;
     private final CartsRepository cartsRepository;
     private final ItemsRepository itemsRepository;
 
-    public CartService() {
-        offerService = new OfferService();
-        CartsRepositoryFactory cartsRepositoryFactory = new CartsRepositoryFactory();
+    @Inject
+    public CartService(CartsRepositoryFactory cartsRepositoryFactory, ItemsRepositoryFactory itemsRepositoryFactory) {
         cartsRepository = cartsRepositoryFactory.creat(StoreConfiguration.CARTS_REPOSITORY_TYPE);
-
-        ItemsRepositoryFactory itemsRepositoryFactory = new ItemsRepositoryFactory();
         itemsRepository = itemsRepositoryFactory.create(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
     }
 

@@ -4,6 +4,7 @@ import com.sinan.javademo.apiapplication.contract.CartCheckoutResponse;
 import com.sinan.javademo.apiapplication.contract.CartDetailsResponse;
 import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.service.CartService;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -14,7 +15,8 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class CartResource extends SMSResource {
 
-    private final CartService cartService = new CartService();
+    @Inject
+    private CartService cartService;
 
     public CartResource() {
     }

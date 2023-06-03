@@ -4,14 +4,18 @@ import com.sinan.javademo.smscore.model.offer.BaseOffer;
 import com.sinan.javademo.smscore.repository.offers.OffersRepository;
 import com.sinan.javademo.smscore.repository.offers.OffersRepositoryFactory;
 import com.sinan.javademo.smscore.util.StoreConfiguration;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import java.util.List;
 
+@Singleton
 public class OfferService {
+
     private final OffersRepository offersRepository;
 
-    public OfferService() {
-        OffersRepositoryFactory factory = new OffersRepositoryFactory();
+    @Inject
+    public OfferService(OffersRepositoryFactory factory) {
         offersRepository = factory.create(StoreConfiguration.OFFERS_REPOSITORY_TYPE);
     }
 
