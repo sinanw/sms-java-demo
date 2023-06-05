@@ -17,8 +17,8 @@ public class CartCheckoutResponseJsonAdapter extends TypeAdapter<CartCheckoutRes
         jsonWriter.beginArray();
         for (var offer : cartCheckoutResponse.getOffers()) {
             jsonWriter.beginObject();
-            jsonWriter.name("discountDescription").value(offer.description());
-            jsonWriter.name("discountValue").value(APIHelper.formatDouble(offer.value()));
+            jsonWriter.name("discountDescription").value(offer.getDescription());
+            jsonWriter.name("discountValue").value(APIHelper.formatDouble(offer.getValue()));
             jsonWriter.endObject();
         }
         jsonWriter.endArray();

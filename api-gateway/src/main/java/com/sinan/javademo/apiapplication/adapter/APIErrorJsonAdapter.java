@@ -12,8 +12,8 @@ public class APIErrorJsonAdapter extends TypeAdapter<APIError> {
     @Override
     public void write(JsonWriter jsonWriter, APIError apiError) throws IOException {
         jsonWriter.beginObject();
-        jsonWriter.name("errorMessage").value(apiError.message());
-        jsonWriter.name("errorDescription").value(apiError.description());
+        jsonWriter.name("errorMessage").value(apiError.getMessage());
+        jsonWriter.name("errorDescription").value(apiError.getDescription());
         jsonWriter.endObject();
     }
 

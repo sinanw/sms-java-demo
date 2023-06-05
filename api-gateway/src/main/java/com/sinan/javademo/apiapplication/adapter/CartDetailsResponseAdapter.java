@@ -17,10 +17,10 @@ public class CartDetailsResponseAdapter extends TypeAdapter<CartDetailsResponse>
         jsonWriter.beginArray();
         for (var item : cartDetailsResponse.getCartItems()) {
             jsonWriter.beginObject();
-            jsonWriter.name("name").value(item.name());
-            jsonWriter.name("unit").value(String.valueOf(item.unit()));
-            jsonWriter.name("price").value(item.price());
-            jsonWriter.name("quantity").value(item.quantity());
+            jsonWriter.name("name").value(item.getName());
+            jsonWriter.name("unit").value(String.valueOf(item.getUnit()));
+            jsonWriter.name("price").value(item.getPrice());
+            jsonWriter.name("quantity").value(item.getQuantity());
             jsonWriter.endObject();
         }
         jsonWriter.endArray();
