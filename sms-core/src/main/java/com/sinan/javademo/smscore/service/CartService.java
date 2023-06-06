@@ -73,7 +73,9 @@ public class CartService {
         for (var offer : activeOffers) {
             if (offer.getConditionStrategy().isApplicable(cart)) {
                 double discountValue = offer.getExecutionStrategy().apply(cart);
-                cart.addOffer(offer, discountValue);
+                if (discountValue > 0) {
+                    cart.addOffer(offer, discountValue);
+                }
             } else {
                 cart.removeOfferIfExist(offer);
             }
