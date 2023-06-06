@@ -10,20 +10,40 @@ import java.util.List;
 
 @JsonAdapter(CartDetailsResponseAdapter.class)
 public class CartDetailsResponse {
-    private final String cartId;
-    private final List<CartItem> cartItems;
-    private final String currency;
+    private String cartId;
+    private List<CartItem> cartItems;
+    private String currency;
 
     public String getCartId() {
         return cartId;
     }
 
+    public void setCartId(String cartId) {
+        this.cartId = cartId;
+    }
+
     public List<CartItem> getCartItems() {
-        return cartItems;
+        return new ArrayList<>(cartItems);
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = new ArrayList<>(cartItems);
     }
 
     public String getCurrency() {
         return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public void addCartItem(CartItem cartItem) {
+        cartItems.add(cartItem);
+    }
+
+    public CartDetailsResponse() {
+        cartItems = new ArrayList<>();
     }
 
     public CartDetailsResponse(Cart cart) {

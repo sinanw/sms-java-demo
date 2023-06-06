@@ -12,25 +12,12 @@ import java.util.List;
 @JsonAdapter(CartCheckoutResponseJsonAdapter.class)
 public class CartCheckoutResponse {
 
-    private final double totalPrice;
-    private final double subTotalPrice;
-    private final List<CartDiscount> offers;
-    private final String currency;
+    private double totalPrice;
+    private double subTotalPrice;
+    private List<CartDiscount> offers;
+    private String currency;
 
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public double getSubTotalPrice() {
-        return subTotalPrice;
-    }
-
-    public List<CartDiscount> getOffers() {
-        return offers;
-    }
-
-    public String getCurrency() {
-        return currency;
+    public CartCheckoutResponse() {
     }
 
     public CartCheckoutResponse(Cart cart) {
@@ -42,6 +29,38 @@ public class CartCheckoutResponse {
         for (var offer : appliedOffers.keySet()) {
             this.offers.add(new CartDiscount(offer.toString(), appliedOffers.get(offer)));
         }
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public double getSubTotalPrice() {
+        return subTotalPrice;
+    }
+
+    public void setSubTotalPrice(double subTotalPrice) {
+        this.subTotalPrice = subTotalPrice;
+    }
+
+    public List<CartDiscount> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<CartDiscount> offers) {
+        this.offers = offers;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }
 

@@ -15,7 +15,7 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CartResource extends SMSResource {
-    private final CartService cartService;
+    private CartService cartService;
 
     @Inject
     public CartResource(CartService cartService) {
@@ -29,21 +29,12 @@ public class CartResource extends SMSResource {
         return Response.status(Response.Status.CREATED).entity(gson.toJson(response)).build();
     }
 
-    @POST
-    @Path("/checkout/{id}")
-    public Response checkoutCart(@PathParam("id") String cartId) {
-        Cart cart = cartService.checkoutCart(cartId);
-        CartCheckoutResponse response = new CartCheckoutResponse(cart);
-        return Response.status(Response.Status.OK).entity(gson.toJson(response)).build();
-    }
-
     @GET
     @Path("{id}")
     public Response getCartDetails(@PathParam("id") String cartId) {
         Cart cart = cartService.getCartInfo(cartId);
         CartDetailsResponse response = new CartDetailsResponse(cart);
         return Response.status(Response.Status.OK).entity(gson.toJson(response)).build();
-
     }
 
     @POST
@@ -60,6 +51,14 @@ public class CartResource extends SMSResource {
     public Response removeItem(@PathParam("cartId") String cartId, @PathParam("itemId") String itemIdentifier) {
         Cart cart = cartService.removeItem(cartId, itemIdentifier);
         CartDetailsResponse response = new CartDetailsResponse(cart);
+        return Response.status(Response.Status.OK).entity(gson.toJson(response)).build();
+    }
+
+    @POST
+    @Path("/checkout/{id}")
+    public Response checkoutCart(@PathParam("id") String cartId) {
+        Cart cart = cartService.checkoutCart(cartId);
+        CartCheckoutResponse response = new CartCheckoutResponse(cart);
         return Response.status(Response.Status.OK).entity(gson.toJson(response)).build();
     }
 

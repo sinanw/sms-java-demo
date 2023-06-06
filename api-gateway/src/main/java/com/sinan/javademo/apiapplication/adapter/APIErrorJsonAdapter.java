@@ -18,8 +18,17 @@ public class APIErrorJsonAdapter extends TypeAdapter<APIError> {
     }
 
     @Override
-    public APIError read(JsonReader jsonReader) {
-        throw new UnsupportedOperationException(
-                "Deserializing from json is not supported, this object is a response contract!");
+    public APIError read(JsonReader jsonReader) throws IOException {
+        APIError apiError = new APIError();
+        jsonReader.beginObject();
+        while (jsonReader.hasNext()) {
+            switch (jsonReader.nextName()) {
+                case "errorMessage" -> apiError.setMessage(jsonReader.nextString());
+                case "errorDescription" -> apiError.setDescription(jsonReader.nextString());
+                default -> jsonReader.skipValue();
+            }
+        }
+        jsonReader.endObject();
+        return apiError;
     }
 }
