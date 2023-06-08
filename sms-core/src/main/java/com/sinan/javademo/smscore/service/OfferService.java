@@ -11,15 +11,19 @@ import java.util.List;
 @Singleton
 public class OfferService {
 
-    private final IOffersRepository offersRepository;
+    private IOffersRepository offersRepository;
 
     @Inject
     public OfferService(OffersRepositoryFactory factory) {
         offersRepository = factory.createInstance();
     }
 
-    public List<BaseOffer> getActiveOffers(){
+    public List<BaseOffer> getActiveOffers() {
         var allOffers = offersRepository.getOffers();
         return allOffers.stream().filter(BaseOffer::isActive).toList();
+    }
+
+    public void setOffersRepository(IOffersRepository offersRepository) {
+        this.offersRepository = offersRepository;
     }
 }
