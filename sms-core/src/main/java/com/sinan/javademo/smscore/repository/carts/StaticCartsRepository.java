@@ -5,7 +5,9 @@ import com.sinan.javademo.smscore.model.cart.Cart;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Singleton
@@ -18,7 +20,7 @@ public class StaticCartsRepository implements ICartsRepository {
 
     @PostConstruct
     private void init() {
-        //Do nothing for now
+        //Do initializations here
     }
 
     @Override
@@ -27,7 +29,11 @@ public class StaticCartsRepository implements ICartsRepository {
             throw new CartNotFoundException(id);
         }
         return carts.get(id);
+    }
 
+    @Override
+    public List<Cart> getCarts() {
+        return new ArrayList<>(carts.values());
     }
 
     @Override
