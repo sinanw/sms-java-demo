@@ -2,6 +2,7 @@ package com.sinan.javademo.smscore.repository.carts;
 
 import com.sinan.javademo.smscore.exception.CartNotFoundException;
 import com.sinan.javademo.smscore.model.cart.Cart;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Singleton;
 
 import java.util.HashMap;
@@ -9,10 +10,15 @@ import java.util.Map;
 
 @Singleton
 public class StaticCartsRepository implements ICartsRepository {
-    private final Map<String, Cart> carts;
+    private Map<String, Cart> carts;
 
     public StaticCartsRepository() {
         carts = new HashMap<>();
+    }
+
+    @PostConstruct
+    private void init() {
+        //Do nothing for now
     }
 
     @Override

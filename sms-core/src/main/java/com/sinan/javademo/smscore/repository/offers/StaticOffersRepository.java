@@ -6,6 +6,7 @@ import com.sinan.javademo.smscore.model.offer.DoubleItemsOffer;
 import com.sinan.javademo.smscore.model.offer.SingleItemOffer;
 import com.sinan.javademo.smscore.repository.items.IItemsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -16,24 +17,25 @@ import java.util.List;
 @Singleton
 public class StaticOffersRepository implements IOffersRepository {
 
-    private final List<BaseOffer> offers;
-    private final IItemsRepository itemsRepository;
+    private List<BaseOffer> offers;
+    private ItemsRepositoryFactory itemsRepositoryFactory;
 
 
     @Inject
     public StaticOffersRepository(ItemsRepositoryFactory itemsRepositoryFactory) {
-        itemsRepository = itemsRepositoryFactory.createInstance();
+        this.itemsRepositoryFactory = itemsRepositoryFactory;
+    }
+
+    @PostConstruct
+    private void init() {
+        IItemsRepository itemsRepository = itemsRepositoryFactory.createInstance();
 
         offers = new ArrayList<>();
-        BaseOffer offer1 = new SingleItemOffer("Apples have 10% off their normal price this week",
-                itemsRepository.getItem("Apples"), 10);
+        BaseOffer offer1 = new SingleItemOffer("Apples have 10% off their normal price this week", itemsRepository.getItem("Apples"), 10);
         offer1.setStartTime(LocalDateTime.of(2023, 5, 24, 0, 0, 0));
         offer1.setEndTime(LocalDateTime.of(2023, 6, 30, 0, 0, 0));
 
-        BaseOffer offer2 = new DoubleItemsOffer("Buy 2 tins of soup and get a loaf of bread for half price",
-                itemsRepository.getItem("Soup"),
-                itemsRepository.getItem("Bread"),
-                2, 50);
+        BaseOffer offer2 = new DoubleItemsOffer("Buy 2 tins of soup and get a loaf of bread for half price", itemsRepository.getItem("Soup"), itemsRepository.getItem("Bread"), 2, 50);
         BaseOffer offer3 = new CartPercentageOffer("Get 10% discount off the base cart total price", 10);
 
         offers.addAll(List.of(offer1, offer2, offer3));
