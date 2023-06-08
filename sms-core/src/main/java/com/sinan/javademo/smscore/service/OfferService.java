@@ -3,7 +3,6 @@ package com.sinan.javademo.smscore.service;
 import com.sinan.javademo.smscore.model.offer.BaseOffer;
 import com.sinan.javademo.smscore.repository.offers.IOffersRepository;
 import com.sinan.javademo.smscore.repository.offers.OffersRepositoryFactory;
-import com.sinan.javademo.smscore.util.StoreConfiguration;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -16,7 +15,7 @@ public class OfferService {
 
     @Inject
     public OfferService(OffersRepositoryFactory factory) {
-        offersRepository = factory.create(StoreConfiguration.OFFERS_REPOSITORY_TYPE);
+        offersRepository = factory.createInstance();
     }
 
     public List<BaseOffer> getActiveOffers(){

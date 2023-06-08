@@ -8,7 +8,6 @@ import com.sinan.javademo.smscore.repository.carts.ICartsRepository;
 import com.sinan.javademo.smscore.repository.carts.CartsRepositoryFactory;
 import com.sinan.javademo.smscore.repository.items.IItemsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
-import com.sinan.javademo.smscore.util.StoreConfiguration;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -28,8 +27,8 @@ public class CartService {
                        ItemsRepositoryFactory itemsRepositoryFactory) {
         this.offerService = offerService;
         this.cartBuilder = cartBuilder;
-        cartsRepository = cartsRepositoryFactory.creat(StoreConfiguration.CARTS_REPOSITORY_TYPE);
-        itemsRepository = itemsRepositoryFactory.create(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
+        cartsRepository = cartsRepositoryFactory.creatInstance();
+        itemsRepository = itemsRepositoryFactory.createInstance();
     }
 
     public Cart getCartInfo(String cartId) {

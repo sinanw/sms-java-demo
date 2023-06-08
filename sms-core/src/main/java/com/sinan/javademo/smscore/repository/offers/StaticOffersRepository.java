@@ -6,7 +6,6 @@ import com.sinan.javademo.smscore.model.offer.DoubleItemsOffer;
 import com.sinan.javademo.smscore.model.offer.SingleItemOffer;
 import com.sinan.javademo.smscore.repository.items.IItemsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
-import com.sinan.javademo.smscore.util.StoreConfiguration;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -22,8 +21,8 @@ public class StaticOffersRepository implements IOffersRepository {
 
 
     @Inject
-    private StaticOffersRepository(ItemsRepositoryFactory itemsRepositoryFactory) {
-        itemsRepository = itemsRepositoryFactory.create(StoreConfiguration.ITEMS_REPOSITORY_TYPE);
+    public StaticOffersRepository(ItemsRepositoryFactory itemsRepositoryFactory) {
+        itemsRepository = itemsRepositoryFactory.createInstance();
 
         offers = new ArrayList<>();
         BaseOffer offer1 = new SingleItemOffer("Apples have 10% off their normal price this week",
