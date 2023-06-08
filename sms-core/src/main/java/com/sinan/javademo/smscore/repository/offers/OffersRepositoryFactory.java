@@ -10,14 +10,16 @@ public class OffersRepositoryFactory {
 
 
     private final Instance<IOffersRepository> offersRepositoryInstances;
+    private final StoreConfiguration storeConfiguration;
 
     @Inject
-    public OffersRepositoryFactory(Instance<IOffersRepository> offersRepositories) {
+    public OffersRepositoryFactory(Instance<IOffersRepository> offersRepositories, StoreConfiguration storeConfiguration) {
         this.offersRepositoryInstances = offersRepositories;
+        this.storeConfiguration = storeConfiguration;
     }
 
     public IOffersRepository createInstance() {
-        String repositoryType = StoreConfiguration.OFFERS_REPOSITORY_TYPE;
+        String repositoryType = storeConfiguration.getOffersRepositoryType();
         return switch (repositoryType) {
             case "STATIC" -> offersRepositoryInstances.select(StaticOffersRepository.class).get();
             case "DB" -> offersRepositoryInstances.select(DBOffersRepository.class).get();

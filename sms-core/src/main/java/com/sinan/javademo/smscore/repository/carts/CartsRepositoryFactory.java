@@ -9,14 +9,16 @@ import jakarta.inject.Singleton;
 public class CartsRepositoryFactory {
 
     private final Instance<ICartsRepository> cartsRepositoryInstances;
+    private final StoreConfiguration storeConfiguration;
 
     @Inject
-    public CartsRepositoryFactory(Instance<ICartsRepository> cartsRepositoryInstances) {
+    public CartsRepositoryFactory(Instance<ICartsRepository> cartsRepositoryInstances, StoreConfiguration storeConfiguration) {
         this.cartsRepositoryInstances = cartsRepositoryInstances;
+        this.storeConfiguration = storeConfiguration;
     }
 
     public ICartsRepository creatInstance() {
-        String repositoryType = StoreConfiguration.CARTS_REPOSITORY_TYPE;
+        String repositoryType = storeConfiguration.getCartsRepositoryType();
         return switch (repositoryType) {
             case "STATIC" -> cartsRepositoryInstances.select(StaticCartsRepository.class).get();
             case "DB" -> cartsRepositoryInstances.select(DBCartsRepository.class).get();

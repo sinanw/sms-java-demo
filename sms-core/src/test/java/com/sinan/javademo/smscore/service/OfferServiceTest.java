@@ -7,6 +7,7 @@ import com.sinan.javademo.smscore.model.offer.SingleItemOffer;
 import com.sinan.javademo.smscore.repository.offers.OffersRepositoryFactory;
 import com.sinan.javademo.smscore.repository.offers.StaticOffersRepository;
 import org.mockito.*;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -33,6 +34,12 @@ public class OfferServiceTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         offerService.setOffersRepository(staticOffersRepository);
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        Mockito.reset(offersRepositoryFactory);
+        Mockito.reset(staticOffersRepository);
     }
 
     private List<BaseOffer> createDummyOffers() {
