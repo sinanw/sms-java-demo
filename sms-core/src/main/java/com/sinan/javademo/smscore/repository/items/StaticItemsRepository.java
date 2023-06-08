@@ -6,33 +6,40 @@ import com.sinan.javademo.smscore.model.item.UnitType;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Singleton;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Singleton
 public class StaticItemsRepository implements IItemsRepository {
-    private Map<String, Item> storeItems;
+    private Map<String, Item> items;
 
     public StaticItemsRepository() {
-        storeItems = new HashMap<>();
+        items = new HashMap<>();
     }
 
     @PostConstruct
     private void init() {
-        storeItems.put("Soup", new Item("Soup", UnitType.TIN, 0.65d));
-        storeItems.put("Bread", new Item("Bread", UnitType.LOAF, 0.80d));
-        storeItems.put("Milk", new Item("Milk", UnitType.BOTTLE, 1.30d));
-        storeItems.put("Apples", new Item("Apples", UnitType.BAG, 1.00d));
+        items.put("Soup", new Item("Soup", UnitType.TIN, 0.65d));
+        items.put("Bread", new Item("Bread", UnitType.LOAF, 0.80d));
+        items.put("Milk", new Item("Milk", UnitType.BOTTLE, 1.30d));
+        items.put("Apples", new Item("Apples", UnitType.BAG, 1.00d));
     }
 
-    public Map<String, Item> getItems() {
-        return storeItems;
+    public List<Item> getItems() {
+        return new ArrayList<>(items.values());
     }
 
     public Item getItem(String itemName) {
-        if (!storeItems.containsKey(itemName)) {
+        if (!items.containsKey(itemName)) {
             throw new ItemNotFoundException(itemName);
         }
-        return storeItems.get(itemName);
+        return items.get(itemName);
+    }
+
+    @Override
+    public void saveItem(Item item) {
+        items.put(item.getName(), item);
     }
 }

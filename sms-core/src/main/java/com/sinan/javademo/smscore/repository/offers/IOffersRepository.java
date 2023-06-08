@@ -6,4 +6,8 @@ import java.util.List;
 public interface IOffersRepository {
     List<BaseOffer> getOffers();
 
+    BaseOffer getOffer(String offerId);
+
+    void saveOffer(BaseOffer offer);
+
 }

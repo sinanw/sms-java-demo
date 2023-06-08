@@ -2,10 +2,12 @@ package com.sinan.javademo.smscore.repository.items;
 
 import com.sinan.javademo.smscore.model.item.Item;
 
-import java.util.Map;
+import java.util.List;
 
 public interface IItemsRepository {
-    Map<String, Item> getItems();
+    List<Item> getItems();
 
     Item getItem(String item);
+
+    void saveItem(Item item);
 }

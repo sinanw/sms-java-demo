@@ -42,6 +42,14 @@ public abstract class BaseOffer {
         return executionStrategy;
     }
 
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
     public void setStartTime(LocalDateTime startTime) {
         InputValidator.validateDateTimeRange(startTime, endTime);
         this.startTime = startTime;

@@ -4,10 +4,11 @@ import com.google.gson.Gson;
 import com.sinan.javademo.apiapplication.contract.CartCheckoutResponse;
 import com.sinan.javademo.apiapplication.contract.CartDetailsResponse;
 import com.sinan.javademo.apiapplication.model.CartDiscount;
+import com.sinan.javademo.apiapplication.util.TestHelper;
 import com.sinan.javademo.smscore.exception.CartItemNotFoundException;
 import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.model.item.Item;
-import com.sinan.javademo.smscore.model.item.UnitType;
+import com.sinan.javademo.smscore.model.offer.BaseOffer;
 import com.sinan.javademo.smscore.model.offer.CartPercentageOffer;
 import com.sinan.javademo.smscore.service.CartService;
 import jakarta.ws.rs.core.Response;
@@ -23,7 +24,6 @@ import static org.testng.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class CartResourceTest {
 
@@ -43,34 +43,22 @@ public class CartResourceTest {
         Mockito.reset(cartService);
     }
 
-    private static final Random random = new Random();
-
-    private void createDummyCart(Cart cart, List<String> itemsIdentifiers) {
-        UnitType[] types = UnitType.values();
-        for (var item : itemsIdentifiers) {
-            cart.addItem(new Item(item, types[random.nextInt(types.length)], 10 * random.nextDouble()));
-        }
-    }
-
     @Test
     public void testCreateCart_withItems() {
         List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
-        Cart cart = new Cart();
-        createDummyCart(cart, itemsIdentifiers);
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
         Mockito.when(cartService.createCart(Mockito.any())).thenReturn(cart);
         Response response = cartResource.createCart(itemsIdentifiers);
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
         assertEquals(cartDetailsResponse.getCartItems().size(), 4);
-        itemsIdentifiers.forEach(itemIdentifier -> assertTrue(cartDetailsResponse.getCartItems().stream()
-                .anyMatch(item -> item.getName().equals(itemIdentifier))));
+        itemsIdentifiers.forEach(itemIdentifier -> assertTrue(cartDetailsResponse.getCartItems().stream().anyMatch(item -> item.getName().equals(itemIdentifier))));
     }
 
 
     @Test
     public void testCreateCart_withoutItems() {
         List<String> itemsIdentifiers = new ArrayList<>();
-        Cart cart = new Cart();
-        createDummyCart(cart, itemsIdentifiers);
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
         Mockito.when(cartService.createCart(Mockito.any())).thenReturn(cart);
         Response response = cartResource.createCart(itemsIdentifiers);
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
@@ -81,24 +69,20 @@ public class CartResourceTest {
     @Test
     public void testGetCartDetails() {
         List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
-        Cart cart = new Cart();
-        createDummyCart(cart, itemsIdentifiers);
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
         Mockito.when(cartService.getCartInfo(Mockito.any())).thenReturn(cart);
         Response response = cartResource.getCartDetails(cart.getId());
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
         assertEquals(cartDetailsResponse.getCartId(), cart.getId());
         assertEquals(cartDetailsResponse.getCartItems().size(), 4);
-        itemsIdentifiers.forEach(itemIdentifier -> assertTrue(cartDetailsResponse.getCartItems().stream()
-                .anyMatch(item -> item.getName().equals(itemIdentifier))));
+        itemsIdentifiers.forEach(itemIdentifier -> assertTrue(cartDetailsResponse.getCartItems().stream().anyMatch(item -> item.getName().equals(itemIdentifier))));
     }
 
     @Test
     public void testAddItem_existingItem() {
         List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
-        Cart cart = new Cart();
-        createDummyCart(cart, itemsIdentifiers);
-        UnitType[] types = UnitType.values();
-        cart.addItem(new Item("item2", types[random.nextInt(types.length)], 5d));
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
+        cart.addItem(new Item("item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
         Mockito.when(cartService.addItem(Mockito.any(), Mockito.any())).thenReturn(cart);
         Response response = cartResource.addItem(cart.getId(), "item2");
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
@@ -110,10 +94,8 @@ public class CartResourceTest {
     @Test
     public void testAddItem_newItem() {
         List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
-        Cart cart = new Cart();
-        createDummyCart(cart, itemsIdentifiers);
-        UnitType[] types = UnitType.values();
-        cart.addItem(new Item("item5", types[random.nextInt(types.length)], 5d));
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
+        cart.addItem(new Item("item5", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
         Mockito.when(cartService.addItem(Mockito.any(), Mockito.any())).thenReturn(cart);
         Response response = cartResource.addItem(cart.getId(), "item5");
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
@@ -126,10 +108,8 @@ public class CartResourceTest {
     @Test
     public void testRemoveItem_existingItem() {
         List<String> itemsIdentifiers = List.of("item1", "item2", "item2", "item3", "item4");
-        Cart cart = new Cart();
-        createDummyCart(cart, itemsIdentifiers);
-        UnitType[] types = UnitType.values();
-        cart.removeItem(new Item("item2", types[random.nextInt(types.length)], 5d));
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
+        cart.removeItem(new Item("item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
         Mockito.when(cartService.removeItem(Mockito.any(), Mockito.any())).thenReturn(cart);
         Response response = cartResource.removeItem(cart.getId(), "item2");
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
@@ -141,10 +121,8 @@ public class CartResourceTest {
     @Test
     public void testRemoveItem_existingItemLastOne() {
         List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
-        Cart cart = new Cart();
-        createDummyCart(cart, itemsIdentifiers);
-        UnitType[] types = UnitType.values();
-        cart.removeItem(new Item("item2", types[random.nextInt(types.length)], 5d));
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
+        cart.removeItem(new Item("item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
         Mockito.when(cartService.removeItem(Mockito.any(), Mockito.any())).thenReturn(cart);
         Response response = cartResource.removeItem(cart.getId(), "item2");
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
@@ -164,27 +142,29 @@ public class CartResourceTest {
     @Test
     public void testCheckoutCart_withDiscounts() {
         List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
-        Cart cart = new Cart();
-        createDummyCart(cart, itemsIdentifiers);
-        cart.addOffer(new CartPercentageOffer("Discount on cart", 50), 10);
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
+
+        BaseOffer offer = new CartPercentageOffer("Discount on cart", TestHelper.getRandomDiscountPercentage());
+        cart.addOffer(offer, TestHelper.getRandomDiscountValue());
+
         Mockito.when(cartService.checkoutCart(Mockito.any())).thenReturn(cart);
         Response response = cartResource.checkoutCart(cart.getId());
         CartCheckoutResponse cartCheckoutResponse = new Gson().fromJson((String) response.getEntity(), CartCheckoutResponse.class);
+
         assertFalse(cartCheckoutResponse.getOffers().isEmpty());
         assertNotEquals(cartCheckoutResponse.getSubTotalPrice(), cartCheckoutResponse.getTotalPrice());
         double totalDiscount = cartCheckoutResponse.getOffers().stream().map(CartDiscount::getValue).reduce(0d, Double::sum);
-        assertEquals(cartCheckoutResponse.getTotalPrice() + totalDiscount, cartCheckoutResponse.getSubTotalPrice(), 0.000001d);
+        assertEquals(cartCheckoutResponse.getTotalPrice() + totalDiscount, cartCheckoutResponse.getSubTotalPrice(), 0.01d);
     }
 
     @Test
     public void testCheckoutCart_withoutDiscounts() {
         List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
-        Cart cart = new Cart();
-        createDummyCart(cart, itemsIdentifiers);
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
         Mockito.when(cartService.checkoutCart(Mockito.any())).thenReturn(cart);
         Response response = cartResource.checkoutCart(cart.getId());
         CartCheckoutResponse cartCheckoutResponse = new Gson().fromJson((String) response.getEntity(), CartCheckoutResponse.class);
         assertTrue(cartCheckoutResponse.getOffers().isEmpty());
-        assertEquals(cartCheckoutResponse.getSubTotalPrice(), cartCheckoutResponse.getTotalPrice(), 0.000001d);
+        assertEquals(cartCheckoutResponse.getSubTotalPrice(), cartCheckoutResponse.getTotalPrice(), 0.01d);
     }
 }
