@@ -45,7 +45,7 @@ public class CartResourceTest {
 
     @Test
     public void testCreateCart_withItems() {
-        List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
         Mockito.when(cartService.createCart(Mockito.any())).thenReturn(cart);
         Response response = cartResource.createCart(itemsIdentifiers);
@@ -68,7 +68,7 @@ public class CartResourceTest {
 
     @Test
     public void testGetCartDetails() {
-        List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
         Mockito.when(cartService.getCartInfo(Mockito.any())).thenReturn(cart);
         Response response = cartResource.getCartDetails(cart.getId());
@@ -80,38 +80,38 @@ public class CartResourceTest {
 
     @Test
     public void testAddItem_existingItem() {
-        List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
-        cart.addItem(new Item("item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
+        cart.addItem(new Item("Item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
         Mockito.when(cartService.addItem(Mockito.any(), Mockito.any())).thenReturn(cart);
-        Response response = cartResource.addItem(cart.getId(), "item2");
+        Response response = cartResource.addItem(cart.getId(), "Item2");
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
         assertEquals(cartDetailsResponse.getCartId(), cart.getId());
         assertEquals(cartDetailsResponse.getCartItems().size(), 4);
-        cartDetailsResponse.getCartItems().forEach(item -> assertEquals(item.getQuantity(), item.getName().equals("item2") ? 2 : 1));
+        cartDetailsResponse.getCartItems().forEach(item -> assertEquals(item.getQuantity(), item.getName().equals("Item2") ? 2 : 1));
     }
 
     @Test
     public void testAddItem_newItem() {
-        List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
-        cart.addItem(new Item("item5", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
+        cart.addItem(new Item("Item5", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
         Mockito.when(cartService.addItem(Mockito.any(), Mockito.any())).thenReturn(cart);
-        Response response = cartResource.addItem(cart.getId(), "item5");
+        Response response = cartResource.addItem(cart.getId(), "Item5");
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
         assertEquals(cartDetailsResponse.getCartId(), cart.getId());
         assertEquals(cartDetailsResponse.getCartItems().size(), 5);
-        assertTrue(cartDetailsResponse.getCartItems().stream().anyMatch(item -> item.getName().equals("item5")));
+        assertTrue(cartDetailsResponse.getCartItems().stream().anyMatch(item -> item.getName().equals("Item5")));
         cartDetailsResponse.getCartItems().forEach(item -> assertEquals(item.getQuantity(), 1));
     }
 
     @Test
     public void testRemoveItem_existingItem() {
-        List<String> itemsIdentifiers = List.of("item1", "item2", "item2", "item3", "item4");
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
-        cart.removeItem(new Item("item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
+        cart.removeItem(new Item("Item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
         Mockito.when(cartService.removeItem(Mockito.any(), Mockito.any())).thenReturn(cart);
-        Response response = cartResource.removeItem(cart.getId(), "item2");
+        Response response = cartResource.removeItem(cart.getId(), "Item2");
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
         assertEquals(cartDetailsResponse.getCartId(), cart.getId());
         assertEquals(cartDetailsResponse.getCartItems().size(), 4);
@@ -120,31 +120,31 @@ public class CartResourceTest {
 
     @Test
     public void testRemoveItem_existingItemLastOne() {
-        List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
-        cart.removeItem(new Item("item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
+        cart.removeItem(new Item("Item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
         Mockito.when(cartService.removeItem(Mockito.any(), Mockito.any())).thenReturn(cart);
-        Response response = cartResource.removeItem(cart.getId(), "item2");
+        Response response = cartResource.removeItem(cart.getId(), "Item2");
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
         assertEquals(cartDetailsResponse.getCartId(), cart.getId());
         assertEquals(cartDetailsResponse.getCartItems().size(), 3);
         cartDetailsResponse.getCartItems().forEach(item -> assertEquals(item.getQuantity(), 1));
-        assertFalse(cartDetailsResponse.getCartItems().stream().anyMatch(item -> item.getName().equals("item2")));
+        assertFalse(cartDetailsResponse.getCartItems().stream().anyMatch(item -> item.getName().equals("Item2")));
     }
 
     @Test(expectedExceptions = CartItemNotFoundException.class)
     public void testRemoveItem_itemNotExist() {
         Cart cart = new Cart();
         Mockito.when(cartService.removeItem(Mockito.any(), Mockito.any())).thenThrow(CartItemNotFoundException.class);
-        cartResource.removeItem(cart.getId(), "item2");
+        cartResource.removeItem(cart.getId(), "Item2");
     }
 
     @Test
     public void testCheckoutCart_withDiscounts() {
-        List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
 
-        BaseOffer offer = new CartPercentageOffer("Discount on cart", TestHelper.getRandomDiscountPercentage());
+        BaseOffer offer = new CartPercentageOffer("Offer1", TestHelper.getRandomDiscountPercentage());
         cart.addOffer(offer, TestHelper.getRandomDiscountValue());
 
         Mockito.when(cartService.checkoutCart(Mockito.any())).thenReturn(cart);
@@ -159,7 +159,7 @@ public class CartResourceTest {
 
     @Test
     public void testCheckoutCart_withoutDiscounts() {
-        List<String> itemsIdentifiers = List.of("item1", "item2", "item3", "item4");
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
         Mockito.when(cartService.checkoutCart(Mockito.any())).thenReturn(cart);
         Response response = cartResource.checkoutCart(cart.getId());

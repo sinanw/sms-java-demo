@@ -45,6 +45,10 @@ public final class TestHelper {
         return new Item("RandomItem" + random.nextInt(), getRandomItemType(), getRandomItemPrice());
     }
 
+    public static Item getDummyItemWithName(String itemName) {
+        return new Item(itemName + random.nextInt(), getRandomItemType(), getRandomItemPrice());
+    }
+
     public static Cart createDummyCart() {
         Cart cart = new Cart();
         for (int i = 0; i < 5; i++) {
@@ -70,5 +74,13 @@ public final class TestHelper {
         offer5.setEndTime(LocalDateTime.of(2030, 5, 24, 0, 0, 0));
 
         return new ArrayList<>(List.of(offer1, offer2, offer3, offer4, offer5));
+    }
+
+    public static Cart createDummyCartFromItems(List<String> itemsIdentifiers) {
+        Cart cart = new Cart();
+        for (var item : itemsIdentifiers) {
+            cart.addItem(new Item(item, getRandomItemType(), getRandomItemPrice()));
+        }
+        return cart;
     }
 }

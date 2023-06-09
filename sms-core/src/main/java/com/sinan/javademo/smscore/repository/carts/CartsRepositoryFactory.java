@@ -17,7 +17,7 @@ public class CartsRepositoryFactory {
         this.storeConfiguration = storeConfiguration;
     }
 
-    public ICartsRepository creatInstance() {
+    public ICartsRepository createInstance() {
         String repositoryType = storeConfiguration.getCartsRepositoryType();
         return switch (repositoryType) {
             case "STATIC" -> cartsRepositoryInstances.select(StaticCartsRepository.class).get();
