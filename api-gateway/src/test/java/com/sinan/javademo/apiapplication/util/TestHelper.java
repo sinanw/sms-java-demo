@@ -10,26 +10,24 @@ import java.util.Random;
 public final class TestHelper {
     private final static Random random = new Random();
 
-    public static double getRandomItemPrice() {
-        double lowerBound = 0.1;
-        double upperBound = 10;
-        return lowerBound + random.nextDouble() * (upperBound - lowerBound);
-    }
-
     public static UnitType getRandomItemType() {
         UnitType[] types = UnitType.values();
         return types[random.nextInt(types.length)];
     }
 
+    public static double getRandomItemPrice() {
+        return getRandomDouble(0.1, 10);
+    }
+
     public static double getRandomDiscountPercentage() {
-        double lowerBound = 1;
-        double upperBound = 100;
-        return lowerBound + random.nextDouble() * (upperBound - lowerBound);
+        return getRandomDouble(1, 100);
     }
 
     public static double getRandomDiscountValue() {
-        double lowerBound = 1;
-        double upperBound = 50;
+        return getRandomDouble(1, 50);
+    }
+
+    public static double getRandomDouble(double lowerBound, double upperBound) {
         return lowerBound + random.nextDouble() * (upperBound - lowerBound);
     }
 

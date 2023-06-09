@@ -18,8 +18,8 @@ public class CartService {
 
     private final OfferService offerService;
     private final CartBuilder cartBuilder;
-    private final ICartsRepository cartsRepository;
-    private final IItemsRepository itemsRepository;
+    private final CartsRepositoryFactory cartsRepositoryFactory;
+    private final ItemsRepositoryFactory itemsRepositoryFactory;
 
     @Inject
     public CartService(OfferService offerService, CartBuilder cartBuilder,
@@ -27,11 +27,12 @@ public class CartService {
                        ItemsRepositoryFactory itemsRepositoryFactory) {
         this.offerService = offerService;
         this.cartBuilder = cartBuilder;
-        cartsRepository = cartsRepositoryFactory.creatInstance();
-        itemsRepository = itemsRepositoryFactory.createInstance();
+        this.cartsRepositoryFactory = cartsRepositoryFactory;
+        this.itemsRepositoryFactory = itemsRepositoryFactory;
     }
 
     public Cart getCartInfo(String cartId) {
+        ICartsRepository cartsRepository = cartsRepositoryFactory.creatInstance();
         return cartsRepository.getCart(cartId);
     }
 
@@ -46,11 +47,14 @@ public class CartService {
         Cart cart = cartBuilder.build();
 
         //Saving cart to storage
+        ICartsRepository cartsRepository = cartsRepositoryFactory.creatInstance();
         cartsRepository.saveCart(cart);
         return cart;
     }
 
     public Cart addItem(String cartId, String itemIdentifier) {
+        ICartsRepository cartsRepository = cartsRepositoryFactory.creatInstance();
+        IItemsRepository itemsRepository = itemsRepositoryFactory.createInstance();
         Cart cart = cartsRepository.getCart(cartId);
         Item item = itemsRepository.getItem(itemIdentifier);
         cart.addItem(item);
@@ -59,6 +63,8 @@ public class CartService {
     }
 
     public Cart removeItem(String cartId, String itemIdentifier) {
+        ICartsRepository cartsRepository = cartsRepositoryFactory.creatInstance();
+        IItemsRepository itemsRepository = itemsRepositoryFactory.createInstance();
         Cart cart = cartsRepository.getCart(cartId);
         Item item = itemsRepository.getItem(itemIdentifier);
         cart.removeItem(item);
@@ -67,6 +73,7 @@ public class CartService {
     }
 
     public Cart checkoutCart(String cartId) {
+        ICartsRepository cartsRepository = cartsRepositoryFactory.creatInstance();
         Cart cart = cartsRepository.getCart(cartId);
         var activeOffers = offerService.getActiveOffers();
         for (var offer : activeOffers) {
