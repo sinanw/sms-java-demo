@@ -46,7 +46,7 @@ public final class TestHelper {
     }
 
     public static Item getDummyItemWithName(String itemName) {
-        return new Item(itemName + random.nextInt(), getRandomItemType(), getRandomItemPrice());
+        return new Item(itemName, getRandomItemType(), getRandomItemPrice());
     }
 
     public static Cart createDummyCart() {

@@ -1,8 +1,13 @@
 package com.sinan.javademo.smscore.service;
 
+import com.sinan.javademo.smscore.exception.CartItemNotFoundException;
 import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.model.cart.CartBuilder;
 import com.sinan.javademo.smscore.model.item.Item;
+import com.sinan.javademo.smscore.model.offer.BaseOffer;
+import com.sinan.javademo.smscore.model.offer.CartPercentageOffer;
+import com.sinan.javademo.smscore.model.offer.DoubleItemsOffer;
+import com.sinan.javademo.smscore.model.offer.SingleItemOffer;
 import com.sinan.javademo.smscore.repository.carts.CartsRepositoryFactory;
 import com.sinan.javademo.smscore.repository.carts.StaticCartsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
@@ -16,6 +21,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.*;
@@ -103,7 +109,7 @@ public class CartServiceTest {
     public void testAddItem_existingItem() {
         List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
-        Item item = (Item) cart.getItems().keySet().toArray()[0];
+        Item item = TestHelper.getDummyItemWithName("Item2");
         Mockito.when(staticCartsRepository.getCart(Mockito.any())).thenReturn(cart);
         Mockito.when(staticItemsRepository.getItem(Mockito.any())).thenReturn(item);
         assertTrue(cart.hasItem(item));
@@ -116,10 +122,99 @@ public class CartServiceTest {
     }
 
     @Test
-    public void testRemoveItem() {
+    public void testRemoveItem_existingItem() {
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item2", "Item3", "Item4");
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
+        Item item = TestHelper.getDummyItemWithName("Item2");
+        Mockito.when(staticCartsRepository.getCart(Mockito.any())).thenReturn(cart);
+        Mockito.when(staticItemsRepository.getItem(Mockito.any())).thenReturn(item);
+        assertTrue(cart.hasItem(item));
+        Cart retrievedCart = cartService.removeItem(cart.getId(), item.getName());
+        assertNotNull(retrievedCart);
+        assertTrue(retrievedCart.hasItem(item));
+        assertEquals(retrievedCart.getItems().size(), 4);
+        assertEquals(retrievedCart.getItems().get(item), 1);
+        Mockito.verify(staticCartsRepository, Mockito.times(1)).saveCart(Mockito.any());
     }
 
     @Test
-    public void testCheckoutCart() {
+    public void testRemoveItem_existingItemLastOne() {
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
+        Item item = TestHelper.getDummyItemWithName("Item2");
+        Mockito.when(staticCartsRepository.getCart(Mockito.any())).thenReturn(cart);
+        Mockito.when(staticItemsRepository.getItem(Mockito.any())).thenReturn(item);
+        assertTrue(cart.hasItem(item));
+        Cart retrievedCart = cartService.removeItem(cart.getId(), item.getName());
+        assertNotNull(retrievedCart);
+        assertFalse(retrievedCart.hasItem(item));
+        assertEquals(retrievedCart.getItems().size(), 3);
+        Mockito.verify(staticCartsRepository, Mockito.times(1)).saveCart(Mockito.any());
+    }
+
+    @Test(expectedExceptions = CartItemNotFoundException.class)
+    public void testRemoveItem_itemNotExist() {
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
+        Item item = TestHelper.getDummyItemWithName("Item5");
+        Mockito.when(staticCartsRepository.getCart(Mockito.any())).thenReturn(cart);
+        Mockito.when(staticItemsRepository.getItem(Mockito.any())).thenReturn(item);
+        assertFalse(cart.hasItem(item));
+        Cart retrievedCart = cartService.removeItem(cart.getId(), item.getName());
+    }
+
+    @Test
+    public void testCheckoutCart_noActiveOffers() {
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
+        Mockito.when(staticCartsRepository.getCart(Mockito.any())).thenReturn(cart);
+        Mockito.when(offerService.getActiveOffers()).thenReturn(new ArrayList<>());
+        Cart retrievedCart = cartService.checkoutCart(cart.getId());
+        assertEquals(retrievedCart.getAppliedOffers().size(), 0);
+        assertEquals(retrievedCart.getSubTotalPrice(), retrievedCart.getTotalPrice());
+        assertEquals(retrievedCart.getTotalDiscount(), 0);
+        Mockito.verify(staticCartsRepository, Mockito.times(1)).saveCart(Mockito.any());
+    }
+
+    @Test
+    public void testCheckoutCart_noApplicableOffers() {
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
+        Mockito.when(staticCartsRepository.getCart(Mockito.any())).thenReturn(cart);
+        List<BaseOffer> offers = new ArrayList<>();
+        Item item1 = TestHelper.getDummyItemWithName("Item5");
+        BaseOffer offer1 = new SingleItemOffer("Offer1", item1, TestHelper.getRandomDiscountPercentage());
+        Item item2 = TestHelper.getDummyItemWithName("Item2");
+        Item item3 = TestHelper.getDummyItemWithName("Item3");
+        BaseOffer offer2 = new DoubleItemsOffer("Offer2", item2, item3, 2, TestHelper.getRandomDiscountPercentage());
+        offers.addAll(List.of(offer1, offer2));
+        Mockito.when(offerService.getActiveOffers()).thenReturn(offers);
+        Cart retrievedCart = cartService.checkoutCart(cart.getId());
+        assertEquals(retrievedCart.getAppliedOffers().size(), 0);
+        assertEquals(retrievedCart.getSubTotalPrice(), retrievedCart.getTotalPrice());
+        assertEquals(retrievedCart.getTotalDiscount(), 0);
+        Mockito.verify(staticCartsRepository, Mockito.times(1)).saveCart(Mockito.any());
+    }
+
+    @Test
+    public void testCheckoutCart_withApplicableOffers() {
+        List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item2", "Item3", "Item4");
+        Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
+        Mockito.when(staticCartsRepository.getCart(Mockito.any())).thenReturn(cart);
+        List<BaseOffer> offers = new ArrayList<>();
+        Item item1 = TestHelper.getDummyItemWithName("Item1");
+        BaseOffer offer1 = new SingleItemOffer("Offer1", item1, TestHelper.getRandomDiscountPercentage());
+        Item item2 = TestHelper.getDummyItemWithName("Item2");
+        Item item3 = TestHelper.getDummyItemWithName("Item3");
+        BaseOffer offer2 = new DoubleItemsOffer("Offer2", item2, item3, 2, TestHelper.getRandomDiscountPercentage());
+        BaseOffer offer3 = new CartPercentageOffer("Offer3", TestHelper.getRandomDiscountPercentage());
+        offers.addAll(List.of(offer1, offer2, offer3));
+        Mockito.when(offerService.getActiveOffers()).thenReturn(offers);
+        Cart retrievedCart = cartService.checkoutCart(cart.getId());
+        assertEquals(retrievedCart.getAppliedOffers().size(), 3);
+        assertEquals(retrievedCart.getSubTotalPrice(), retrievedCart.getTotalPrice() + retrievedCart.getTotalDiscount());
+        double sumItemsDiscounts = retrievedCart.getAppliedOffers().values().stream().reduce(0d, Double::sum);
+        assertEquals(retrievedCart.getTotalDiscount(), sumItemsDiscounts);
+        Mockito.verify(staticCartsRepository, Mockito.times(1)).saveCart(Mockito.any());
     }
 }
