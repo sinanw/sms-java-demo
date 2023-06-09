@@ -66,6 +66,13 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>com.sinan.javademo</groupId>
+            <artifactId>sms-core</artifactId>
+            <version>${sms.core.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>${gson.version}</version>
