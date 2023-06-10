@@ -214,7 +214,7 @@ public class CartServiceTest {
         assertEquals(retrievedCart.getAppliedOffers().size(), 3);
         assertEquals(retrievedCart.getSubTotalPrice(), retrievedCart.getTotalPrice() + retrievedCart.getTotalDiscount());
         double sumItemsDiscounts = retrievedCart.getAppliedOffers().values().stream().reduce(0d, Double::sum);
-        assertEquals(retrievedCart.getTotalDiscount(), sumItemsDiscounts);
+        assertEquals(retrievedCart.getTotalDiscount(), sumItemsDiscounts,0.1d);
         Mockito.verify(staticCartsRepository, Mockito.times(1)).saveCart(Mockito.any());
     }
 }

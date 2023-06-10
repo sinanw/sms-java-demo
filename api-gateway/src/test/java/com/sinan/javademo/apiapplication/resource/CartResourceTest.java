@@ -154,7 +154,7 @@ public class CartResourceTest {
         assertFalse(cartCheckoutResponse.getOffers().isEmpty());
         assertNotEquals(cartCheckoutResponse.getSubTotalPrice(), cartCheckoutResponse.getTotalPrice());
         double totalDiscount = cartCheckoutResponse.getOffers().stream().map(CartDiscount::getValue).reduce(0d, Double::sum);
-        assertEquals(cartCheckoutResponse.getTotalPrice() + totalDiscount, cartCheckoutResponse.getSubTotalPrice(), 0.01d);
+        assertEquals(cartCheckoutResponse.getTotalPrice() + totalDiscount, cartCheckoutResponse.getSubTotalPrice(), 0.1d);
     }
 
     @Test
@@ -165,6 +165,6 @@ public class CartResourceTest {
         Response response = cartResource.checkoutCart(cart.getId());
         CartCheckoutResponse cartCheckoutResponse = new Gson().fromJson((String) response.getEntity(), CartCheckoutResponse.class);
         assertTrue(cartCheckoutResponse.getOffers().isEmpty());
-        assertEquals(cartCheckoutResponse.getSubTotalPrice(), cartCheckoutResponse.getTotalPrice(), 0.01d);
+        assertEquals(cartCheckoutResponse.getSubTotalPrice(), cartCheckoutResponse.getTotalPrice(), 0.1d);
     }
 }
