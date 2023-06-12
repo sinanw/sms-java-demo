@@ -2,7 +2,13 @@ package com.sinan.javademo.apiapplication.model;
 
 import com.sinan.javademo.smscore.model.item.UnitType;
 
-public class CartItem{
+/**
+ * A model to represent the details of one item inside a cart.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
+public class CartItem {
     private String name;
     private UnitType unit;
     private double price;

@@ -6,6 +6,13 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
+/**
+ * A mapper class to map the general {@link Exception} to a response with corresponding {@link APIError}.
+ * @see <a href="https://docs.oracle.com/javaee/7/api/javax/ws/rs/ext/ExceptionMapper.html">Interface ExceptionMapper</a>
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 @Provider
 public class UnknownExceptionMapper implements ExceptionMapper<Exception> {
     private final static String message = "This response was generated due to " +

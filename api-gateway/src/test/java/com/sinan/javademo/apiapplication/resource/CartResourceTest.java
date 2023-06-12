@@ -79,12 +79,12 @@ public class CartResourceTest {
     }
 
     @Test
-    public void testAddItem_existingItem() {
+    public void testAddItemUnit_existingItem() {
         List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
         cart.addItem(new Item("Item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
         Mockito.when(cartService.addItem(Mockito.any(), Mockito.any())).thenReturn(cart);
-        Response response = cartResource.addItem(cart.getId(), "Item2");
+        Response response = cartResource.addItemUnit(cart.getId(), "Item2");
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
         assertEquals(cartDetailsResponse.getCartId(), cart.getId());
         assertEquals(cartDetailsResponse.getCartItems().size(), 4);
@@ -92,12 +92,12 @@ public class CartResourceTest {
     }
 
     @Test
-    public void testAddItem_newItem() {
+    public void testAddItemUnit_newItem() {
         List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
         cart.addItem(new Item("Item5", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
         Mockito.when(cartService.addItem(Mockito.any(), Mockito.any())).thenReturn(cart);
-        Response response = cartResource.addItem(cart.getId(), "Item5");
+        Response response = cartResource.addItemUnit(cart.getId(), "Item5");
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
         assertEquals(cartDetailsResponse.getCartId(), cart.getId());
         assertEquals(cartDetailsResponse.getCartItems().size(), 5);
@@ -106,12 +106,12 @@ public class CartResourceTest {
     }
 
     @Test
-    public void testRemoveItem_existingItem() {
+    public void testRemoveItemUnit_existingItem() {
         List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
         cart.removeItem(new Item("Item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
         Mockito.when(cartService.removeItem(Mockito.any(), Mockito.any())).thenReturn(cart);
-        Response response = cartResource.removeItem(cart.getId(), "Item2");
+        Response response = cartResource.removeItemUnit(cart.getId(), "Item2");
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
         assertEquals(cartDetailsResponse.getCartId(), cart.getId());
         assertEquals(cartDetailsResponse.getCartItems().size(), 4);
@@ -119,12 +119,12 @@ public class CartResourceTest {
     }
 
     @Test
-    public void testRemoveItem_existingItemLastOne() {
+    public void testRemoveItemUnit_existingItemLastOne() {
         List<String> itemsIdentifiers = List.of("Item1", "Item2", "Item3", "Item4");
         Cart cart = TestHelper.createDummyCartFromItems(itemsIdentifiers);
         cart.removeItem(new Item("Item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice()));
         Mockito.when(cartService.removeItem(Mockito.any(), Mockito.any())).thenReturn(cart);
-        Response response = cartResource.removeItem(cart.getId(), "Item2");
+        Response response = cartResource.removeItemUnit(cart.getId(), "Item2");
         CartDetailsResponse cartDetailsResponse = new Gson().fromJson((String) response.getEntity(), CartDetailsResponse.class);
         assertEquals(cartDetailsResponse.getCartId(), cart.getId());
         assertEquals(cartDetailsResponse.getCartItems().size(), 3);
@@ -133,10 +133,10 @@ public class CartResourceTest {
     }
 
     @Test(expectedExceptions = CartItemNotFoundException.class)
-    public void testRemoveItem_itemNotExist() {
+    public void testRemoveItemUnit_itemNotExist() {
         Cart cart = new Cart();
         Mockito.when(cartService.removeItem(Mockito.any(), Mockito.any())).thenThrow(CartItemNotFoundException.class);
-        cartResource.removeItem(cart.getId(), "Item2");
+        cartResource.removeItemUnit(cart.getId(), "Item2");
     }
 
     @Test

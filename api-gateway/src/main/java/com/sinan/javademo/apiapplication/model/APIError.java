@@ -3,6 +3,12 @@ package com.sinan.javademo.apiapplication.model;
 import com.google.gson.annotations.JsonAdapter;
 import com.sinan.javademo.apiapplication.adapter.APIErrorJsonAdapter;
 
+/**
+ * A model to wrap the error details of any exception that may happen when calling APIs.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 @JsonAdapter(APIErrorJsonAdapter.class)
 public class APIError {
     private String message, description;

@@ -1,6 +1,12 @@
 package com.sinan.javademo.apiapplication.model;
 
-public class CartDiscount{
+/**
+ * A model to represent the details an applied discount on a cart.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
+public class CartDiscount {
     private String description;
     private double value;
 

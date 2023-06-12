@@ -8,7 +8,12 @@ import com.sinan.javademo.smscore.model.cart.Cart;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * A contract model to represent the cart checkout details in the response.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 @JsonAdapter(CartCheckoutResponseJsonAdapter.class)
 public class CartCheckoutResponse {
 

@@ -8,11 +8,27 @@ import com.sinan.javademo.smscore.model.cart.Cart;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A contract model to represent the cart details in the response.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 @JsonAdapter(CartDetailsResponseAdapter.class)
 public class CartDetailsResponse {
     private String cartId;
     private List<CartItem> cartItems;
     private String currency;
+
+    public CartDetailsResponse(Cart cart) {
+        this.cartId = cart.getId();
+        this.currency = cart.getCurrency().toString();
+        cartItems = new ArrayList<>();
+        var items = cart.getItems();
+        for (var item : items.keySet()) {
+            cartItems.add(new CartItem(item.getName(), item.getUnit(), item.getPrice(), items.get(item)));
+        }
+    }
 
     public String getCartId() {
         return cartId;
@@ -44,16 +60,6 @@ public class CartDetailsResponse {
 
     public CartDetailsResponse() {
         cartItems = new ArrayList<>();
-    }
-
-    public CartDetailsResponse(Cart cart) {
-        this.cartId = cart.getId();
-        this.currency = cart.getCurrency().toString();
-        cartItems = new ArrayList<>();
-        var items = cart.getItems();
-        for (var item : items.keySet()) {
-            cartItems.add(new CartItem(item.getName(), item.getUnit(), item.getPrice(), items.get(item)));
-        }
     }
 
 }

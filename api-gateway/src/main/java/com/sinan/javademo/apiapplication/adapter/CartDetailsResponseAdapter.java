@@ -12,6 +12,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A custom adapter to serialize/deserialize {@link CartDetailsResponse} to/from json using Gson library.
+ * @see <a href="https://www.javadoc.io/doc/com.google.code.gson/gson/2.8.1/com/google/gson/TypeAdapter.html">Class TypeAdapter</a>
+ * @see <a href="https://github.com/google/gson">Google Gson</a>
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 public class CartDetailsResponseAdapter extends TypeAdapter<CartDetailsResponse> {
     @Override
     public void write(JsonWriter jsonWriter, CartDetailsResponse cartDetailsResponse) throws IOException {
