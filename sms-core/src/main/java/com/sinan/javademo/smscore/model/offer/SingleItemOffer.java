@@ -5,6 +5,13 @@ import com.sinan.javademo.smscore.model.offer.strategy.discount.condition.ItemEx
 import com.sinan.javademo.smscore.model.offer.strategy.discount.execution.ItemPercentageExecutionStrategy;
 import com.sinan.javademo.smscore.util.InputValidator;
 
+/**
+ * An offer representing a percentage discount on a specific item in the cart.
+ * Ex. 20% discount on Bread.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 public class SingleItemOffer extends ProductBaseOffer {
     private final Item item;
     private double percentage;

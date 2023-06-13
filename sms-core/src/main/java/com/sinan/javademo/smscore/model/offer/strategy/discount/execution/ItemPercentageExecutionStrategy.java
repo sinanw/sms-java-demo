@@ -4,6 +4,12 @@ import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.model.item.Item;
 import com.sinan.javademo.smscore.util.InputValidator;
 
+/**
+ * An execution strategy to apply a percentage discount on a specific item in the cart.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 public class ItemPercentageExecutionStrategy implements IDiscountExecutionStrategy {
     private final Item item;
     private double percentage;
@@ -27,10 +33,10 @@ public class ItemPercentageExecutionStrategy implements IDiscountExecutionStrate
 
     @Override
     public double apply(Cart cart) {
-        if (cart.hasItem(item)){
+        if (cart.hasItem(item)) {
             double itemTotalPrice = cart.getItemTotalPrice(item);
             return (percentage / 100) * itemTotalPrice;
-        }else{
+        } else {
             return 0;
         }
     }

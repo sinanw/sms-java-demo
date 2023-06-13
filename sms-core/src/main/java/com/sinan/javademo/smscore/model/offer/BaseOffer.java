@@ -7,6 +7,12 @@ import com.sinan.javademo.smscore.util.InputValidator;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * The super class to represent all offers in the system.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 public abstract class BaseOffer {
     private final String id;
     private String description;
@@ -71,7 +77,6 @@ public abstract class BaseOffer {
         }
         return true;
     }
-
 
     public boolean equals(Object o) {
         if (this == o) return true;

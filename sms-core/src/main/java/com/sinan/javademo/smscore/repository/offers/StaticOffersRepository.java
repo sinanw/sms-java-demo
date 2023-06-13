@@ -17,9 +17,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * An implementation of offers repositories representing an in memory static storage.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 @Singleton
 public class StaticOffersRepository implements IOffersRepository {
-
     private Map<String, BaseOffer> offers;
     private ItemsRepositoryFactory itemsRepositoryFactory;
 

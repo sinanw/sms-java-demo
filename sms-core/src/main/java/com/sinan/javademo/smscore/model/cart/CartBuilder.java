@@ -8,6 +8,13 @@ import jakarta.inject.Inject;
 
 import java.util.List;
 
+/**
+ * A concrete builder class to construct carts step-by-step (used for later potential code extension).
+ *
+ * @author Sinan Wannous
+ * @see <a href="https://refactoring.guru/design-patterns/builder">Builder Design Pattern</a>
+ * @since 1.0
+ */
 @RequestScoped
 public class CartBuilder implements IBaseCartBuilder {
     private Cart cart;

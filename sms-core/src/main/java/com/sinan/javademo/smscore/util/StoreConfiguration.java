@@ -8,8 +8,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * A utility to manage reading configuration values from textual config file..
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 @Singleton
 public class StoreConfiguration {
+    private static final String confFile = "application.properties";
     private String ITEMS_REPOSITORY_TYPE;
     private String OFFERS_REPOSITORY_TYPE;
     private String CARTS_REPOSITORY_TYPE;
@@ -17,11 +24,13 @@ public class StoreConfiguration {
     @PostConstruct
     private void init() {
         try {
+            //Initializing input stream reader
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            InputStream propertiesInputStream = classloader.getResourceAsStream("application.properties");
+            InputStream propertiesInputStream = classloader.getResourceAsStream(confFile);
+
+            //Reading properties
             Properties applicationProperties = new Properties();
             applicationProperties.load(propertiesInputStream);
-
             ITEMS_REPOSITORY_TYPE = applicationProperties.getProperty("repository.items");
             OFFERS_REPOSITORY_TYPE = applicationProperties.getProperty("repository.offers");
             CARTS_REPOSITORY_TYPE = applicationProperties.getProperty("repository.carts");

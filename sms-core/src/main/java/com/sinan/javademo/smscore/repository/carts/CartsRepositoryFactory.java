@@ -5,10 +5,23 @@ import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
+/**
+ * A factory for creating carts repositories.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 @Singleton
 public class CartsRepositoryFactory {
 
+    /**
+     * A collection of all instances.
+     */
     private final Instance<ICartsRepository> cartsRepositoryInstances;
+
+    /**
+     * The store configuration instance to retrieve repository type.
+     */
     private final StoreConfiguration storeConfiguration;
 
     @Inject
@@ -17,6 +30,11 @@ public class CartsRepositoryFactory {
         this.storeConfiguration = storeConfiguration;
     }
 
+    /**
+     * Create a repository instance based on store configurations.
+     *
+     * @return the created instance.
+     */
     public ICartsRepository createInstance() {
         String repositoryType = storeConfiguration.getCartsRepositoryType();
         return switch (repositoryType) {

@@ -12,6 +12,7 @@ public abstract class SMSResource {
 
     /**
      * An instance of Gson library to serialize/deserialize APIs input and output to/from json.
+     *
      * @see <a href="https://github.com/google/gson">Google Gson</a>
      */
     protected final Gson gson = new Gson();

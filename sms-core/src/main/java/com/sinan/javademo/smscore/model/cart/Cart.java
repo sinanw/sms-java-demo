@@ -10,6 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * A model to represent a cart in the system with all its details.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 
 public class Cart {
     private final String id;

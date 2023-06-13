@@ -5,10 +5,23 @@ import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
+/**
+ * A factory for creating items repositories.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 @Singleton
 public class ItemsRepositoryFactory {
 
+    /**
+     * A collection of all instances.
+     */
     private final Instance<IItemsRepository> itemsRepositoryInstances;
+
+    /**
+     * The store configuration instance to retrieve repository type.
+     */
     private final StoreConfiguration storeConfiguration;
 
     @Inject
@@ -17,6 +30,11 @@ public class ItemsRepositoryFactory {
         this.storeConfiguration = storeConfiguration;
     }
 
+    /**
+     * Create a repository instance based on store configurations.
+     *
+     * @return the created instance.
+     */
     public IItemsRepository createInstance() {
         String repositoryType = storeConfiguration.getItemsRepositoryType();
         return switch (repositoryType) {

@@ -38,6 +38,7 @@ public class CartResource extends SMSResource {
      *
      * @param itemsIdentifiers a list of identifiers of the items to be added to the cart when created (<em>it may be empty</em>).
      * @return a response with the created cart details ({@link CartDetailsResponse}) in the response entity.
+     * @throws ItemNotFoundException if one of item identifiers is not mapped to an existing item in the system.
      */
     @POST
     public Response createCart(List<String> itemsIdentifiers) {

@@ -5,6 +5,13 @@ import com.sinan.javademo.smscore.model.offer.strategy.discount.condition.MinIte
 import com.sinan.javademo.smscore.model.offer.strategy.discount.execution.ItemPercentageExecutionStrategy;
 import com.sinan.javademo.smscore.util.InputValidator;
 
+/**
+ * An offer representing a percentage discount on an item if a minimum of another item is found in the cart.
+ * Ex. Buy two bottles of Milk and get Bread with half the price.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 public class DoubleItemsOffer extends ProductBaseOffer {
     private final Item sourceItem;
     private final Item targetItem;

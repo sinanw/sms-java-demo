@@ -4,6 +4,13 @@ import com.sinan.javademo.smscore.model.offer.strategy.discount.condition.NoCond
 import com.sinan.javademo.smscore.model.offer.strategy.discount.execution.CartPercentageExecutionStrategy;
 import com.sinan.javademo.smscore.util.InputValidator;
 
+/**
+ * An offer representing a percentage discount on the total cart price regardless of any condition.
+ * Ex. get 15% discount on the total purchase.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 public class CartPercentageOffer extends CartBaseOffer {
     private double percentage;
 

@@ -5,6 +5,12 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * An implementation of offers repositories representing a database storage.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 @Singleton
 public class DBOffersRepository implements IOffersRepository {
     @Override

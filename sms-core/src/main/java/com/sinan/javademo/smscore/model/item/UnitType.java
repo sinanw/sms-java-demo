@@ -1,5 +1,11 @@
 package com.sinan.javademo.smscore.model.item;
 
+/**
+ * A model to represent the item's unit type.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 public enum UnitType {
     TIN, LOAF, BOTTLE, BAG;
 

@@ -7,9 +7,18 @@ import jakarta.inject.Singleton;
 
 import java.util.List;
 
+/**
+ * A backend service to provide offers related functionalities.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 @Singleton
 public class OfferService {
 
+    /**
+     * The factory used to create an offer repository instance.
+     */
     private OffersRepositoryFactory offersRepositoryFactory;
 
     @Inject
@@ -17,6 +26,11 @@ public class OfferService {
         this.offersRepositoryFactory = offersRepositoryFactory;
     }
 
+    /**
+     * Returns all currently active offers.
+     *
+     * @return a list of active offers.
+     */
     public List<BaseOffer> getActiveOffers() {
         var allOffers = offersRepositoryFactory.createInstance().getOffers();
         return allOffers.stream().filter(BaseOffer::isActive).toList();

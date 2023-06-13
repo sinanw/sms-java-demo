@@ -2,6 +2,12 @@ package com.sinan.javademo.smscore.model.item;
 
 import java.util.UUID;
 
+/**
+ * A model to represent an item in the system (product) with all its details.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 public class Item {
     private final String id;
     private String name;

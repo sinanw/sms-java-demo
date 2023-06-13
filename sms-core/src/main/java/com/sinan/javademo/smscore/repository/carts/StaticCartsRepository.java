@@ -10,6 +10,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * An implementation of carts repositories representing an in memory static storage.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 @Singleton
 public class StaticCartsRepository implements ICartsRepository {
     private Map<String, Cart> carts;
@@ -24,11 +30,11 @@ public class StaticCartsRepository implements ICartsRepository {
     }
 
     @Override
-    public Cart getCart(String id) {
-        if (!carts.containsKey(id)) {
-            throw new CartNotFoundException(id);
+    public Cart getCart(String cartId) {
+        if (!carts.containsKey(cartId)) {
+            throw new CartNotFoundException(cartId);
         }
-        return carts.get(id);
+        return carts.get(cartId);
     }
 
     @Override

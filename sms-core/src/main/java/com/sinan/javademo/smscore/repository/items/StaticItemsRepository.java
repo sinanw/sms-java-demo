@@ -11,6 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * An implementation of items repositories representing an in memory static storage.
+ *
+ * @author Sinan Wannous
+ * @since 1.0
+ */
 @Singleton
 public class StaticItemsRepository implements IItemsRepository {
     private Map<String, Item> items;
