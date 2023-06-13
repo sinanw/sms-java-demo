@@ -4,7 +4,7 @@ import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.util.InputValidator;
 
 /**
- * An execution strategy to apply a percentage discount on the cart subtotal price.
+ * An execution strategy to calculate a percentage discount on the cart subtotal price.
  *
  * @author Sinan Wannous
  * @since 1.0

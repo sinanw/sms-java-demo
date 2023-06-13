@@ -9,6 +9,7 @@ import jakarta.inject.Singleton;
  * A factory for creating offers repositories.
  *
  * @author Sinan Wannous
+ * @see <a href="https://refactoring.guru/design-patterns/factory-method">Factory Method Design Pattern</a>
  * @since 1.0
  */
 @Singleton

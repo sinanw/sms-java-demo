@@ -6,6 +6,7 @@ import com.sinan.javademo.smscore.model.cart.Cart;
  * The interface of all offer execution strategies.
  *
  * @author Sinan Wannous
+ * @see <a href="https://refactoring.guru/design-patterns/strategy">Strategy Design Pattern</a>
  * @since 1.0
  */
 public interface IDiscountExecutionStrategy {

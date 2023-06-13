@@ -4,7 +4,7 @@ import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.model.item.Item;
 
 /**
- * A condition strategy representing whether a specific item is existed or not in the cart.
+ * A condition strategy to check if a specific item is existed or not in the cart.
  *
  * @author Sinan Wannous
  * @since 1.0

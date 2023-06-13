@@ -5,7 +5,7 @@ import com.sinan.javademo.smscore.model.item.Item;
 import com.sinan.javademo.smscore.util.InputValidator;
 
 /**
- * An execution strategy to apply a percentage discount on a specific item in the cart.
+ * An execution strategy to calculate a percentage discount on a specific item in the cart.
  *
  * @author Sinan Wannous
  * @since 1.0
