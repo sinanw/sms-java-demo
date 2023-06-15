@@ -1,9 +1,9 @@
 package com.sinan.javademo.smscore.repository.offers;
 
 import com.sinan.javademo.smscore.util.StoreConfiguration;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
 
 /**
  * A factory for creating offers repositories.
@@ -12,24 +12,20 @@ import jakarta.inject.Singleton;
  * @see <a href="https://refactoring.guru/design-patterns/factory-method">Factory Method Design Pattern</a>
  * @since 1.0
  */
-@Singleton
+@ApplicationScoped
 public class OffersRepositoryFactory {
 
     /**
      * A collection of all instances.
      */
-    private final Instance<IOffersRepository> offersRepositoryInstances;
+    @Inject
+    private Instance<IOffersRepository> offersRepositoryInstances;
 
     /**
      * The store configuration instance to retrieve repository type.
      */
-    private final StoreConfiguration storeConfiguration;
-
     @Inject
-    public OffersRepositoryFactory(Instance<IOffersRepository> offersRepositories, StoreConfiguration storeConfiguration) {
-        this.offersRepositoryInstances = offersRepositories;
-        this.storeConfiguration = storeConfiguration;
-    }
+    private StoreConfiguration storeConfiguration;
 
     /**
      * Create a repository instance based on store configurations.

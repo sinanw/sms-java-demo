@@ -2,7 +2,7 @@ package com.sinan.javademo.smscore.util;
 
 import com.sinan.javademo.smscore.exception.SMSException;
 import jakarta.annotation.PostConstruct;
-import jakarta.inject.Singleton;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,7 +14,7 @@ import java.util.Properties;
  * @author Sinan Wannous
  * @since 1.0
  */
-@Singleton
+@ApplicationScoped
 public class StoreConfiguration {
     private static final String confFile = "application.properties";
     private String ITEMS_REPOSITORY_TYPE;

@@ -1,7 +1,7 @@
 package com.sinan.javademo.smscore.repository.carts;
 
 import com.sinan.javademo.smscore.model.cart.Cart;
-import jakarta.inject.Singleton;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @author Sinan Wannous
  * @since 1.0
  */
-@Singleton
+@ApplicationScoped
 public class DBCartsRepository implements ICartsRepository {
     @Override
     public Cart getCart(String cartId) {

@@ -26,12 +26,8 @@ public class CartResource extends SMSResource {
     /**
      * The cart service to provide backend logic for cart related functionalities.
      */
-    private CartService cartService;
-
     @Inject
-    public CartResource(CartService cartService) {
-        this.cartService = cartService;
-    }
+    private CartService cartService;
 
     /**
      * An endpoint to create new cart with/without items.

@@ -3,7 +3,7 @@ package com.sinan.javademo.smscore.model.cart;
 import com.sinan.javademo.smscore.model.item.Item;
 import com.sinan.javademo.smscore.repository.items.IItemsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.util.List;
@@ -15,21 +15,17 @@ import java.util.List;
  * @see <a href="https://refactoring.guru/design-patterns/builder">Builder Design Pattern</a>
  * @since 1.0
  */
-@RequestScoped
+@ApplicationScoped
 public class CartBuilder implements IBaseCartBuilder {
     private Cart cart;
 
+    @Inject
     private ItemsRepositoryFactory itemsRepositoryFactory;
 
-    @Inject
-    public CartBuilder(ItemsRepositoryFactory itemsRepositoryFactory) {
-        this.itemsRepositoryFactory = itemsRepositoryFactory;
-        this.cart = new Cart();
-    }
 
     public CartBuilder() {
+        this.cart = new Cart();
     }
-
 
     @Override
     public void populateItems(List<String> itemsList) {
@@ -51,3 +47,4 @@ public class CartBuilder implements IBaseCartBuilder {
         return result;
     }
 }
+

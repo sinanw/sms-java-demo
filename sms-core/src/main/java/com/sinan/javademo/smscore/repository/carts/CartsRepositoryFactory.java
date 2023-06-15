@@ -1,9 +1,9 @@
 package com.sinan.javademo.smscore.repository.carts;
 
 import com.sinan.javademo.smscore.util.StoreConfiguration;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
 
 /**
  * A factory for creating carts repositories.
@@ -12,24 +12,20 @@ import jakarta.inject.Singleton;
  * @see <a href="https://refactoring.guru/design-patterns/factory-method">Factory Method Design Pattern</a>
  * @since 1.0
  */
-@Singleton
+@ApplicationScoped
 public class CartsRepositoryFactory {
 
     /**
      * A collection of all instances.
      */
-    private final Instance<ICartsRepository> cartsRepositoryInstances;
+    @Inject
+    private Instance<ICartsRepository> cartsRepositoryInstances;
 
     /**
      * The store configuration instance to retrieve repository type.
      */
-    private final StoreConfiguration storeConfiguration;
-
     @Inject
-    public CartsRepositoryFactory(Instance<ICartsRepository> cartsRepositoryInstances, StoreConfiguration storeConfiguration) {
-        this.cartsRepositoryInstances = cartsRepositoryInstances;
-        this.storeConfiguration = storeConfiguration;
-    }
+    private StoreConfiguration storeConfiguration;
 
     /**
      * Create a repository instance based on store configurations.

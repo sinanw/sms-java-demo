@@ -4,7 +4,7 @@ import com.sinan.javademo.smscore.exception.ItemNotFoundException;
 import com.sinan.javademo.smscore.model.item.Item;
 import com.sinan.javademo.smscore.model.item.UnitType;
 import jakarta.annotation.PostConstruct;
-import jakarta.inject.Singleton;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,9 +17,9 @@ import java.util.Map;
  * @author Sinan Wannous
  * @since 1.0
  */
-@Singleton
+@ApplicationScoped
 public class StaticItemsRepository implements IItemsRepository {
-    private Map<String, Item> items;
+    private final Map<String, Item> items;
 
     public StaticItemsRepository() {
         items = new HashMap<>();

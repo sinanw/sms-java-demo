@@ -11,8 +11,8 @@ import com.sinan.javademo.smscore.repository.carts.ICartsRepository;
 import com.sinan.javademo.smscore.repository.carts.CartsRepositoryFactory;
 import com.sinan.javademo.smscore.repository.items.IItemsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
 
 import java.util.List;
 
@@ -22,36 +22,32 @@ import java.util.List;
  * @author Sinan Wannous
  * @since 1.0
  */
-@Singleton
+@ApplicationScoped
 public class CartService {
 
     /**
      * The backend service for offer functionalities.
      */
+    @Inject
     private OfferService offerService;
 
     /**
      * The cart builder to create carts.
      */
+    @Inject
     private CartBuilder cartBuilder;
 
     /**
      * The factory of carts repository instances.
      */
+    @Inject
     private CartsRepositoryFactory cartsRepositoryFactory;
 
     /**
      * The factory of items repository instances.
      */
-    private ItemsRepositoryFactory itemsRepositoryFactory;
-
     @Inject
-    public CartService(OfferService offerService, CartBuilder cartBuilder, CartsRepositoryFactory cartsRepositoryFactory, ItemsRepositoryFactory itemsRepositoryFactory) {
-        this.offerService = offerService;
-        this.cartBuilder = cartBuilder;
-        this.cartsRepositoryFactory = cartsRepositoryFactory;
-        this.itemsRepositoryFactory = itemsRepositoryFactory;
-    }
+    private ItemsRepositoryFactory itemsRepositoryFactory;
 
     /**
      * Returns the details of a specific cart from repository.

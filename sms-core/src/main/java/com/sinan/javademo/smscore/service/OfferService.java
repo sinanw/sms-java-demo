@@ -2,8 +2,8 @@ package com.sinan.javademo.smscore.service;
 
 import com.sinan.javademo.smscore.model.offer.BaseOffer;
 import com.sinan.javademo.smscore.repository.offers.OffersRepositoryFactory;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
 
 import java.util.List;
 
@@ -13,18 +13,14 @@ import java.util.List;
  * @author Sinan Wannous
  * @since 1.0
  */
-@Singleton
+@ApplicationScoped
 public class OfferService {
 
     /**
      * The factory used to create an offer repository instance.
      */
-    private OffersRepositoryFactory offersRepositoryFactory;
-
     @Inject
-    public OfferService(OffersRepositoryFactory offersRepositoryFactory) {
-        this.offersRepositoryFactory = offersRepositoryFactory;
-    }
+    private OffersRepositoryFactory offersRepositoryFactory;
 
     /**
      * Returns all currently active offers.
