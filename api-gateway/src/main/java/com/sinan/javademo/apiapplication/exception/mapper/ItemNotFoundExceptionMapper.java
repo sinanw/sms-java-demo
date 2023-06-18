@@ -22,6 +22,6 @@ public class ItemNotFoundExceptionMapper implements ExceptionMapper<ItemNotFound
         APIError apiError = new APIError(ex.getMessage(),
                 "This error happened because an item can't be found in our system, " +
                         "please make sure to select valid item identifiers!");
-        return Response.status(Response.Status.BAD_REQUEST).entity(new Gson().toJson(apiError)).build();
+        return Response.status(Response.Status.NOT_FOUND).entity(new Gson().toJson(apiError)).build();
     }
 }

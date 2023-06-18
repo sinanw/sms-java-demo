@@ -33,11 +33,10 @@ public class ItemPercentageExecutionStrategy implements IDiscountExecutionStrate
 
     @Override
     public double apply(Cart cart) {
-        if (cart.hasItem(item)) {
-            double itemTotalPrice = cart.getItemTotalPrice(item);
-            return (percentage / 100) * itemTotalPrice;
-        } else {
+        if (!cart.hasItem(item)) {
             return 0;
         }
+        double itemTotalPrice = cart.getItemTotalPrice(item);
+        return (percentage / 100) * itemTotalPrice;
     }
 }

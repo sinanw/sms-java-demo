@@ -16,9 +16,9 @@ import jakarta.ws.rs.core.MediaType;
 public class EngineeringResource extends SMSResource {
 
     /**
-     * An endpoint to test if the system is up and running.
+     * A ping healthcheck endpoint to test if the service is running and accessible.
      *
-     * @return a string indicating the successful reception of the call.
+     * @return a string with 200 OK response indicating the successful reception of the call.
      */
     @GET
     @Path("/ping")

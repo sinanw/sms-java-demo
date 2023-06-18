@@ -51,8 +51,8 @@ public class CartResource extends SMSResource {
      * @throws CartNotFoundException if the cart identifier is not mapped to an existing cart in the system.
      */
     @GET
-    @Path("{id}")
-    public Response getCartDetails(@PathParam("id") String cartId) {
+    @Path("{cartId}")
+    public Response getCartDetails(@PathParam("cartId") String cartId) {
         Cart cart = cartService.getCartInfo(cartId);
         CartDetailsResponse response = new CartDetailsResponse(cart);
         return Response.status(Response.Status.OK).entity(gson.toJson(response)).build();

@@ -3,7 +3,7 @@
 
 This project is intended to showcase my software engineering and development skills.
 
-It is a demo project but incorporates key software design and clean code principles.
+It is a demo project but incorporates **key software design and clean code principles.**
 
 ## 1. Features
 
@@ -16,7 +16,7 @@ This project represents a backend module of a basic Store Management System (SMS
 Items examples:
 - *Bread - 1.20€ per Packet*
 - *Milk - 0.85€ per Bottle*
-- *Tuna - 1.65€ per Can*
+- *Tuna - 1.65€ per Tin*
 
 Offers examples:
 - *15% discount on Bread this week*
@@ -27,13 +27,13 @@ Offers examples:
 
 ### 2.1. Design Patterns
 
-| Applied Design Pattern | Use Case                                                                  | Example                                                                                                |
-|------------------------|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| Strategy               | Define condition/execution strategies for different types of offers       | [Discount Strategies](sms-core/src/main/java/com/sinan/javademo/smscore/model/offer/strategy/discount) |
-| Builder/Director       | Build cart objects                                                        | [Cart Builder](sms-core/src/main/java/com/sinan/javademo/smscore/model/cart)                           |
-| Factory Method         | Create repositories based on config properties                            | [Items Repository](sms-core/src/main/java/com/sinan/javademo/smscore/repository/items)                 |
-| Adapter                | Serialize/deserialize APIs response to custom json                        | [Response Adapters](api-gateway/src/main/java/com/sinan/javademo/apiapplication/adapter)               |
-| Singleton              | Maintain unique instance of several models (using CDI @ApplicationScoped) | [Cart/Offer Services](sms-core/src/main/java/com/sinan/javademo/smscore/service)                       |
+| Applied Design Pattern | Use Case                                                                    | Example                                                                                                |
+|------------------------|-----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| Strategy               | Define condition/execution strategies for different types of offers         | [Discount Strategies](sms-core/src/main/java/com/sinan/javademo/smscore/model/offer/strategy/discount) |
+| Builder/Director       | Build cart objects                                                          | [Cart Builder](sms-core/src/main/java/com/sinan/javademo/smscore/model/cart)                           |
+| Factory Method         | Create repositories based on config properties                              | [Items Repository](sms-core/src/main/java/com/sinan/javademo/smscore/repository/items)                 |
+| Adapter                | Serialize/deserialize APIs response to custom json                          | [Response Adapters](api-gateway/src/main/java/com/sinan/javademo/apiapplication/adapter)               |
+| Singleton              | Maintain unique instance of several models (using CDI `@ApplicationScoped`) | [Cart/Offer Services](sms-core/src/main/java/com/sinan/javademo/smscore/service)                       |
 
 ### 2.2. Dependency Injection (DI)
 - Code maintains dependency on abstraction rather than concrete objects (Inversion of Control).
@@ -41,7 +41,7 @@ Offers examples:
 
 ### 2.3. Clean Code Principles
 - KISS: code is written as SIMPLE as possible.
-- DRY: methods are SMALL and do only ONE thing.
+- DRY: all methods are SMALL and do only ONE thing.
 - YAGNI: no unnecessary functionalities are implemented (except for some cases for the sake of this demo).
 - Readability: descriptive & self-explanatory classes, methods, and variable names.
 - Convention: code follows consistent and standard naming conventions.
@@ -60,7 +60,7 @@ Offers examples:
 
 ### 2.6. OOP & OOD Principles
 - Code is fully OOP (thanks to Java!).
-- Abstraction: code relies on abstraction to handle complexity (DI).
+- Abstraction: code relies on abstraction to handle complexity (DI, design patterns, ...).
 - Encapsulation: code implements restricted access to data members and methods (with getters/setters when required). 
 - Inheritance: classes are structured in hierarchical manner.
 - Polymorphism: ex. via strategy design pattern. 

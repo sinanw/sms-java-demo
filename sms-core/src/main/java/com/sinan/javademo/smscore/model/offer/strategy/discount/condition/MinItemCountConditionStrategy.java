@@ -32,6 +32,6 @@ public class MinItemCountConditionStrategy implements IDiscountConditionStrategy
 
     @Override
     public boolean isApplicable(Cart cart) {
-        return (cart.hasItem(item) && cart.getItemQuantity(item) >= minQuantity);
+        return cart.getItemQuantity(item) >= minQuantity;
     }
 }
