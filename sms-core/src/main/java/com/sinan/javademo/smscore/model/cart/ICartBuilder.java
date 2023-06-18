@@ -9,7 +9,7 @@ import java.util.List;
  * @see <a href="https://refactoring.guru/design-patterns/builder">Builder Design Pattern</a>
  * @since 1.0
  */
-public interface IBaseCartBuilder {
+public interface ICartBuilder {
     void populateItems(List<String> items);
 
     void reset();

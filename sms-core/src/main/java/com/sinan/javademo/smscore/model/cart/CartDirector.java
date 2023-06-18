@@ -10,9 +10,9 @@ import java.util.List;
  * @since 1.0
  */
 public class CartDirector {
-    IBaseCartBuilder cartBuilder;
+    ICartBuilder cartBuilder;
 
-    public CartDirector(IBaseCartBuilder cartBuilder) {
+    public CartDirector(ICartBuilder cartBuilder) {
         this.cartBuilder = cartBuilder;
     }
 

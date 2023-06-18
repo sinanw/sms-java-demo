@@ -16,7 +16,7 @@ import java.util.List;
  * @since 1.0
  */
 @ApplicationScoped
-public class CartBuilder implements IBaseCartBuilder {
+public class CartBuilder implements ICartBuilder {
     private Cart cart;
 
     @Inject
