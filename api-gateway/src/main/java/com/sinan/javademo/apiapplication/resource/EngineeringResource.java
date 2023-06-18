@@ -25,15 +25,5 @@ public class EngineeringResource extends SMSResource {
     public String ping() {
         return "pong";
     }
-
-    /**
-     * An endpoint to do some tests if necessary (<em>Recommended to be commented out on deployment</em>).
-     *
-     * @return the test result in a string format.
-     */
-    @GET
-    @Path("/test")
-    public String test() {
-        return "test";
-    }
+    
 }

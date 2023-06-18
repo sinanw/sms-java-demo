@@ -100,7 +100,7 @@ docker-compose up --build
 ```http
   POST /sms/api/cart
 ```
-- Body - raw (json): `[... "itemId" ...]`
+- Body - raw (json): `[... "itemIdentifier" ...]`
 
 #### 4.3. Cart Details
 
@@ -113,17 +113,19 @@ docker-compose up --build
 ```http
   POST /sms/api/cart/{cartId}/items
 ```
-- Body - raw (json): `itemId`
+| Parameter        | Type     | Description                    |
+|:-----------------|:---------|:-------------------------------|
+| `itemIdentifier` | `String` | **Required**. Item to be added |
 
 #### 4.5. Remove Item
 
 ```http
-  DELETE /sms/api/cart/{cartId}/items/{itemId}
+  DELETE /sms/api/cart/{cartId}/items/{itemIdentifier}
 ```
 
 #### 4.6. Cart Checkout
 
 ```http
-  POST /sms/api/cart/checkout/{cartId}
+  GET /sms/api/cart/{cartId}/checkout
 ```
 

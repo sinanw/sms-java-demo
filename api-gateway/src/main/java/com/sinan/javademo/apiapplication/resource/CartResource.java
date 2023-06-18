@@ -2,6 +2,7 @@ package com.sinan.javademo.apiapplication.resource;
 
 import com.sinan.javademo.apiapplication.contract.CartCheckoutResponse;
 import com.sinan.javademo.apiapplication.contract.CartDetailsResponse;
+import com.sinan.javademo.apiapplication.exception.RequiredParamException;
 import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.service.CartService;
 import jakarta.inject.Inject;
@@ -64,13 +65,17 @@ public class CartResource extends SMSResource {
      * @param cartId         the cart identifier.
      * @param itemIdentifier the item identifier.
      * @return a response with cart details ({@link CartDetailsResponse} with the item added/quantity increased) in the response entity.
-     * @throws CartNotFoundException if the cart identifier is not mapped to an existing cart in the system.
-     * @throws ItemNotFoundException if the item identifier is not mapped to an existing item in the system.
+     * @throws RequiredParamException if the call was made without providing an item identifier.
+     * @throws CartNotFoundException  if the cart identifier is not mapped to an existing cart in the system.
+     * @throws ItemNotFoundException  if the item identifier is not mapped to an existing item in the system.
      */
     @POST
     @Path("/{cartId}/items")
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response addItemUnit(@PathParam("cartId") String cartId, String itemIdentifier) {
+    public Response addItemUnit(@PathParam("cartId") String cartId, @QueryParam("itemIdentifier") String itemIdentifier) {
+        if (itemIdentifier == null) {
+            throw new RequiredParamException("itemIdentifier");
+        }
         Cart cart = cartService.addItem(cartId, itemIdentifier);
         CartDetailsResponse response = new CartDetailsResponse(cart);
         return Response.status(Response.Status.OK).entity(gson.toJson(response)).build();
@@ -101,9 +106,9 @@ public class CartResource extends SMSResource {
      * @return a response with cart summary and applied discounts ({@link CartCheckoutResponse}) in the response entity.
      * @throws CartNotFoundException if the cart identifier is not mapped to an existing cart in the system.
      */
-    @POST
-    @Path("/checkout/{id}")
-    public Response checkoutCart(@PathParam("id") String cartId) {
+    @GET
+    @Path("/{cartId}/checkout")
+    public Response checkoutCart(@PathParam("cartId") String cartId) {
         Cart cart = cartService.checkoutCart(cartId);
         CartCheckoutResponse response = new CartCheckoutResponse(cart);
         return Response.status(Response.Status.OK).entity(gson.toJson(response)).build();
