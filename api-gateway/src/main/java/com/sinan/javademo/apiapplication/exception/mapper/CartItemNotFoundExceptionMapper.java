@@ -17,11 +17,12 @@ import jakarta.ws.rs.ext.Provider;
 @Provider
 public class CartItemNotFoundExceptionMapper implements ExceptionMapper<CartItemNotFoundException> {
 
+    private final static String description = "This error happened because an item can't be found in the cart, " +
+            "please make sure to select valid item identifiers!";
+
     @Override
     public Response toResponse(CartItemNotFoundException ex) {
-        APIError apiError = new APIError(ex.getMessage(),
-                "This error happened because an item can't be found in the cart, " +
-                        "please make sure to select valid item identifiers!");
+        APIError apiError = new APIError(ex.getMessage(), description);
         return Response.status(Response.Status.BAD_REQUEST).entity(new Gson().toJson(apiError)).build();
     }
 }

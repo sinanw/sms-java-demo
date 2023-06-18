@@ -17,11 +17,12 @@ import jakarta.ws.rs.ext.Provider;
 @Provider
 public class CartNotFoundExceptionMapper implements ExceptionMapper<CartNotFoundException> {
 
+    private final static String description = "This error happened because cart id can't be found, " +
+            "please make sure to send a valid id!";
+
     @Override
     public Response toResponse(CartNotFoundException ex) {
-        APIError apiError = new APIError(ex.getMessage(),
-                "This error happened because cart id can't be found, " +
-                        "please make sure to send a valid id!");
+        APIError apiError = new APIError(ex.getMessage(), description);
         return Response.status(Response.Status.NOT_FOUND).entity(new Gson().toJson(apiError)).build();
     }
 }

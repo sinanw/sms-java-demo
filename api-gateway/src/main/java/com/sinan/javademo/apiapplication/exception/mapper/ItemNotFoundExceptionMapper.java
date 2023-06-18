@@ -17,11 +17,12 @@ import jakarta.ws.rs.ext.Provider;
 @Provider
 public class ItemNotFoundExceptionMapper implements ExceptionMapper<ItemNotFoundException> {
 
+    private final static String description = "This error happened because an item can't be found in our system, " +
+            "please make sure to select valid item identifiers!";
+
     @Override
     public Response toResponse(ItemNotFoundException ex) {
-        APIError apiError = new APIError(ex.getMessage(),
-                "This error happened because an item can't be found in our system, " +
-                        "please make sure to select valid item identifiers!");
+        APIError apiError = new APIError(ex.getMessage(), description);
         return Response.status(Response.Status.NOT_FOUND).entity(new Gson().toJson(apiError)).build();
     }
 }

@@ -17,11 +17,12 @@ import jakarta.ws.rs.ext.Provider;
 @Provider
 public class RequiredParamExceptionMapper implements ExceptionMapper<RequiredParamException> {
 
+    private final static String description = "This error happened because a required parameter is not provided. " +
+            "please make sure to make a valid API call!";
+
     @Override
     public Response toResponse(RequiredParamException ex) {
-        APIError apiError = new APIError(ex.getMessage(),
-                "This error happened because a required parameter is not provided. " +
-                        "please make sure to make a valid API call!");
+        APIError apiError = new APIError(ex.getMessage(), description);
         return Response.status(Response.Status.BAD_REQUEST).entity(new Gson().toJson(apiError)).build();
     }
 }
