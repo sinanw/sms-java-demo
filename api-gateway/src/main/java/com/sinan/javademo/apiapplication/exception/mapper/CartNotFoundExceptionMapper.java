@@ -1,14 +1,14 @@
 package com.sinan.javademo.apiapplication.exception.mapper;
 
 import com.google.gson.Gson;
-import com.sinan.javademo.apiapplication.model.APIError;
+import com.sinan.javademo.apiapplication.contract.APIErrorResponse;
 import com.sinan.javademo.smscore.exception.CartNotFoundException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
 /**
- * A mapper class to map the {@link CartNotFoundException} to a response with corresponding {@link APIError}.
+ * A mapper class to map the {@link CartNotFoundException} to a response with corresponding {@link APIErrorResponse}.
  *
  * @author Sinan Wannous
  * @see <a href="https://docs.oracle.com/javaee/7/api/javax/ws/rs/ext/ExceptionMapper.html">Interface ExceptionMapper</a>
@@ -22,7 +22,7 @@ public class CartNotFoundExceptionMapper implements ExceptionMapper<CartNotFound
 
     @Override
     public Response toResponse(CartNotFoundException ex) {
-        APIError apiError = new APIError(ex.getMessage(), description);
-        return Response.status(Response.Status.NOT_FOUND).entity(new Gson().toJson(apiError)).build();
+        APIErrorResponse apiErrorResponse = new APIErrorResponse(ex.getMessage(), description);
+        return Response.status(Response.Status.NOT_FOUND).entity(new Gson().toJson(apiErrorResponse)).build();
     }
 }

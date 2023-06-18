@@ -1,13 +1,13 @@
 package com.sinan.javademo.apiapplication.exception.mapper;
 
 import com.google.gson.Gson;
-import com.sinan.javademo.apiapplication.model.APIError;
+import com.sinan.javademo.apiapplication.contract.APIErrorResponse;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
 /**
- * A mapper class to map the general {@link Exception} to a response with corresponding {@link APIError}.
+ * A mapper class to map the general {@link Exception} to a response with corresponding {@link APIErrorResponse}.
  *
  * @author Sinan Wannous
  * @see <a href="https://docs.oracle.com/javaee/7/api/javax/ws/rs/ext/ExceptionMapper.html">Interface ExceptionMapper</a>
@@ -22,7 +22,7 @@ public class UnknownExceptionMapper implements ExceptionMapper<Exception> {
 
     @Override
     public Response toResponse(Exception ex) {
-        APIError apiError = new APIError(String.format("SERVER ERROR (%s)", ex.getMessage()), description);
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(new Gson().toJson(apiError)).build();
+        APIErrorResponse apiErrorResponse = new APIErrorResponse(String.format("SERVER ERROR (%s)", ex.getMessage()), description);
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(new Gson().toJson(apiErrorResponse)).build();
     }
 }

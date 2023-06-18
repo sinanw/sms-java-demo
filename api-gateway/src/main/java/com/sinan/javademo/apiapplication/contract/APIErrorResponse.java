@@ -1,7 +1,7 @@
-package com.sinan.javademo.apiapplication.model;
+package com.sinan.javademo.apiapplication.contract;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.sinan.javademo.apiapplication.adapter.APIErrorJsonAdapter;
+import com.sinan.javademo.apiapplication.adapter.APIErrorResponseJsonAdapter;
 
 /**
  * A model to wrap the error details of any exception that may happen when calling APIs.
@@ -9,14 +9,14 @@ import com.sinan.javademo.apiapplication.adapter.APIErrorJsonAdapter;
  * @author Sinan Wannous
  * @since 1.0
  */
-@JsonAdapter(APIErrorJsonAdapter.class)
-public class APIError {
+@JsonAdapter(APIErrorResponseJsonAdapter.class)
+public class APIErrorResponse {
     private String message, description;
 
-    public APIError() {
+    public APIErrorResponse() {
     }
 
-    public APIError(String message, String description) {
+    public APIErrorResponse(String message, String description) {
         this.message = message;
         this.description = description;
     }
