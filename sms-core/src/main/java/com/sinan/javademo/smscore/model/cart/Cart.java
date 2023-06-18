@@ -79,19 +79,14 @@ public class Cart {
         appliedOffers.put(offer, discount);
     }
 
-    public void removeOfferIfExist(BaseOffer offer) {
-        if (hasOffer(offer)) {
-            appliedOffers.remove(offer);
-        }
+    public void resetAppliedOffers() {
+        appliedOffers.clear();
     }
 
     public Map<BaseOffer, Double> getAppliedOffers() {
         return new HashMap<>(appliedOffers);
     }
 
-    public boolean hasOffer(BaseOffer offer) {
-        return appliedOffers.containsKey(offer);
-    }
 
     public double getTotalDiscount() {
         return appliedOffers.values().stream().reduce(0d, Double::sum);

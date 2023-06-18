@@ -155,19 +155,19 @@ public class CartService {
         //Retrieving cart information
         Cart cart = cartsRepository.getCart(cartId);
 
+        //Reset applied offers if cart is already checked out (to be reevaluated).
+        cart.resetAppliedOffers();
+
         //Retrieving currently active offers and iterating through them
         var activeOffers = offerService.getActiveOffers();
         for (var offer : activeOffers) {
             if (offer.getConditionStrategy().isApplicable(cart)) {
-                //Offer is applicable to the cart, apply it
+                //Offer is applicable to the cart, calculate applicable discount
                 double discountValue = offer.getExecutionStrategy().apply(cart);
                 if (discountValue > 0) {
                     //The offer has led to discount, add offer to cart
                     cart.addOffer(offer, discountValue);
                 }
-            } else {
-                //Offer is no longer applicable, remove it if existed
-                cart.removeOfferIfExist(offer);
             }
         }
 
