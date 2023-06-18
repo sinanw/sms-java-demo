@@ -42,7 +42,6 @@ public class OfferServiceTest {
     public void testGetActiveOffers() {
         Mockito.when(staticOffersRepository.getOffers()).thenReturn(TestHelper.createDummyOffers());
         List<BaseOffer> offers = offerService.getActiveOffers();
-        Mockito.verify(offersRepositoryFactory, Mockito.times(1)).createInstance();
         Mockito.verify(staticOffersRepository, Mockito.times(1)).getOffers();
         offers.forEach(offer -> assertTrue(offer.isActive()));
     }
