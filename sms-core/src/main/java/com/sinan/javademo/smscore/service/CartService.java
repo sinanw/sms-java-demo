@@ -11,6 +11,7 @@ import com.sinan.javademo.smscore.repository.carts.ICartsRepository;
 import com.sinan.javademo.smscore.repository.carts.CartsRepositoryFactory;
 import com.sinan.javademo.smscore.repository.items.IItemsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -49,6 +50,16 @@ public class CartService {
     @Inject
     private ItemsRepositoryFactory itemsRepositoryFactory;
 
+    private ICartsRepository cartsRepository;
+    private IItemsRepository itemsRepository;
+
+
+    @PostConstruct
+    private void init() {
+        cartsRepository = cartsRepositoryFactory.createInstance();
+        itemsRepository = itemsRepositoryFactory.createInstance();
+    }
+
     /**
      * Returns the details of a specific cart from repository.
      *
@@ -57,7 +68,6 @@ public class CartService {
      * @throws CartNotFoundException if cart identifier is not mapped to an existing cart in the repository.
      */
     public Cart getCartInfo(String cartId) {
-        ICartsRepository cartsRepository = cartsRepositoryFactory.createInstance();
         return cartsRepository.getCart(cartId);
     }
 
@@ -80,7 +90,6 @@ public class CartService {
         Cart cart = cartBuilder.build();
 
         //Saving cart to repository
-        ICartsRepository cartsRepository = cartsRepositoryFactory.createInstance();
         cartsRepository.saveCart(cart);
 
         return cart;
@@ -98,8 +107,6 @@ public class CartService {
     public Cart addItem(String cartId, String itemIdentifier) {
 
         //Retrieving cart and item information
-        ICartsRepository cartsRepository = cartsRepositoryFactory.createInstance();
-        IItemsRepository itemsRepository = itemsRepositoryFactory.createInstance();
         Cart cart = cartsRepository.getCart(cartId);
         Item item = itemsRepository.getItem(itemIdentifier);
 
@@ -125,8 +132,6 @@ public class CartService {
     public Cart removeItem(String cartId, String itemIdentifier) {
 
         //Retrieving cart and item information
-        ICartsRepository cartsRepository = cartsRepositoryFactory.createInstance();
-        IItemsRepository itemsRepository = itemsRepositoryFactory.createInstance();
         Cart cart = cartsRepository.getCart(cartId);
         Item item = itemsRepository.getItem(itemIdentifier);
 
@@ -148,7 +153,6 @@ public class CartService {
     public Cart checkoutCart(String cartId) {
 
         //Retrieving cart information
-        ICartsRepository cartsRepository = cartsRepositoryFactory.createInstance();
         Cart cart = cartsRepository.getCart(cartId);
 
         //Retrieving currently active offers and iterating through them
