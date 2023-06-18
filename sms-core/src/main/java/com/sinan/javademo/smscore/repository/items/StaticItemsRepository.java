@@ -48,4 +48,9 @@ public class StaticItemsRepository implements IItemsRepository {
     public void saveItem(Item item) {
         items.put(item.getName(), item);
     }
+
+    @Override
+    public String getType() {
+        return "STATIC";
+    }
 }

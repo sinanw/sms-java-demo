@@ -47,4 +47,9 @@ public class StaticCartsRepository implements ICartsRepository {
         carts.put(cart.getId(), cart);
     }
 
+    @Override
+    public String getType() {
+        return "STATIC";
+    }
+
 }

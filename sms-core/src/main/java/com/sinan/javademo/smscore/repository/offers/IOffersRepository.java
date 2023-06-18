@@ -36,4 +36,11 @@ public interface IOffersRepository {
      */
     void saveOffer(BaseOffer offer);
 
+    /**
+     * Returns unique type to match with the configuration property.
+     *
+     * @return the repository type.
+     */
+    String getType();
+
 }

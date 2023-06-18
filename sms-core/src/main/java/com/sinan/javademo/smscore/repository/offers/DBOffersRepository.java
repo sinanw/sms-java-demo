@@ -30,4 +30,9 @@ public class DBOffersRepository implements IOffersRepository {
         //This is just an example, no database implementation is provided.
         throw new UnsupportedOperationException("This functionality is not supported in this demo project!");
     }
+
+    @Override
+    public String getType() {
+        return "DB";
+    }
 }

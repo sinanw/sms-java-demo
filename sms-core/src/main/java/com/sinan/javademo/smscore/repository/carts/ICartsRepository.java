@@ -35,4 +35,11 @@ public interface ICartsRepository {
      * @param cart the cart to be saved.
      */
     void saveCart(Cart cart);
+
+    /**
+     * Returns unique type to match with the configuration property.
+     *
+     * @return the repository type.
+     */
+    String getType();
 }

@@ -24,7 +24,11 @@ public class CartBuilder implements ICartBuilder {
 
 
     public CartBuilder() {
-        this.cart = new Cart();
+        initCart();
+    }
+
+    private void initCart() {
+        cart = new Cart();
     }
 
     @Override
@@ -38,7 +42,7 @@ public class CartBuilder implements ICartBuilder {
 
     @Override
     public void reset() {
-        this.cart = new Cart();
+        initCart();
     }
 
     public Cart build() {

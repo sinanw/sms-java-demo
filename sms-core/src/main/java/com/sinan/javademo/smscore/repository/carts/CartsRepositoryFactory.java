@@ -34,11 +34,11 @@ public class CartsRepositoryFactory {
      */
     public ICartsRepository createInstance() {
         String repositoryType = storeConfiguration.getCartsRepositoryType();
-        return switch (repositoryType) {
-            case "STATIC" -> cartsRepositoryInstances.select(StaticCartsRepository.class).get();
-            case "DB" -> cartsRepositoryInstances.select(DBCartsRepository.class).get();
-            default ->
-                    throw new IllegalArgumentException(String.format("%s carts repository type is not supported!", repositoryType));
-        };
+        return cartsRepositoryInstances.stream()
+                .filter(repository -> repositoryType.equals(repository.getType()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        String.format("%s carts repository type is not supported!", repositoryType)
+                ));
     }
 }

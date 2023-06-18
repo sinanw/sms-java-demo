@@ -34,11 +34,11 @@ public class ItemsRepositoryFactory {
      */
     public IItemsRepository createInstance() {
         String repositoryType = storeConfiguration.getItemsRepositoryType();
-        return switch (repositoryType) {
-            case "STATIC" -> itemsRepositoryInstances.select(StaticItemsRepository.class).get();
-            case "DB" -> itemsRepositoryInstances.select(DBItemsRepository.class).get();
-            default ->
-                    throw new IllegalArgumentException(String.format("%s items repository type is not supported!", repositoryType));
-        };
+        return itemsRepositoryInstances.stream()
+                .filter(repository -> repositoryType.equals(repository.getType()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        String.format("%s items repository type is not supported!", repositoryType)
+                ));
     }
 }

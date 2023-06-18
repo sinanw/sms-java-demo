@@ -35,4 +35,11 @@ public interface IItemsRepository {
      * @param item the item to be saved.
      */
     void saveItem(Item item);
+
+    /**
+     * Returns unique type to match with the configuration property.
+     *
+     * @return the repository type.
+     */
+    String getType();
 }

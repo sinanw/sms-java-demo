@@ -34,11 +34,11 @@ public class OffersRepositoryFactory {
      */
     public IOffersRepository createInstance() {
         String repositoryType = storeConfiguration.getOffersRepositoryType();
-        return switch (repositoryType) {
-            case "STATIC" -> offersRepositoryInstances.select(StaticOffersRepository.class).get();
-            case "DB" -> offersRepositoryInstances.select(DBOffersRepository.class).get();
-            default ->
-                    throw new IllegalArgumentException(String.format("%s offers repository type is not supported!", repositoryType));
-        };
+        return offersRepositoryInstances.stream()
+                .filter(repository -> repositoryType.equals(repository.getType()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        String.format("%s offers repository type is not supported!", repositoryType)
+                ));
     }
 }

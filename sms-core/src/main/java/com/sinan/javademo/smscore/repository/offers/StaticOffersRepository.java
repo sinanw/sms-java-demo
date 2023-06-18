@@ -73,4 +73,9 @@ public class StaticOffersRepository implements IOffersRepository {
         offers.put(offer.getId(), offer);
     }
 
+    @Override
+    public String getType() {
+        return "STATIC";
+    }
+
 }
