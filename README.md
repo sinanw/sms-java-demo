@@ -54,6 +54,7 @@ Offers examples:
 
 ### 2.5. Automated Testing
 - Extensive test cases for happy path and edge cases.
+- Unit tests organized in [AAA - Arrange, Act, Assert](https://java-design-patterns.com/patterns/arrange-act-assert/) pattern.
 - Testing framework: [TestNG](https://testng.org/doc/)
 - Mocking library: [Mockito](https://site.mockito.org)
 
