@@ -41,14 +41,14 @@ Offers examples:
 
 ### 2.3. Clean Code Principles
 - KISS: code is written as SIMPLE as possible.
-- DRY: all methods are SMALL and do only ONE thing.
+- DRY: code relies on re-usability and abstraction to prevent duplication.
 - YAGNI: no unnecessary functionalities are implemented (except for some cases for the sake of this demo).
 - Readability: descriptive & self-explanatory classes, methods, and variable names.
 - Convention: code follows consistent and standard naming conventions.
 
 ### 2.4. Code Documentation
 - Code is self-explanatory. 
-- Code is fully documented in [javadoc](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html) format. 
+- Code is documented in [javadoc](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html) format. 
 - Clarification comments are added when necessary. 
 - Nothing is commented out!
 

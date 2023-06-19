@@ -6,6 +6,7 @@ import com.sinan.javademo.smscore.model.item.UnitType;
 import com.sinan.javademo.smscore.util.TestHelper;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -24,17 +25,22 @@ public class StaticItemsRepositoryTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @AfterMethod
+    public void tearDown() {
+        staticItemsRepository = null;
+    }
+
     @Test
     public void testGetItems() {
         Item item1 = new Item("Item1", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice());
         Item item2 = new Item("Item2", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice());
         staticItemsRepository.saveItem(item1);
         staticItemsRepository.saveItem(item2);
-        assertTrue(staticItemsRepository.getItems().size() >= 2);
+        assertEquals(staticItemsRepository.getItems().size(), 2);
 
         Item item3 = new Item("Item3", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice());
         staticItemsRepository.saveItem(item3);
-        assertTrue(staticItemsRepository.getItems().size() >= 3);
+        assertEquals(staticItemsRepository.getItems().size(), 3);
     }
 
     @Test
@@ -56,7 +62,7 @@ public class StaticItemsRepositoryTest {
     public void testSaveItem_newItem() {
         Item newItem = new Item("NewItem", TestHelper.getRandomItemType(), TestHelper.getRandomItemPrice());
         staticItemsRepository.saveItem(newItem);
-        assertTrue(staticItemsRepository.getItems().size() > 0);
+        assertEquals(staticItemsRepository.getItems().size(), 1);
         assertNotNull(staticItemsRepository.getItem(newItem.getName()));
     }
 

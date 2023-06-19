@@ -7,6 +7,7 @@ import com.sinan.javademo.smscore.model.offer.SingleItemOffer;
 import com.sinan.javademo.smscore.util.TestHelper;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -24,17 +25,22 @@ public class StaticOffersRepositoryTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @AfterMethod
+    public void tearDown() {
+        staticOffersRepository = null;
+    }
+
     @Test
     public void testGetOffers() {
         BaseOffer offer1 = new SingleItemOffer("Offer1", TestHelper.getDummyItem(), TestHelper.getRandomDiscountPercentage());
         BaseOffer offer2 = new SingleItemOffer("Offer2", TestHelper.getDummyItem(), TestHelper.getRandomDiscountPercentage());
         staticOffersRepository.saveOffer(offer1);
         staticOffersRepository.saveOffer(offer2);
-        assertTrue(staticOffersRepository.getOffers().size() >= 2);
+        assertEquals(staticOffersRepository.getOffers().size(), 2);
 
         BaseOffer offer3 = new CartPercentageOffer("Offer3", TestHelper.getRandomDiscountPercentage());
         staticOffersRepository.saveOffer(offer3);
-        assertTrue(staticOffersRepository.getOffers().size() >= 3);
+        assertEquals(staticOffersRepository.getOffers().size(), 3);
     }
 
     @Test
@@ -57,7 +63,7 @@ public class StaticOffersRepositoryTest {
     public void testSaveOffer_newOffer() {
         BaseOffer newOffer = new SingleItemOffer("NewOffer", TestHelper.getDummyItem(), TestHelper.getRandomDiscountPercentage());
         staticOffersRepository.saveOffer(newOffer);
-        assertTrue(staticOffersRepository.getOffers().size() > 0);
+        assertEquals(staticOffersRepository.getOffers().size(), 1);
         assertNotNull(staticOffersRepository.getOffer(newOffer.getId()));
     }
 

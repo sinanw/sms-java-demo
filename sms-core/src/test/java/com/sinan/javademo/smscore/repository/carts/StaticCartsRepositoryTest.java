@@ -7,6 +7,7 @@ import com.sinan.javademo.smscore.model.offer.CartPercentageOffer;
 import com.sinan.javademo.smscore.util.TestHelper;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -25,17 +26,22 @@ public class StaticCartsRepositoryTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @AfterMethod
+    public void tearDown() {
+        staticCartsRepository = null;
+    }
+
     @Test
     public void testGetCarts() {
         Cart cart1 = TestHelper.createDummyCart();
         Cart cart2 = TestHelper.createDummyCart();
         staticCartsRepository.saveCart(cart1);
         staticCartsRepository.saveCart(cart2);
-        assertTrue(staticCartsRepository.getCarts().size() >= 2);
+        assertEquals(staticCartsRepository.getCarts().size(), 2);
 
         Cart cart3 = TestHelper.createDummyCart();
         staticCartsRepository.saveCart(cart3);
-        assertTrue(staticCartsRepository.getCarts().size() >= 3);
+        assertEquals(staticCartsRepository.getCarts().size(), 3);
     }
 
     @Test
@@ -57,7 +63,7 @@ public class StaticCartsRepositoryTest {
     public void testSaveCart_newCart() {
         Cart newCart = TestHelper.createDummyCart();
         staticCartsRepository.saveCart(newCart);
-        assertTrue(staticCartsRepository.getCarts().size() > 0);
+        assertEquals(staticCartsRepository.getCarts().size(), 1);
         assertNotNull(staticCartsRepository.getCart(newCart.getId()));
     }
 
@@ -73,7 +79,7 @@ public class StaticCartsRepositoryTest {
         updatedCart.addOffer(offer, TestHelper.getRandomDiscountValue());
         updatedCart.setCurrency(Monetary.getCurrency("EUR"));
         staticCartsRepository.saveCart(updatedCart);
-        assertTrue(staticCartsRepository.getCart(updatedCart.getId()).getAppliedOffers().size() > 0);
+        assertEquals(staticCartsRepository.getCart(updatedCart.getId()).getAppliedOffers().size(), 1);
         assertEquals(staticCartsRepository.getCart(updatedCart.getId()).getCurrency().toString(), "EUR");
     }
 }
