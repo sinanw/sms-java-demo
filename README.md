@@ -134,3 +134,15 @@ docker-compose up --build
   GET /sms/api/cart/{cartId}/checkout
 ```
 
+## 5. Screenshots
+Here are some examples of APIs response: 
+#### 5.1. Cart Details Response
+![Cart Details Response](docs/screenshots/CartDetailsResponse.jpg)
+
+#### 5.2. Cart Checkout Response
+![Cart Checkout Response](docs/screenshots/CartCheckoutResponse.jpg)
+
+#### 5.3. API Error Response
+![API Error Response](docs/screenshots/APIErrorResponse.jpg)
+
+
