@@ -73,19 +73,19 @@ Offers examples:
 ## 3. Deployment
 
 To deploy the project on your device, clone it and run the following:
-#### 3.1. Maven -> Build
+#### Maven -> Build
 *To compile java files and create executable war/jar packages:* 
 ```
 mvn clean package
 ```
 
-#### 3.2. Docker -> Create network
+#### Docker -> Create network
 *To create docker network (first time only):*
 ```
 docker network create smsjavademo_net
 ```
 
-#### 3.3. Docker -> Run
+#### Docker -> Run
 *To build docker image and start container:*
 ```
 docker-compose up --build
@@ -94,26 +94,26 @@ docker-compose up --build
 
 ## 4. API Reference
 
-#### 4.1. Ping
+#### Ping
 
 ```http
   GET /sms/api/engineering/ping
 ```
 
-#### 4.2. Create Cart
+#### Create Cart
 
 ```http
   POST /sms/api/cart
 ```
 - Body - raw (json): `[... "itemIdentifier" ...]`
 
-#### 4.3. Cart Details
+#### Cart Details
 
 ```http
   GET /sms/api/cart/{cartId}
 ```
 
-#### 4.4. Add Item
+#### Add Item
 
 ```http
   POST /sms/api/cart/{cartId}/items
@@ -122,13 +122,13 @@ docker-compose up --build
 |:-----------------|:---------|:-------------------------------|
 | `itemIdentifier` | `String` | **Required**. Item to be added |
 
-#### 4.5. Remove Item
+#### Remove Item
 
 ```http
   DELETE /sms/api/cart/{cartId}/items/{itemIdentifier}
 ```
 
-#### 4.6. Cart Checkout
+#### Cart Checkout
 
 ```http
   GET /sms/api/cart/{cartId}/checkout
@@ -136,13 +136,13 @@ docker-compose up --build
 
 ## 5. Screenshots
 Here are some examples of APIs response: 
-#### 5.1. Cart Details Response
+#### Cart Details Response
 ![Cart Details Response](docs/screenshots/CartDetailsResponse.jpg)
 
-#### 5.2. Cart Checkout Response
+#### Cart Checkout Response
 ![Cart Checkout Response](docs/screenshots/CartCheckoutResponse.jpg)
 
-#### 5.3. API Error Response
+#### API Error Response
 ![API Error Response](docs/screenshots/APIErrorResponse.jpg)
 
 
