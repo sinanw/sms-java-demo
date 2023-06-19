@@ -1,6 +1,5 @@
 package com.sinan.javademo.apiapplication.exception.mapper;
 
-import com.google.gson.Gson;
 import com.sinan.javademo.apiapplication.contract.APIErrorResponse;
 import com.sinan.javademo.smscore.exception.CartItemNotFoundException;
 import jakarta.ws.rs.core.Response;
@@ -22,7 +21,8 @@ public class CartItemNotFoundExceptionMapper implements ExceptionMapper<CartItem
 
     @Override
     public Response toResponse(CartItemNotFoundException ex) {
-        APIErrorResponse apiErrorResponse = new APIErrorResponse(ex.getMessage(), description);
-        return Response.status(Response.Status.BAD_REQUEST).entity(new Gson().toJson(apiErrorResponse)).build();
+        APIErrorResponse apiErrorResponse = new APIErrorResponse(
+                ex.getMessage(), description, Response.Status.BAD_REQUEST);
+        return apiErrorResponse.generateResponse();
     }
 }

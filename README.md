@@ -63,7 +63,11 @@ Offers examples:
 - Abstraction: code relies on abstraction to handle complexity (DI, design patterns, ...).
 - Encapsulation: code implements restricted access to data members and methods (with getters/setters when required). 
 - Inheritance: classes are structured in hierarchical manner.
-- Polymorphism: ex. via strategy design pattern. 
+- Polymorphism: ex. via strategy design pattern.
+  
+### 2.7. Additional Features
+- API contracts use custom deserializers to isolate api response from internal data fields (see [Contracts](api-gateway/src/main/java/com/sinan/javademo/apiapplication/contract) and [Adapters](api-gateway/src/main/java/com/sinan/javademo/apiapplication/adapter)).
+- API errors follow IETF [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807) standard (see [APIErrorResponseJsonAdapter.java](api-gateway/src/main/java/com/sinan/javademo/apiapplication/adapter/APIErrorResponseJsonAdapter.java)).
 
 ## 3. Deployment
 

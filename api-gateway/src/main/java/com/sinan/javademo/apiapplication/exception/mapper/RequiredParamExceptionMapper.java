@@ -1,6 +1,5 @@
 package com.sinan.javademo.apiapplication.exception.mapper;
 
-import com.google.gson.Gson;
 import com.sinan.javademo.apiapplication.exception.RequiredParamException;
 import com.sinan.javademo.apiapplication.contract.APIErrorResponse;
 import jakarta.ws.rs.core.Response;
@@ -22,7 +21,8 @@ public class RequiredParamExceptionMapper implements ExceptionMapper<RequiredPar
 
     @Override
     public Response toResponse(RequiredParamException ex) {
-        APIErrorResponse apiErrorResponse = new APIErrorResponse(ex.getMessage(), description);
-        return Response.status(Response.Status.BAD_REQUEST).entity(new Gson().toJson(apiErrorResponse)).build();
+        APIErrorResponse apiErrorResponse = new APIErrorResponse(
+                ex.getMessage(), description, Response.Status.BAD_REQUEST);
+        return apiErrorResponse.generateResponse();
     }
 }
