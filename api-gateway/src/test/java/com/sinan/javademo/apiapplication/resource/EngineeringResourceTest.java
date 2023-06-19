@@ -19,6 +19,13 @@ public class EngineeringResourceTest {
 
     @Test
     public void testPing() {
-        assertEquals(engineeringResource.ping(), "pong");
+        //Arrange
+        String expected = "pong";
+
+        //Act
+        String actual = engineeringResource.ping();
+
+        //Assert
+        assertEquals(actual, expected);
     }
 }
