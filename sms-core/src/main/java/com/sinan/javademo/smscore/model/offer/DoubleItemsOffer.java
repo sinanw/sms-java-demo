@@ -15,8 +15,18 @@ import com.sinan.javademo.smscore.util.InputValidator;
 public class DoubleItemsOffer extends ProductBaseOffer {
     private final Item sourceItem;
     private final Item targetItem;
-    private int minSourceQuantity;
-    private double percentage;
+    private final int minSourceQuantity;
+    private final double percentage;
+
+    public DoubleItemsOffer(String description, Item sourceItem, Item targetItem, int minSourceQuantity, double percentage) {
+        super(description);
+        this.sourceItem = sourceItem;
+        this.targetItem = targetItem;
+        this.minSourceQuantity = InputValidator.validateMinQuantity(minSourceQuantity, 1);
+        this.percentage = InputValidator.validatePercentage(percentage, 1, 100);
+        this.conditionStrategy = new MinItemCountConditionStrategy(sourceItem, minSourceQuantity);
+        this.executionStrategy = new ItemPercentageExecutionStrategy(targetItem, percentage);
+    }
 
     public Item getSourceItem() {
         return sourceItem;
@@ -30,26 +40,8 @@ public class DoubleItemsOffer extends ProductBaseOffer {
         return minSourceQuantity;
     }
 
-    public void setMinSourceQuantity(int minSourceQuantity) {
-        this.minSourceQuantity = minSourceQuantity;
-    }
-
     public double getPercentage() {
         return percentage;
-    }
-
-    public void setPercentage(double percentage) {
-        this.percentage = percentage;
-    }
-
-    public DoubleItemsOffer(String description, Item sourceItem, Item targetItem, int minSourceQuantity, double percentage) {
-        super(description);
-        this.sourceItem = sourceItem;
-        this.targetItem = targetItem;
-        this.minSourceQuantity = minSourceQuantity;
-        this.percentage = InputValidator.validatePercentage(percentage, 1, 100);
-        this.conditionStrategy = new MinItemCountConditionStrategy(sourceItem, minSourceQuantity);
-        this.executionStrategy = new ItemPercentageExecutionStrategy(targetItem, percentage);
     }
 
     @Override

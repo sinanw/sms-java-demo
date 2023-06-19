@@ -1,5 +1,7 @@
 package com.sinan.javademo.smscore.model.item;
 
+import com.sinan.javademo.smscore.util.InputValidator;
+
 import java.util.UUID;
 
 /**
@@ -17,7 +19,7 @@ public class Item {
     public Item(String name, UnitType unit, double price) {
         this.name = name;
         this.unit = unit;
-        this.price = price;
+        setPrice(price);
         this.id = UUID.randomUUID().toString();
     }
 
@@ -46,7 +48,7 @@ public class Item {
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        this.price = InputValidator.validateMinPrice(price, 0.01d);
     }
 
     @Override

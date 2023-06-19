@@ -2,7 +2,6 @@ package com.sinan.javademo.smscore.model.offer.strategy.discount.execution;
 
 import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.model.item.Item;
-import com.sinan.javademo.smscore.util.InputValidator;
 
 /**
  * An execution strategy to calculate a percentage discount on a specific item in the cart.
@@ -12,7 +11,12 @@ import com.sinan.javademo.smscore.util.InputValidator;
  */
 public class ItemPercentageExecutionStrategy implements IDiscountExecutionStrategy {
     private final Item item;
-    private double percentage;
+    private final double percentage;
+
+    public ItemPercentageExecutionStrategy(Item item, double percentage) {
+        this.item = item;
+        this.percentage = percentage;
+    }
 
     public Item getItem() {
         return item;
@@ -20,15 +24,6 @@ public class ItemPercentageExecutionStrategy implements IDiscountExecutionStrate
 
     public double getPercentage() {
         return percentage;
-    }
-
-    public void setPercentage(double percentage) {
-        this.percentage = percentage;
-    }
-
-    public ItemPercentageExecutionStrategy(Item item, double percentage) {
-        this.item = item;
-        this.percentage = InputValidator.validatePercentage(percentage, 1, 100);
     }
 
     @Override

@@ -87,7 +87,6 @@ public class Cart {
         return new HashMap<>(appliedOffers);
     }
 
-
     public double getTotalDiscount() {
         return appliedOffers.values().stream().reduce(0d, Double::sum);
     }

@@ -1,7 +1,6 @@
 package com.sinan.javademo.smscore.model.offer.strategy.discount.execution;
 
 import com.sinan.javademo.smscore.model.cart.Cart;
-import com.sinan.javademo.smscore.util.InputValidator;
 
 /**
  * An execution strategy to calculate a percentage discount on the cart subtotal price.
@@ -11,18 +10,14 @@ import com.sinan.javademo.smscore.util.InputValidator;
  */
 public class CartPercentageExecutionStrategy implements IDiscountExecutionStrategy {
 
-    private double percentage;
+    private final double percentage;
 
-    public double getPercentage() {
-        return percentage;
-    }
-
-    public void setPercentage(double percentage) {
+    public CartPercentageExecutionStrategy(double percentage) {
         this.percentage = percentage;
     }
 
-    public CartPercentageExecutionStrategy(double percentage) {
-        this.percentage = InputValidator.validatePercentage(percentage, 1, 100);
+    public double getPercentage() {
+        return percentage;
     }
 
     @Override

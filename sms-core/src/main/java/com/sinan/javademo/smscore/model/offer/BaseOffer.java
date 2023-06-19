@@ -23,8 +23,8 @@ public abstract class BaseOffer {
     public BaseOffer(String description) {
         this.id = UUID.randomUUID().toString();
         this.description = description;
-        this.startTime = null;
-        this.endTime = null;
+        setStartTime(null);
+        setEndTime(null);
     }
 
     public String getId() {
@@ -38,7 +38,6 @@ public abstract class BaseOffer {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public IDiscountConditionStrategy getConditionStrategy() {
         return conditionStrategy;

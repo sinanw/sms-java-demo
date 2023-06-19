@@ -1,5 +1,7 @@
 package com.sinan.javademo.smscore.util;
 
+import com.sinan.javademo.smscore.exception.InvalidMinItemPriceException;
+import com.sinan.javademo.smscore.exception.InvalidMinItemQuantityException;
 import com.sinan.javademo.smscore.exception.InvalidPercentageException;
 import com.sinan.javademo.smscore.exception.TimeRangeConflictException;
 
@@ -41,5 +43,35 @@ public final class InputValidator {
                 throw new TimeRangeConflictException(startTime, endTime);
             }
         }
+    }
+
+    /**
+     * Validates if quantity respects the minimum acceptable value.
+     *
+     * @param quantity     the value to be validated.
+     * @param minimumBound the minimum value allowed.
+     * @return the same input quantity if valid.
+     * @throws InvalidMinItemQuantityException if provided quantity is less than the minimum bound.
+     */
+    public static int validateMinQuantity(int quantity, int minimumBound) {
+        if (quantity < minimumBound) {
+            throw new InvalidMinItemQuantityException(quantity, minimumBound);
+        }
+        return quantity;
+    }
+
+    /**
+     * Validates if price respects the minimum acceptable value.
+     *
+     * @param price        the value to be validated.
+     * @param minimumBound the minimum value allowed.
+     * @return the same input price if valid.
+     * @throws InvalidMinItemPriceException if provided price is less than the minimum bound.
+     */
+    public static double validateMinPrice(double price, double minimumBound) {
+        if (price < minimumBound) {
+            throw new InvalidMinItemPriceException(price, minimumBound);
+        }
+        return price;
     }
 }

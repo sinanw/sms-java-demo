@@ -1,5 +1,7 @@
 package com.sinan.javademo.smscore.util;
 
+import com.sinan.javademo.smscore.exception.InvalidMinItemPriceException;
+import com.sinan.javademo.smscore.exception.InvalidMinItemQuantityException;
 import com.sinan.javademo.smscore.exception.InvalidPercentageException;
 import com.sinan.javademo.smscore.exception.TimeRangeConflictException;
 import org.testng.annotations.DataProvider;
@@ -63,5 +65,46 @@ public class InputValidatorTest {
     @Test(dataProvider = "conflictedStartEndTimeDataProvider", expectedExceptions = TimeRangeConflictException.class)
     public void testValidateDateTimeRange_conflictedStartEndTime(LocalDateTime startTime, LocalDateTime endTime) {
         InputValidator.validateDateTimeRange(startTime, endTime);
+    }
+
+
+    @DataProvider(name = "validQuantityDataProvider")
+    public static Object[][] getValidQuantities() {
+        return new Object[][]{{0, 0}, {5, 5}, {11, 10}, {25, 15}};
+    }
+
+    @Test(dataProvider = "validQuantityDataProvider")
+    public void testValidateMinQuantity_withValidValues(int quantity, int minimumBound) {
+        InputValidator.validateMinQuantity(quantity, minimumBound);
+    }
+
+    @DataProvider(name = "invalidQuantityDataProvider")
+    public static Object[][] getInvalidQuantities() {
+        return new Object[][]{{0, 1}, {5, 6}, {10, 11}, {15, 25}};
+    }
+
+    @Test(dataProvider = "invalidQuantityDataProvider", expectedExceptions = InvalidMinItemQuantityException.class)
+    public void testValidateMinQuantity_withInvalidValues(int quantity, int minimumBound) {
+        InputValidator.validateMinQuantity(quantity, minimumBound);
+    }
+
+    @DataProvider(name = "validPriceDataProvider")
+    public static Object[][] getValidPrices() {
+        return new Object[][]{{5d, 5d}, {11d, 10d}, {25d, 15d}};
+    }
+
+    @Test(dataProvider = "validPriceDataProvider")
+    public void testValidateMinPrice_withValidValues(double price, double minimumBound) {
+        InputValidator.validateMinPrice(price, minimumBound);
+    }
+
+    @DataProvider(name = "invalidPriceDataProvider")
+    public static Object[][] getInvalidPrices() {
+        return new Object[][]{{0d, 1d}, {5d, 6d}, {10d, 11d}, {15d, 25d}};
+    }
+
+    @Test(dataProvider = "invalidPriceDataProvider", expectedExceptions = InvalidMinItemPriceException.class)
+    public void testValidateMinPrice_withInvalidValues(double price, double minimumBound) {
+        InputValidator.validateMinPrice(price, minimumBound);
     }
 }

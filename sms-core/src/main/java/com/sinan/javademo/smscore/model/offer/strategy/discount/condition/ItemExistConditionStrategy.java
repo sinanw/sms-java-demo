@@ -16,6 +16,10 @@ public class ItemExistConditionStrategy implements IDiscountConditionStrategy {
         this.item = item;
     }
 
+    public Item getItem() {
+        return item;
+    }
+
     @Override
     public boolean isApplicable(Cart cart) {
         return cart.hasItem(item);

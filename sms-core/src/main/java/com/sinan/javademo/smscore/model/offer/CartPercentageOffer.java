@@ -12,21 +12,17 @@ import com.sinan.javademo.smscore.util.InputValidator;
  * @since 1.0
  */
 public class CartPercentageOffer extends CartBaseOffer {
-    private double percentage;
-
-    public double getPercentage() {
-        return percentage;
-    }
-
-    public void setPercentage(double percentage) {
-        this.percentage = percentage;
-    }
+    private final double percentage;
 
     public CartPercentageOffer(String description, double percentage) {
         super(description);
         this.percentage = InputValidator.validatePercentage(percentage, 1, 100);
         this.conditionStrategy = new NoConditionStrategy();
         this.executionStrategy = new CartPercentageExecutionStrategy(percentage);
+    }
+
+    public double getPercentage() {
+        return percentage;
     }
 
     public String toString() {
