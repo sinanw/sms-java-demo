@@ -3,6 +3,7 @@ package com.sinan.javademo.smscore.model.cart;
 import com.sinan.javademo.smscore.model.item.Item;
 import com.sinan.javademo.smscore.repository.items.IItemsRepository;
 import com.sinan.javademo.smscore.repository.items.ItemsRepositoryFactory;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -22,8 +23,11 @@ public class CartBuilder implements ICartBuilder {
     @Inject
     private ItemsRepositoryFactory itemsRepositoryFactory;
 
+    private IItemsRepository itemsRepository;
 
-    public CartBuilder() {
+    @PostConstruct
+    private void init() {
+        itemsRepository = itemsRepositoryFactory.createInstance();
         initCart();
     }
 
@@ -32,8 +36,7 @@ public class CartBuilder implements ICartBuilder {
     }
 
     @Override
-    public void populateItems(List<String> itemsList) {
-        IItemsRepository itemsRepository = itemsRepositoryFactory.createInstance();
+    public void setItems(List<String> itemsList) {
         for (var item : itemsList) {
             Item newItem = itemsRepository.getItem(item);
             cart.addItem(newItem);

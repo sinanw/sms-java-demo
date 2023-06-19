@@ -10,7 +10,7 @@ import java.util.List;
  * @since 1.0
  */
 public interface ICartBuilder {
-    void populateItems(List<String> items);
+    void setItems(List<String> items);
 
     void reset();
 }

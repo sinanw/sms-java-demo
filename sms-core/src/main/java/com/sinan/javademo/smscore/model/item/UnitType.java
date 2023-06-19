@@ -7,7 +7,7 @@ package com.sinan.javademo.smscore.model.item;
  * @since 1.0
  */
 public enum UnitType {
-    TIN, LOAF, BOTTLE, BAG;
+    TIN, LOAF, BOTTLE, BAG, CAN, JAR, BOX;
 
     @Override
     public String toString() {

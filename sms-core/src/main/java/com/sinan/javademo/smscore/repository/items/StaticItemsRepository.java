@@ -31,6 +31,14 @@ public class StaticItemsRepository implements IItemsRepository {
         items.put("Bread", new Item("Bread", UnitType.LOAF, 0.80d));
         items.put("Milk", new Item("Milk", UnitType.BOTTLE, 1.30d));
         items.put("Apples", new Item("Apples", UnitType.BAG, 1.00d));
+        items.put("Beans", new Item("Beans", UnitType.CAN, 0.62d));
+        items.put("Tofu", new Item("Tofu", UnitType.BAG, 2.99d));
+        items.put("Meat", new Item("Meat", UnitType.BAG, 8.29d));
+        items.put("Nuts", new Item("Nuts", UnitType.BAG, 4.45d));
+        items.put("Salad", new Item("Salad", UnitType.BAG, 1.20d));
+        items.put("Tahini", new Item("Tahini", UnitType.JAR, 5.33d));
+        items.put("Cake", new Item("Cake", UnitType.BOX, 10.00d));
+        items.put("Champagne", new Item("Champagne", UnitType.BOTTLE, 15.99d));
     }
 
     public List<Item> getItems() {

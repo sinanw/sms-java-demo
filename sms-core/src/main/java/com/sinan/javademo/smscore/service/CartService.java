@@ -5,7 +5,6 @@ import com.sinan.javademo.smscore.exception.CartNotFoundException;
 import com.sinan.javademo.smscore.exception.ItemNotFoundException;
 import com.sinan.javademo.smscore.model.cart.Cart;
 import com.sinan.javademo.smscore.model.cart.CartBuilder;
-import com.sinan.javademo.smscore.model.cart.CartDirector;
 import com.sinan.javademo.smscore.model.item.Item;
 import com.sinan.javademo.smscore.repository.carts.ICartsRepository;
 import com.sinan.javademo.smscore.repository.carts.CartsRepositoryFactory;
@@ -80,13 +79,8 @@ public class CartService {
      */
     public Cart createCart(List<String> itemsIdentifiers) {
 
-        //Creating cart object using cart director
-        CartDirector cartDirector = new CartDirector(cartBuilder);
-        if (itemsIdentifiers != null && itemsIdentifiers.size() > 0) {
-            cartDirector.createCartWithItems(itemsIdentifiers);
-        } else {
-            cartDirector.createEmptyCart();
-        }
+        //Creating and initializing cart object using injected cart builder
+        cartBuilder.setItems(itemsIdentifiers);
         Cart cart = cartBuilder.build();
 
         //Saving cart to repository
