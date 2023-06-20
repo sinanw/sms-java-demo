@@ -94,7 +94,7 @@ docker-compose up --build
 
 ## 4. API Reference
 <em>To run APIs, simply use attached Postman collection in [/docs/postman](docs/postman).</em>  
-
+![](docs/screenshots/PostmanCollection.jpg)
 #### Ping
 
 ```http
