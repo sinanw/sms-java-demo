@@ -89,7 +89,7 @@ mvn clean package
 docker network create smsjavademo_net
 ```
 
-#### Run on Docker
+#### Run docker container
 *To build docker image and start container:*
 ```
 docker-compose up --build
