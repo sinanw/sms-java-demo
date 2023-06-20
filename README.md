@@ -32,7 +32,6 @@ Offers examples:
 | Strategy               | Define condition/execution strategies for different types of offers         | [Discount Strategies](sms-core/src/main/java/com/sinan/javademo/smscore/model/offer/strategy/discount) |
 | Builder/Director       | Build cart objects                                                          | [Cart Builder](sms-core/src/main/java/com/sinan/javademo/smscore/model/cart)                           |
 | Factory Method         | Create repositories based on config properties                              | [Items Repository](sms-core/src/main/java/com/sinan/javademo/smscore/repository/items)                 |
-| Adapter                | Serialize/deserialize APIs response to custom json                          | [Response Adapters](api-gateway/src/main/java/com/sinan/javademo/apiapplication/adapter)               |
 | Singleton              | Maintain unique instance of several models (using CDI `@ApplicationScoped`) | [Cart/Offer Services](sms-core/src/main/java/com/sinan/javademo/smscore/service)                       |
 
 ### 2.2. Dependency Injection (DI)
@@ -70,22 +69,27 @@ Offers examples:
 - API contracts use custom deserializers to isolate api response from internal data fields (see [Contracts](api-gateway/src/main/java/com/sinan/javademo/apiapplication/contract) and [Adapters](api-gateway/src/main/java/com/sinan/javademo/apiapplication/adapter)).
 - API errors follow IETF [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807) standard (see [APIErrorResponseJsonAdapter.java](api-gateway/src/main/java/com/sinan/javademo/apiapplication/adapter/APIErrorResponseJsonAdapter.java)).
 
+### 2.8. System Design
+- Used [C4 model](https://c4model.com) to design the system in multiple levels of abstraction.
+- High level diagrams can be found [here](docs/system-design/diagrams).
+![](docs/system-design/diagrams/SMS_SystemDesigm_C4Diagrams.jpg)
+
 ## 3. Deployment
 
 To deploy the project on your device, clone it and run the following:
-#### Maven -> Build
+#### Build (Maven)
 *To compile java files and create executable war/jar packages:* 
 ```
 mvn clean package
 ```
 
-#### Docker -> Create network
+#### Create docker network
 *To create docker network (first time only):*
 ```
 docker network create smsjavademo_net
 ```
 
-#### Docker -> Run
+#### Run on Docker
 *To build docker image and start container:*
 ```
 docker-compose up --build
