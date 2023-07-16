@@ -16,11 +16,16 @@ public class Item {
     private UnitType unit;
     private double price;
 
+
     public Item(String name, UnitType unit, double price) {
+        this(UUID.randomUUID().toString(), name, unit, price);
+    }
+
+    public Item(String id, String name, UnitType unit, double price) {
+        this.id = id;
         this.name = name;
         this.unit = unit;
-        setPrice(price);
-        this.id = UUID.randomUUID().toString();
+        this.price = price;
     }
 
     public String getId() {
